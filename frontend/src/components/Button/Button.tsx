@@ -15,7 +15,7 @@ export const Button: FC<ButtonArgs> = ({ children, variant = 'default', Icon, ..
         default: 'bg-stone-800 dark:bg-stone-500 hover:bg-stone-700 dark:hover:bg-stone-600 px-7 py-2'
     }
 
-    return <button {...props} className={classNames('cursor-pointer text-stone-50 duration-200 font-sans flex items-center gap-2', buttonType[variant])}>
+    return <button {...props} className={classNames('cursor-pointer text-stone-50 duration-200 font-sans flex items-center gap-2 whitespace-nowrap', buttonType[variant])}>
         {Icon && <Icon className="size-6"/>}
         {children}
     </button>
