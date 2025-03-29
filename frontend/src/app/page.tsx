@@ -1,9 +1,20 @@
 'use client'
 
+import { Categories } from "@/components/Categories";
+import { Container } from "@/components/Container";
+import { Types } from "@/components/Types";
+
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      
-    </div>
+    <Container>
+      <div className="grid grid-cols-[200px 1fr] gap-[5%]">
+        <div className="col-[1/2] justify-items-center">
+          <Categories/>
+        </div>
+        <div className="col-[2/3]">
+          <Types/>
+        </div>
+      </div>
+    </Container>
   );
 }
