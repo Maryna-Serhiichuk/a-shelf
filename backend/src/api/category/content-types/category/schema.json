@@ -1,0 +1,38 @@
+{
+  "kind": "collectionType",
+  "collectionName": "categories",
+  "info": {
+    "singularName": "category",
+    "pluralName": "categories",
+    "displayName": "Category",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "slug": {
+      "type": "uid"
+    },
+    "label": {
+      "type": "string"
+    },
+    "types": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::type.type",
+      "mappedBy": "category"
+    },
+    "icon": {
+      "type": "enumeration",
+      "enum": [
+        "spakles",
+        "star",
+        "eye_dropper",
+        "beaker",
+        "paint_brush",
+        "hand_raised"
+      ]
+    }
+  }
+}
