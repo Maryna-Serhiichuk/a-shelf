@@ -6,7 +6,6 @@ import gel from '@/assets/cleansing/gels/exfoliating-gel-cleanser.png'
 import foam from '@/assets/cleansing/foams/deep-cleansing-foam.png'
 import micelar from '@/assets/cleansing/micellar-water/gentle-micellar-water.png'
 import scrub from '@/assets/cleansing/scrubs/enzyme-scrub.png'
-import Image from "next/image";
 
 const types = [
     { key: 'gels', label: 'Gels', image: gel },
