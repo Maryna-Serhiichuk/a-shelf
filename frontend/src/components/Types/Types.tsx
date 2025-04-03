@@ -2,18 +2,8 @@
 
 import { FC } from "react";
 import { useQuery } from "@tanstack/react-query";
-import gel from '@/assets/cleansing/gels/exfoliating-gel-cleanser.png'
-import foam from '@/assets/cleansing/foams/deep-cleansing-foam.png'
-import micelar from '@/assets/cleansing/micellar-water/gentle-micellar-water.png'
-import scrub from '@/assets/cleansing/scrubs/enzyme-scrub.png'
-import { NavLink } from "../NavLink";
-
-const types = [
-    { key: 'gels', label: 'Gels', image: gel },
-    { key: 'foams', label: 'Foams', image: foam },
-    { key: 'micellar-water', label: 'Micellar Water', image: micelar },
-    { key: 'scrubs', label: 'Scrubs', image: scrub },
-]
+import { NavLink } from "@/components/NavLink";
+import { Loader } from "@/components/Loader";
 
 export const Types: FC<{ category?: string }> = ({ category }) => {
     
@@ -25,7 +15,7 @@ export const Types: FC<{ category?: string }> = ({ category }) => {
             ),
     })
 
-    console.log(data)
+    if (isPending) return <Loader/>
 
     return <div className="grid grid-cols-4 gap-5">
         {data?.data?.map(type => (

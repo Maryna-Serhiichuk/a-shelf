@@ -1,6 +1,10 @@
+'use client'
+
 import { useQuery } from "@tanstack/react-query";
 import { FC } from "react";
-import { Button } from "../Button";
+import { Button } from "@/components/Button";
+import { Loader } from "@/components/Loader";
+import { Price } from "../Price";
 
 export const Products: FC<{ type: string }> = ({ type }) => {
 
@@ -12,7 +16,7 @@ export const Products: FC<{ type: string }> = ({ type }) => {
             ),
     })
 
-    console.log(data)
+    if(isPending) return <Loader/>
 
     return <div className="grid grid-cols-4 gap-5">
         {data?.data?.map(product => (
@@ -27,7 +31,7 @@ export const Products: FC<{ type: string }> = ({ type }) => {
                         {product?.name}
                     </div>
                     <div className="font-bold pb-3 text-stone-950 flex justify-center text-xl text-center">
-                        $50
+                        <Price price={product?.price} />
                     </div>
                     <div className="flex justify-center">
                         <Button>
