@@ -406,6 +406,7 @@ export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
 export interface ApiProductProduct extends Struct.CollectionTypeSchema {
   collectionName: 'products';
   info: {
+    description: '';
     displayName: 'Product';
     pluralName: 'products';
     singularName: 'product';
@@ -427,6 +428,7 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private;
     name: Schema.Attribute.String;
+    price: Schema.Attribute.Decimal;
     publishedAt: Schema.Attribute.DateTime;
     type: Schema.Attribute.Relation<'manyToOne', 'api::type.type'>;
     updatedAt: Schema.Attribute.DateTime;

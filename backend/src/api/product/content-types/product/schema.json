@@ -4,7 +4,8 @@
   "info": {
     "singularName": "product",
     "pluralName": "products",
-    "displayName": "Product"
+    "displayName": "Product",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -14,20 +15,24 @@
       "type": "string"
     },
     "illustration": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
     },
     "type": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::type.type",
       "inversedBy": "products"
+    },
+    "price": {
+      "type": "decimal"
     }
   }
 }

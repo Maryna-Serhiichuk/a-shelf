@@ -27,17 +27,28 @@ declare global {
     }
 
     interface Category {
-        documentId: number;
+        documentId: string;
         slug: string;
         label: string;
         icon: IconType;
+        types: Array<Type>
     }
 
     interface Type {
-        documentId: number;
+        documentId: string;
         slug: string;
         label: string;
         preview: Media;
+        category: Category
+        products: Array<Product>
+    }
+
+    interface Product {
+        documentId: string
+        name: string
+        price: number
+        type: Type
+        illustration: Media
     }
 }
 
