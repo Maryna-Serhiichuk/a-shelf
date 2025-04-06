@@ -39,6 +39,11 @@
       "relation": "manyToMany",
       "target": "api::bargain.bargain",
       "mappedBy": "products"
+    },
+    "discount": {
+      "type": "component",
+      "repeatable": false,
+      "component": "sale.discount"
     }
   }
 }

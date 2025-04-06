@@ -49,6 +49,13 @@ declare global {
         price: number
         type: Type
         illustration: Media
+        discount: Discount
+    }
+
+    interface Discount {
+        interest: number
+        price: number
+        endDate: string
     }
 
     interface Bargain {

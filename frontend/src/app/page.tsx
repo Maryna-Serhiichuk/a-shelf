@@ -7,7 +7,7 @@ import { Types } from "@/components/Types";
 export default function Home() {
   return (
     <Container>
-      <div className="grid grid-cols-[200px 1fr] gap-[5%]">
+      <div className="grid grid-cols-[200px_1fr] gap-[5%]">
         <div className="col-[1/2] justify-items-center">
           <Categories/>
         </div>

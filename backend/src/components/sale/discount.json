@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_sale_discounts",
+  "info": {
+    "displayName": "Discount",
+    "icon": "handHeart"
+  },
+  "options": {},
+  "attributes": {
+    "interest": {
+      "type": "integer"
+    },
+    "price": {
+      "type": "decimal"
+    },
+    "endDate": {
+      "type": "date"
+    }
+  }
+}

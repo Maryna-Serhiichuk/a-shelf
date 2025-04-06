@@ -449,6 +449,7 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    discount: Schema.Attribute.Component<'sale.discount', false>;
     illustration: Schema.Attribute.Media<
       'images' | 'files' | 'videos' | 'audios'
     >;
