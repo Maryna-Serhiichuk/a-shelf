@@ -1,20 +1,9 @@
 'use client'
 
 import { FC, useState } from "react";
-import { SparklesIcon, StarIcon, EyeDropperIcon, BeakerIcon, PaintBrushIcon, HandRaisedIcon } from '@heroicons/react/24/outline'
 import { Icon } from "@/components/Icon";
 import { NavLink } from "@/components/NavLink";
 import classNames from "classnames";
-
-const categories = [
-    {key: 'cleansing', label: 'Cleansing', Icon: SparklesIcon},
-    {key: 'toning', label: 'Toning', Icon: StarIcon},
-    {key: 'moisturizing', label: 'Moisturizing', Icon: EyeDropperIcon},
-    {key: 'nourishing', label: 'Nourishing', Icon: BeakerIcon},
-    {key: 'restoring', label: 'Restoring', Icon: PaintBrushIcon},
-    {key: 'protection', label: 'Protection', Icon: HandRaisedIcon},
-]
-
 
 export const Category: FC<Category> = ({ documentId, label, slug, icon }) => {
     const [isActive, setActive] = useState(false)

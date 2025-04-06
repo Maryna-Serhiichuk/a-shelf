@@ -50,6 +50,13 @@ declare global {
         type: Type
         illustration: Media
     }
+
+    interface Bargain {
+        documentId: string
+        label: string
+        products: Array<Product>
+        price: number
+    }
 }
 
 export {};

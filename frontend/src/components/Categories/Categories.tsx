@@ -6,7 +6,7 @@ import { useQuery } from '@tanstack/react-query'
 
 export const Categories: FC = () => {
     const { isPending, error, data } = useQuery<Response<Array<Category>>>({
-        queryKey: ['repoData'],
+        queryKey: ['categories'],
         queryFn: () =>
             fetch('http://127.0.0.1:1337/api/categories').then((res) =>
                 res.json(),

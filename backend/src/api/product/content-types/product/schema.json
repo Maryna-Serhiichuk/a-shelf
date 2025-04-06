@@ -33,6 +33,12 @@
     },
     "price": {
       "type": "decimal"
+    },
+    "bargains": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::bargain.bargain",
+      "mappedBy": "products"
     }
   }
 }

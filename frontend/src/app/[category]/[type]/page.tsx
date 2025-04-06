@@ -1,5 +1,6 @@
 'use client'
 
+import { Bargain } from "@/components/Bargain";
 import { Categories } from "@/components/Categories";
 import { Container } from "@/components/Container";
 import { Products } from "@/components/Products";
@@ -9,8 +10,6 @@ import { use } from "react";
 
 export default function Page({ params }: { params: Promise<{ type: string }> }) {
     const { type } = use(params);
-
-    console.log(type)
 
     return (
         <Container>
@@ -22,6 +21,7 @@ export default function Page({ params }: { params: Promise<{ type: string }> }) 
                     <Products type={type}/>
                 </div>
             </div>
+            <Bargain type={type} />
         </Container>
     );
 }

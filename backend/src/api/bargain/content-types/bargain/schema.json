@@ -1,0 +1,26 @@
+{
+  "kind": "collectionType",
+  "collectionName": "bargains",
+  "info": {
+    "singularName": "bargain",
+    "pluralName": "bargains",
+    "displayName": "Bargain"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "label": {
+      "type": "string"
+    },
+    "products": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::product.product",
+      "inversedBy": "bargains"
+    },
+    "price": {
+      "type": "decimal"
+    }
+  }
+}
