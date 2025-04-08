@@ -7,7 +7,7 @@ import { Button } from "@/components/Button";
 import { Logo } from "@/components/Logo";
 import { Burger } from "./components/Burger";
 import classNames from "classnames";
-import { NavLink } from "../NavLink";
+import { NavLink } from "@/components/NavLink";
 
 export const Header: FC = () => {
     const [isOpen, setOpen] = useState(false)

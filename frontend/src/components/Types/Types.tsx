@@ -2,9 +2,8 @@
 
 import { FC } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { NavLink } from "@/components/NavLink";
 import { Loader } from "@/components/Loader";
-import { TypePreview } from "../TypePreview";
+import { TypePreview } from "@/components/TypePreview";
 
 export const Types: FC<{ category?: string }> = ({ category }) => {
     

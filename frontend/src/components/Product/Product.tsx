@@ -2,9 +2,9 @@ import { FC } from "react";
 import { Img } from "@/components/Img";
 import { Price } from "@/components/Price";
 import { Rating } from 'react-simple-star-rating'
-import { Button } from "../Button";
-import { Markdown } from "../Markdown";
-import { Ingredients } from "../Ingredients";
+import { Button } from "@/components/Button";
+import { Markdown } from "@/components/Markdown";
+import { Ingredients } from "@/components/Ingredients";
 
 const items = [
     { label: 'Glycine', description: 'Glycine is an amino acid naturally found in the skin and a key component of collagen. In cosmetics, it plays a role in maintaining skin hydration, supporting tissue regeneration, and improving elasticity. It also offers antioxidant protection, making it a valuable ingredient in soothing, anti-aging, and moisturizing formulations, especially for sensitive or stressed skin.' },
