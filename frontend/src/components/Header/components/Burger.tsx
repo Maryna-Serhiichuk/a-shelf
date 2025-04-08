@@ -7,6 +7,6 @@ import { ButtonHTMLAttributes, FC, Fragment } from "react";
 export const Burger: FC<ButtonHTMLAttributes<HTMLButtonElement>> = (props) => {
     return <Fragment>
         
-        <Button {...props} variant={'text'} Icon={Bars3Icon}/>
+        <Button {...props} variant={'link'} Icon={Bars3Icon}/>
     </Fragment>
 }

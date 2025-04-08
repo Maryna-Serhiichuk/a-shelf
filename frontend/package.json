@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
+    "@radix-ui/react-dialog": "^1.1.7",
     "@reduxjs/toolkit": "^2.6.1",
     "@tanstack/react-query": "^5.70.0",
     "classnames": "^2.5.1",
@@ -17,7 +18,10 @@
     "next": "15.2.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-markdown": "^10.1.0",
+    "react-modal": "^3.16.3",
     "react-redux": "^9.2.0",
+    "react-simple-star-rating": "^5.1.7",
     "react-slick": "^0.30.3",
     "slick-carousel": "^1.8.1"
   },

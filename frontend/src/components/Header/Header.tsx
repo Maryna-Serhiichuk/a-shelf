@@ -7,6 +7,7 @@ import { Button } from "@/components/Button";
 import { Logo } from "@/components/Logo";
 import { Burger } from "./components/Burger";
 import classNames from "classnames";
+import { NavLink } from "../NavLink";
 
 export const Header: FC = () => {
     const [isOpen, setOpen] = useState(false)
@@ -14,14 +15,16 @@ export const Header: FC = () => {
     return <Fragment>
         <div className="w-full flex justify-between px-4 py-2">
             <Logo/>
-            <div className="hidden lg:flex">
-                <Button variant={'text'}>
-                    Shop
-                </Button>
-                <Button variant={'text'}>
+            <div className="hidden lg:flex items-center">
+                <NavLink href={'/'}>
+                    <Button variant={'link'}>
+                        Shop
+                    </Button>
+                </NavLink>
+                <Button variant={'link'}>
                     About
                 </Button>
-                <Button variant={'text'}>
+                <Button variant={'link'}>
                     Contact Us
                 </Button>
             </div>
@@ -30,12 +33,12 @@ export const Header: FC = () => {
             </div>
             <div className="flex items-center">
                 <div className="items-center flex sm:hidden">
-                    <Button onClick={() => setOpen(!isOpen)} variant={'text'} Icon={MagnifyingGlassIcon}/>
+                    <Button onClick={() => setOpen(!isOpen)} variant={'link'} Icon={MagnifyingGlassIcon}/>
                 </div>
-                <Button variant={'text'} Icon={ShoppingCartIcon}>
+                <Button variant={'link'} Icon={ShoppingCartIcon}>
                     <span className="hidden lg:block">Cart</span>
                 </Button>
-                <Button variant={'text'} Icon={UserIcon}>
+                <Button variant={'link'} Icon={UserIcon}>
                     <span className="hidden lg:block">Account</span>
                 </Button>
                 <div className="block lg:hidden">

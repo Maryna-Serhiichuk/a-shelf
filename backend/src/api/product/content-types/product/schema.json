@@ -44,6 +44,15 @@
       "type": "component",
       "repeatable": false,
       "component": "sale.discount"
+    },
+    "volume": {
+      "type": "string"
+    },
+    "ingredients": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::ingredient.ingredient",
+      "mappedBy": "products"
     }
   }
 }

@@ -50,6 +50,13 @@ declare global {
         type: Type
         illustration: Media
         discount: Discount
+        volume: string
+        ingredients: Array<Ingredient>
+    }
+
+    interface Ingredient {
+        label: string
+        description: string
     }
 
     interface Discount {
