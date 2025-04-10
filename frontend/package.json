@@ -15,6 +15,7 @@
     "classnames": "^2.5.1",
     "dayjs": "^1.11.13",
     "next": "15.2.3",
+    "rc-collapse": "^4.0.0",
     "rc-dialog": "^10.0.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
@@ -23,7 +24,8 @@
     "react-redux": "^9.2.0",
     "react-simple-star-rating": "^5.1.7",
     "react-slick": "^0.30.3",
-    "slick-carousel": "^1.8.1"
+    "slick-carousel": "^1.8.1",
+    "styled-components": "^6.1.17"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

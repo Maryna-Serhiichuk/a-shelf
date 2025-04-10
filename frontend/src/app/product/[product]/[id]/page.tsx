@@ -4,7 +4,7 @@ import { Bargain } from "@/components/Bargain";
 import { Container } from "@/components/Container";
 import { Product } from "@/components/Product";
 import { useQuery } from "@tanstack/react-query";
-import { use } from "react";
+import { Fragment, use } from "react";
 
 export default function Page({ params }: { params: Promise<{ id: string }> }) {
     const { id } = use(params);
@@ -18,12 +18,12 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
             ),
     })
 
-    console.log(data?.data)
-
     return (
-        <Container>
+        <Fragment>
             {data?.data && <Product {...data?.data} />}
-            <Bargain id={id} />
-        </Container>
+            <Container>
+                <Bargain id={id} />
+            </Container>
+        </Fragment>
     );
 }

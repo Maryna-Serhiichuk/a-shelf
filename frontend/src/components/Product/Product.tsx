@@ -1,10 +1,13 @@
-import { FC } from "react";
+import { FC, Fragment } from "react";
+import { ChevronUpIcon } from '@heroicons/react/24/outline'
 import { Img } from "@/components/Img";
 import { Price } from "@/components/Price";
 import { Rating } from 'react-simple-star-rating'
 import { Button } from "@/components/Button";
 import { Markdown } from "@/components/Markdown";
 import { Ingredients } from "@/components/Ingredients";
+import { Container } from "@/components/Container";
+import { Collapse } from "../Collapse";
 
 const items = [
     { label: 'Glycine', description: 'Glycine is an amino acid naturally found in the skin and a key component of collagen. In cosmetics, it plays a role in maintaining skin hydration, supporting tissue regeneration, and improving elasticity. It also offers antioxidant protection, making it a valuable ingredient in soothing, anti-aging, and moisturizing formulations, especially for sensitive or stressed skin.' },
@@ -23,42 +26,62 @@ Gel Cream is a type of moisturizer that combines the properties of a gel and a c
 This product is perfect for use in the summer or in humid conditions when you need to keep the skin hydrated without feeling heavy.
 `
 
+const collapse = [
+    { label: 'Ingredients', description: 'Aqua (Water), Glycerin, Cetearyl Alcohol, Caprylic/Capric Triglyceride, Butyrospermum Parkii (Shea) Butter, Niacinamide, Panthenol, Tocopherol (Vitamin E), Sodium Hyaluronate, Allantoin, Aloe Barbadensis Leaf Juice, Chamomilla Recutita (Matricaria) Flower Extract, Phenoxyethanol, Ethylhexylglycerin, Parfum (Fragrance).' },
+    { label: 'How to Use', description: 'Apply a small amount to clean, dry skin. Gently massage into the face and neck using upward, circular motions until fully absorbed. Use morning and evening for best results. Avoid contact with eyes.' },
+    { label: 'Purpose', description: 'This moisturizing cream is designed to hydrate and nourish the skin, improve elasticity, and protect against environmental stressors. Suitable for all skin types, including sensitive skin.' },
+]
+
 export const Product: FC<Product> = ({ documentId, name, price, type, illustration, discount, volume }) => {
-    return <div className="grid grid-cols-[1fr] lg:grid-cols-[1fr_1fr] grid-rows-[400px_1fr] md:grid-rows-[600px_1fr] lg:grid-rows-[1fr] gap-[5%]">
-        <div className="flex justify-center col-[1/2]">
-            <Img src={illustration?.url}/>
-        </div>
-        <div className="flex flex-col gap-4 col-[1/2] lg:col-[2/3]">
-            <div className="text-5xl font-light dark:text-stone-100">
-                {name}
-            </div>
-            <div className="dark:text-stone-100">
-                Moisturizing face cream
-            </div>
-            <div className="text-xl font-extralight dark:text-stone-400">
-                {volume}
-            </div>
-            <div className="h-[1px] w-full bg-stone-300"/>
-            <div className="text-3xl font-bold">
-                <Price price={price} discount={discount}/>
-            </div>
-            <div>
-                <Markdown data={description} />
-            </div>
-            <div className="h-[1px] w-full bg-stone-300"/>
-            <div className="flex flex-col gap-2">
-                <div className="dark:text-stone-300">
-                    Active ingredients:
+    return <Fragment>
+        <Container>
+            <div className="grid grid-cols-[1fr] lg:grid-cols-[1fr_1fr] grid-rows-[400px_1fr] md:grid-rows-[600px_1fr] lg:grid-rows-[1fr] auto-rows-auto gap-[5%]">
+                <div className="flex justify-center col-[1/2]">
+                    <Img src={illustration?.url}/>
                 </div>
-                <div className="flex gap-4">
-                    <Ingredients items={items}/>
+                <div className="flex flex-col gap-4 col-[1/2] lg:col-[2/3]">
+                    <div className="text-5xl font-light dark:text-stone-100">
+                        {name}
+                    </div>
+                    <div className="dark:text-stone-100">
+                        Moisturizing face cream
+                    </div>
+                    <div className="text-xl font-extralight dark:text-stone-400">
+                        {volume}
+                    </div>
+                    <div className="h-[1px] w-full bg-stone-300"/>
+                    <div className="text-3xl font-bold">
+                        <Price price={price} discount={discount}/>
+                    </div>
+                    <div>
+                        <Markdown data={description} />
+                    </div>
+                    <div className="h-[1px] w-full bg-stone-300"/>
+                    <div className="flex flex-col gap-2">
+                        <div className="dark:text-stone-300">
+                            Active ingredients:
+                        </div>
+                        <div className="flex gap-4">
+                            <Ingredients items={items}/>
+                        </div>
+                    </div>
+                    <div className="w-full">
+                        <Button className="w-full" size="large">
+                            Add to Cart
+                        </Button>
+                    </div>
                 </div>
             </div>
-            <div className="w-full">
-                <Button className="w-full" size="large">
-                    Add to Cart
-                </Button>
+        </Container>
+        <Container theme="dimming">
+            <div className="grid gap-[5%] grid-cols-[1fr_1fr]">
+                <div>
+                    <Collapse items={collapse}/>
+                </div>
+                <div>
+                    Review
+                </div>
             </div>
-        </div>
-    </div>
+        </Container>
+    </Fragment>
 }

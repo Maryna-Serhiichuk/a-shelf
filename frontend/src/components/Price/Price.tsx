@@ -10,10 +10,13 @@ export const Price: FC<{price?: number, discount?: Discount, mini?: boolean}> = 
     if(!discount || dayjs().isAfter(dayjs(discount?.endDate, 'YYYY-MM-DD'))) return '$' + price.toFixed(2)
 
     return <div className={classNames("flex items-center dark:text-stone-100", {
-        "flex-col-reverse gap-0": mini,
+        "gap-0": mini,
         "gap-6": !mini,
     })}>
-        <div className={classNames("flex flex-col sm:flex-row gap-x-[inherit]")}>
+        <div className={classNames("flex gap-x-[inherit]", { 
+            "flex-col-reverse": mini,
+            "flex-col sm:flex-row": !mini
+            })}>
             <div>
                 ${(discount?.price ? discount?.price : (price * ((100 - discount?.interest) / 100))).toFixed(2)}
             </div>
