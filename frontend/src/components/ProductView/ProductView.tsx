@@ -38,8 +38,8 @@ export const ProductView: FC<Product> = ({ documentId, name, price, type, illust
                         <div className="text-2xl font-bold">
                             <Price price={price} discount={discount}/>
                         </div>
-                        <div className="w-full">
-                            <Button className="w-full" size="large">
+                        <div>
+                            <Button size="large">
                                 Add to Cart
                             </Button>
                         </div>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg width="800px" height="800px" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <style>
+            .a{fill:none;stroke:#000000;stroke-linecap:round;stroke-linejoin:round;}.b{fill:#000000;}</style>
+    </defs>
+    <circle class="a" cx="24" cy="24" r="21.5" />
+    <circle class="a" cx="24" cy="24" r="1.5" />
+    <path class="a" d="M24,3V5" />
+    <path class="a" d="M24,43v2" />
+    <path class="a" d="M43.972,30.489l-1.902-.618" />
+    <path class="a" d="M35.168,39.371l1.175,1.618" />
+    <path class="a" d="M43.972,17.511l-1.902.618" />
+    <path class="a" d="M36.343,7.011,35.168,8.629" />
+    <path class="a" d="M12.832,39.371l-1.175,1.618" />
+    <path class="a" d="M5.93,29.871l-1.902.618" />
+    <path class="a" d="M4.028,17.511l1.902.618" />
+    <path class="a" d="M11.657,7.011l1.175,1.618" />
+    <path class="a" d="M24,25.5V35" />
+    <path class="a" d="M38.266,28.635,25.425,24.463" />
+</svg>

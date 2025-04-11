@@ -9,10 +9,20 @@ import classNames from "classnames";
 
 const CollapseContainer = styled(CollapseRC)`
   border: none;
+  background: transparent;
+
+  .rc-collapse {
+    border: none;
+  }
 
   .rc-collapse-item {
     font-size: 24px;
-    border-color: #f5f5f4;
+    border-color: black;
+
+    .rc-collapse-header, .rc-collapse-content {
+      padding-inline: 0;
+      background: transparent;
+    }
 
     .rc-collapse-title {
         display: flex;
@@ -21,6 +31,7 @@ const CollapseContainer = styled(CollapseRC)`
 
     .rc-collapse-body {
         font-size: 20px;
+        padding-bottom: 25px;
     }
   }
 `;
@@ -56,12 +67,12 @@ export const Collapse: FC<{ items: Array<{ label: string, description: string }>
         onChange={e => setActiveKey(e)}
         accordion items={items?.map((it, i) => ({ 
             label: <div className="flex w-full justify-between items-center">
-                <div>{it?.label}</div>
+                <div className="font-semibold text-stone-900 text-3xl">{it?.label}</div>
                 <div className={classNames({
                     "transform-[rotate(-180deg)] duration-300": activeKey[0] === i.toString()
                 })}><ChevronUpIcon height={40} fontSize={20}/></div>
             </div>,
-            children: it?.description,
+            children: <div className="text-2xl">{it?.description}</div>,
             headerClass: "w-full",
             showArrow: false,
         }))} 

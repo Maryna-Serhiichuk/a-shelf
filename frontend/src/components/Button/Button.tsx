@@ -18,7 +18,7 @@ export const Button: FC<ButtonArgs> = ({ children, variant = 'default', size = '
     }
 
     const buttonSize: {[key in NonNullable<ButtonArgs['size']>]: string} = {
-        large: 'py-3 text-xl',
+        large: 'px-15 py-3 text-xl',
         default: 'py-2'
     }
 
