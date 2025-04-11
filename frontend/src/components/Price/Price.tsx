@@ -11,12 +11,9 @@ export const Price: FC<{price?: number, discount?: Discount, mini?: boolean}> = 
 
     return <div className={classNames("flex items-center dark:text-stone-100", {
         "gap-0": mini,
-        "gap-6": !mini,
+        "gap-3": !mini,
     })}>
-        <div className={classNames("flex gap-x-[inherit]", { 
-            "flex-col-reverse": mini,
-            "flex-col sm:flex-row": !mini
-            })}>
+        <div className="flex gap-x-[inherit] flex-col-reverse">
             <div>
                 ${(discount?.price ? discount?.price : (price * ((100 - discount?.interest) / 100))).toFixed(2)}
             </div>
@@ -26,15 +23,20 @@ export const Price: FC<{price?: number, discount?: Discount, mini?: boolean}> = 
                 ${price.toFixed(2)}
             </div>
         </div>
-        {!mini && discount?.interest &&
-            <div className="bg-red-700 dark:bg-red-800 text-lg text-stone-50 px-5 py-2 whitespace-nowrap">
-                Save {discount?.interest}%
+        {!mini &&
+            <div className="flex gap-[inherit] flex-wrap">
+                {discount?.interest &&
+                    <div className="bg-red-700 dark:bg-red-800 text-lg text-stone-50 px-3 py-1 whitespace-nowrap">
+                        Save {discount?.interest}%
+                    </div>
+                }
+                {discount?.endDate &&
+                    <div className="bg-gray-100 px-3 py-1 text-lg font-semibold text-center border border-stone-300 text-stone-600 dark:bg-stone-600 dark:text-stone-50 whitespace-nowrap">
+                        <span>Only {dayjs(discount?.endDate).fromNow()}</span>
+                    </div>
+                }
             </div>
         }
-        {!mini && discount?.endDate &&
-            <div className="bg-gray-100 px-5 py-2 text-lg font-semibold text-center text-stone-600 dark:bg-stone-600 dark:text-stone-50 whitespace-nowrap">
-                <span>Only {dayjs(discount?.endDate).fromNow()}</span>
-            </div>
-        }
+        
     </div>
 }
