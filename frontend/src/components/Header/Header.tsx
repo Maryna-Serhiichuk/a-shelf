@@ -8,6 +8,7 @@ import { Logo } from "@/components/Logo";
 import { Burger } from "./components/Burger";
 import classNames from "classnames";
 import { NavLink } from "@/components/NavLink";
+import { Auth } from "@/components/Auth";
 
 export const Header: FC = () => {
     const [isOpen, setOpen] = useState(false)
@@ -38,9 +39,12 @@ export const Header: FC = () => {
                 <Button variant={'link'} Icon={ShoppingCartIcon}>
                     <span className="hidden lg:block">Cart</span>
                 </Button>
-                <Button variant={'link'} Icon={UserIcon}>
-                    <span className="hidden lg:block">Account</span>
-                </Button>
+                <Auth/>
+                <NavLink href={'/account'}>
+                    <Button variant={'link'} Icon={UserIcon}>
+                        <span className="hidden lg:block">Account</span>
+                    </Button>
+                </NavLink>
                 <div className="block lg:hidden">
                     <Burger />
                 </div>

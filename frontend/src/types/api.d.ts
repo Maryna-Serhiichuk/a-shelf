@@ -71,6 +71,32 @@ declare global {
         products: Array<Product>
         price: number
     }
+
+    interface User {
+        email: string
+        username: string
+    }
+
+    interface RegisterInput {
+        username: string
+        email: string
+        password: string
+    }
+
+    interface RegisterResponse {
+        jwt: string
+        user: User
+    }
+
+    interface LoginInput {
+        identifier: string
+        password: string
+    }
+
+    interface LoginResponse {
+        jwt: string
+        user: User
+    }
 }
 
 export {};
