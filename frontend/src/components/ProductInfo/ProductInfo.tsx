@@ -14,7 +14,7 @@ export const ProductInfo: FC<Product> = ({}) => {
         <Container>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 md:gap-5 lg:gap-20 cursor-default">
                 {info?.map(({ icon: Icon, ...it }) => (
-                    <div className="flex flex-row items-center sm:flex-col gap-3 grid-span-1">
+                    <div key={it?.title} className="flex flex-row items-center sm:flex-col gap-3 grid-span-1">
                         <div className="flex justify-center">
                             <Icon fontSize={100} />
                         </div>

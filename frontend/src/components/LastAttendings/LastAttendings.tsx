@@ -1,8 +1,8 @@
 import { FC } from "react";
 import { Container } from "@/components/Container";
 import { useLastAttendings, UseLastAttendingsArgs } from "@/hooks/useLastAttendings";
-import { ProductPreview } from "../ProductPreview";
-import { SectionTitle } from "../SectionTitle";
+import { ProductPreview } from "@/components/ProductPreview";
+import { SectionTitle } from "@/components/SectionTitle";
 
 interface LastAttendingsArgs extends UseLastAttendingsArgs {}
 

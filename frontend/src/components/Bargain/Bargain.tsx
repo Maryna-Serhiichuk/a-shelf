@@ -16,7 +16,7 @@ export const Bargain: FC<BargainArgs> = ({ id, type }) => {
     const { isPending, error, data } = useQuery<Response<Array<Bargain>>>({
         queryKey: ['bargains'],
         queryFn: () =>
-            fetch(`http://127.0.0.1:1337/api/bargains?${type ? `filters[products][type][slug][$eq]=${type}` : ""}&${id ? `filters[products][documentId][$eq]=${id}` : ""}&populate=products.illustration`).then((res) =>
+            fetch(`http://127.0.0.1:1337/api/relevantBargains?id=${id ?? ''}&type=${type ?? ''}&populate[0]=products.illustration&populate[1]=products.type`).then((res) =>
                 res.json(),
             ),
     })

@@ -2,7 +2,7 @@ import { FC } from "react";
 import leaves from "@/images/leaves.jpg"
 import Image from "next/image";
 import { Collapse } from "@/components/Collapse";
-import { Container } from "../Container";
+import { Container } from "@/components/Container";
 
 const collapse = [
     { label: 'Ingredients', description: 'Aqua (Water), Glycerin, Cetearyl Alcohol, Caprylic/Capric Triglyceride, Butyrospermum Parkii (Shea) Butter, Niacinamide, Panthenol, Tocopherol (Vitamin E), Sodium Hyaluronate, Allantoin, Aloe Barbadensis Leaf Juice, Chamomilla Recutita (Matricaria) Flower Extract, Phenoxyethanol, Ethylhexylglycerin, Parfum (Fragrance).' },

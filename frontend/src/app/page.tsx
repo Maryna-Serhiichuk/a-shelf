@@ -1,5 +1,6 @@
 'use client'
 
+import { Bargain } from "@/components/Bargain";
 import { Categories } from "@/components/Categories";
 import { Container } from "@/components/Container";
 import { Types } from "@/components/Types";
@@ -15,6 +16,7 @@ export default function Home() {
           <Types/>
         </div>
       </div>
+      <Bargain/>
     </Container>
   );
 }
