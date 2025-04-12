@@ -3,9 +3,10 @@ import { Button } from "@/components/Button";
 import { Price } from "@/components/Price";
 import { NavLink } from "@/components/NavLink";
 import { Img } from "@/components/Img";
+import classNames from "classnames";
 
-export const ProductPreview: FC<Product> = ({ documentId, illustration, name, price, discount, volume }) => {
-    return <div key={documentId} className="flex flex-col justify-between px-6 py-6 col-span-2 lg:col-span-1 bg-stone-100 dark:bg-stone-300">
+export const ProductPreview: FC<Product & { className?: string }> = ({ documentId, illustration, name, price, discount, volume, className }) => {
+    return <div key={documentId} className={classNames("flex flex-col justify-between px-6 py-6 bg-stone-100 dark:bg-stone-300", className)}>
         <div className="flex items-end justify-center h-[200px]">
             {illustration?.url &&
                 <Img src={illustration?.url} />    

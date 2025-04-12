@@ -2,6 +2,7 @@
 
 import { Bargain } from "@/components/Bargain";
 import { Container } from "@/components/Container";
+import { LastAttendings } from "@/components/LastAttendings";
 import { Product } from "@/components/Product";
 import { useQuery } from "@tanstack/react-query";
 import { Fragment, use } from "react";
@@ -24,6 +25,7 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
             <Container>
                 <Bargain id={id} />
             </Container>
+            <LastAttendings id={id} />
         </Fragment>
     );
 }

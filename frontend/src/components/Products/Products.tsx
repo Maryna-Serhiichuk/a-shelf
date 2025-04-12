@@ -5,7 +5,11 @@ import { FC } from "react";
 import { Loader } from "@/components/Loader";
 import { ProductPreview } from "@/components/ProductPreview";
 
-export const Products: FC<{ type: string }> = ({ type }) => {
+interface ProductsArgs {
+    type: string
+}
+
+export const Products: FC<ProductsArgs> = ({ type }) => {
 
     const { isPending, error, data } = useQuery<Response<Array<Product>>>({
         queryKey: ['products'],
@@ -19,7 +23,7 @@ export const Products: FC<{ type: string }> = ({ type }) => {
 
     return <div className="grid grid-cols-4 gap-5">
         {data?.data?.map(product => (
-            <ProductPreview key={product?.documentId} {...product} />
+            <ProductPreview key={product?.documentId} {...product} className="col-span-2 lg:col-span-1" />
         ))}
     </div>
 }
