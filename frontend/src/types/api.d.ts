@@ -75,6 +75,7 @@ declare global {
     interface User {
         email: string
         username: string
+        products: Array<Product>
     }
 
     interface RegisterInput {
