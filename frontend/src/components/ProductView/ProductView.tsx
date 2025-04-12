@@ -46,7 +46,7 @@ export const ProductView: FC<Product> = ({ documentId, name, price, type, illust
                     </div>
                 </div>
                 <div className="flex justify-center col-span-6 md:col-span-3 lg:col-span-2 h-[300px] md:h-[600px]">
-                    <Img src={illustration?.url}/>
+                    <Img src={illustration?.url} />
                 </div>
                 <div className="hidden md:flex justify-center col-span-3 lg:col-span-2">
                     <div className="flex flex-col gap-4">

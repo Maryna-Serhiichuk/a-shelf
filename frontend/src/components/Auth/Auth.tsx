@@ -6,7 +6,7 @@ import { SignUp } from "../SignUp";
 
 export const Auth: FC = () => {
     const [isExist, setExist] = useState(true)
-    const [open, setOpen] = useState(true)
+    const [open, setOpen] = useState(false)
 
     return <Fragment>
         <Button variant={'text'} onClick={() => setOpen(true)}>

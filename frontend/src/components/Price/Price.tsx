@@ -17,7 +17,7 @@ export const Price: FC<{price?: number, discount?: Discount, mini?: boolean}> = 
             <div>
                 ${(discount?.price ? discount?.price : (price * ((100 - discount?.interest) / 100))).toFixed(2)}
             </div>
-            <div className={classNames("font-light flex justify-center line-through text-red-800 dark:text-red-400", {
+            <div className={classNames("font-light flex justify-center line-through text-stone-500 dark:text-red-400", {
                 "text-sm": mini
             })}>
                 ${price.toFixed(2)}
@@ -26,7 +26,7 @@ export const Price: FC<{price?: number, discount?: Discount, mini?: boolean}> = 
         {!mini &&
             <div className="flex gap-[inherit] flex-wrap">
                 {discount?.interest &&
-                    <div className="bg-red-700 dark:bg-red-800 text-lg text-stone-50 px-3 py-1 whitespace-nowrap">
+                    <div className="bg-stone-800 dark:bg-red-800 text-lg text-stone-50 px-3 py-1 whitespace-nowrap">
                         Save {discount?.interest}%
                     </div>
                 }
