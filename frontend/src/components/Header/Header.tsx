@@ -1,7 +1,7 @@
 'use client'
 
 import { FC, Fragment, useState } from "react";
-import { ShoppingCartIcon, UserIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline'
+import { ShoppingCartIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline'
 import { Search } from "@/components/Search";
 import { Button } from "@/components/Button";
 import { Logo } from "@/components/Logo";
@@ -36,15 +36,17 @@ export const Header: FC = () => {
                 <div className="items-center flex sm:hidden">
                     <Button onClick={() => setOpen(!isOpen)} variant={'link'} Icon={MagnifyingGlassIcon}/>
                 </div>
-                <Button variant={'link'} Icon={ShoppingCartIcon}>
-                    <span className="hidden lg:block">Cart</span>
-                </Button>
+                <div className="relative">
+                    <NavLink href={'/cart'}>
+                        <div className="absolute left-6 flex justify-center items-center text-sm h-[20px] w-[20px] bg-red-700 rounded-[50%] text-stone-100">
+                            2
+                        </div>
+                        <Button variant={'link'} Icon={ShoppingCartIcon}>
+                            <span className="hidden lg:block">Cart</span>
+                        </Button>
+                    </NavLink>
+                </div>
                 <Auth/>
-                <NavLink href={'/account'}>
-                    <Button variant={'link'} Icon={UserIcon}>
-                        <span className="hidden lg:block">Account</span>
-                    </Button>
-                </NavLink>
                 <div className="block lg:hidden">
                     <Burger />
                 </div>

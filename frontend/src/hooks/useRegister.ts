@@ -1,15 +1,5 @@
 import { useMutation, UseMutationResult  } from "@tanstack/react-query";
 
-  type RegisterResponse = {
-    jwt: string;
-    user: {
-      id: number;
-      username: string;
-      email: string;
-    };
-  };
-  
-
   type UseRegisterResponse = UseMutationResult<
     RegisterResponse,
     Error,
