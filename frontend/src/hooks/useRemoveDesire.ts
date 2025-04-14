@@ -23,7 +23,7 @@ export function useRemoveDesire(): UseRemoveDesire {
 }
 
 export const removeDesire = async (id: string) => {
-    const res = await fetch(`http://localhost:1337/api/remove-product/${id}`, {
+    const res = await fetch(`http://localhost:1337/api/cart/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",

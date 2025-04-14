@@ -1,10 +1,14 @@
 import { FC, Fragment } from "react";
+import { HeartIcon } from "@heroicons/react/24/outline";
 import { Container } from "@/components/Container";
 import { Price } from "@/components/Price";
 import { Button } from "@/components/Button";
 import { Img } from "@/components/Img";
 import { Markdown } from "@/components/Markdown";
 import { Ingredients } from "@/components/Ingredients";
+import { useAddDesire } from "@/hooks/useAddDesire";
+
+// heart
 
 const items = [
     { label: 'Glycine', description: 'Glycine is an amino acid naturally found in the skin and a key component of collagen. In cosmetics, it plays a role in maintaining skin hydration, supporting tissue regeneration, and improving elasticity. It also offers antioxidant protection, making it a valuable ingredient in soothing, anti-aging, and moisturizing formulations, especially for sensitive or stressed skin.' },
@@ -24,6 +28,12 @@ This product is perfect for use in the summer or in humid conditions when you ne
 `
 
 export const ProductView: FC<Product> = ({ documentId, name, price, type, illustration, discount, volume }) => {
+    const { mutate: addDesire, isPending, error } = useAddDesire()
+
+    const addToCart = () => {
+        addDesire(documentId)
+    }
+
     return <Fragment>
         <Container theme="background">
             <div className="grid grid-cols-6 gap-10 items-center">
@@ -38,8 +48,11 @@ export const ProductView: FC<Product> = ({ documentId, name, price, type, illust
                         <div className="text-2xl font-bold">
                             <Price price={price} discount={discount}/>
                         </div>
-                        <div>
+                        <div className="flex flex-nowrap flex-col gap-1">
                             <Button size="large">
+                                Buy Now
+                            </Button>
+                            <Button variant="outlined" onClick={addToCart}>
                                 Add to Cart
                             </Button>
                         </div>
@@ -75,7 +88,7 @@ export const ProductView: FC<Product> = ({ documentId, name, price, type, illust
                         </div>
                         <div className="block lg:hidden w-full">
                             <Button className="w-full" size="large">
-                                Add to Cart
+                                Buy Now
                             </Button>
                         </div>
                     </div>
@@ -110,7 +123,7 @@ export const ProductView: FC<Product> = ({ documentId, name, price, type, illust
                     </div>
                     <div className="block lg:hidden w-full">
                         <Button className="w-full" size="large">
-                            Add to Cart
+                            Buy Now
                         </Button>
                     </div>
                 </div>

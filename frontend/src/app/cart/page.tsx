@@ -10,7 +10,7 @@ export default function Page() {
         queryKey: ['account'],
         // enabled: !!id,
         queryFn: () =>
-            fetch(`http://127.0.0.1:1337/api/users/1?populate[0]=products.illustration&populate[1]=products.discount&status=draft`).then((res) =>
+            fetch(`http://127.0.0.1:1337/api/users/1?populate[0]=products.illustration&populate[1]=products.discount`).then((res) =>
                 res.json(),
             ),
     })

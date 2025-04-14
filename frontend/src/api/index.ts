@@ -1,9 +1,8 @@
-import {
-    createApi,
-    fetchBaseQuery,
-    retry,
-} from '@reduxjs/toolkit/query/react';
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { baseQuery } from './instance';
 
-const baseQuery = fetchBaseQuery({
-    baseUrl: process.env.API_URL,
-});
+export const baseApi = createApi({
+    reducerPath: 'api',
+    baseQuery,
+    endpoints: () => ({}),
+})

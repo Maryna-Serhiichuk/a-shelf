@@ -2,7 +2,6 @@
 
 import { LayoutCategories } from "@/components/LayoutCategories";
 import { useQuery } from "@tanstack/react-query";
-import { Desire } from '@/components/Desire';
 
 export default function Page() {
 
