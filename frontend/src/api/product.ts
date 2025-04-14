@@ -11,5 +11,11 @@ export const productApi = enhanceApi.injectEndpoints({
             //     return {}
             // }
         }),
+        addProductToCart: builder.mutation({
+            query: (id) => ({
+                url: `cart/${id}`,
+                method: 'POST'
+            }),
+        })
     })
 })

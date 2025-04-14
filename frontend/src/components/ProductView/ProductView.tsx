@@ -28,7 +28,7 @@ This product is perfect for use in the summer or in humid conditions when you ne
 `
 
 export const ProductView: FC<Product> = ({ documentId, name, price, type, illustration, discount, volume }) => {
-    const { mutate: addDesire, isPending, error } = useAddDesire()
+    const { addDesire } = useAddDesire()
 
     const addToCart = () => {
         addDesire(documentId)
