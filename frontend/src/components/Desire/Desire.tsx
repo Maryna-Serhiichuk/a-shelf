@@ -5,13 +5,11 @@ import { Price } from "@/components/Price";
 import { TrashIcon } from "@heroicons/react/24/outline";
 import { Button } from "@/components/Button";
 import { Counter } from "@/components/Counter";
-import { useRemoveDesire } from "@/hooks/useRemoveDesire";
 
 export const Desire: FC<Product> = ({ documentId, name, illustration, price, discount, volume }) => {
-    const { mutate: removeProduct, isPending, error } = useRemoveDesire()
 
     const removeItem = () => {
-        removeProduct(documentId)
+        // removeProduct(documentId)
     }
 
     return <div className="grid grid-cols-[200px_1fr] grid-rows-[200px] bg-stone-100 overflow-hidden">

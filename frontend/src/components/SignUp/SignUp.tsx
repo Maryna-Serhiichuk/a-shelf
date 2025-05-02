@@ -4,10 +4,11 @@ import { Button } from "@/components/Button";
 import { Entry } from "@/components/Entry";
 import { Checkbox } from "@/components/Checkbox";
 import { AuthContainer } from "../Auth/components/AuthContainer";
-import { useRegister } from "@/hooks/useRegister";
+import { accountApi } from "@/api/account";
 
 export const SignUp: FC = () => {
-    const { mutate: register } = useRegister()
+    const { useRegisterMutation } = accountApi
+    const [register, { isLoading, error }] = useRegisterMutation();
     
     const signup: FormikConfig<Omit<RegisterInput, 'username'> & { firstName: string, lastName: string }>['onSubmit'] = async (input, onSubmitProps) => {
         const res = register({

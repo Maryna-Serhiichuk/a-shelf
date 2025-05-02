@@ -4,10 +4,11 @@ import { Button } from "@/components/Button";
 import { Entry } from "@/components/Entry";
 import { Checkbox } from "@/components/Checkbox";
 import { AuthContainer } from "../Auth/components/AuthContainer";
-import { useLogin } from "@/hooks/useLogin";
+import { accountApi } from "@/api/account";
 
 export const Login: FC = () => {
-    const { mutate: login, error, data } = useLogin(); // isLoading
+    const { useLoginMutation } = accountApi
+    const [login, { isLoading, error }] = useLoginMutation();
 
     const onLogin: FormikConfig<LoginInput>['onSubmit'] = async (input, onSubmitProps) => {
         login(input)

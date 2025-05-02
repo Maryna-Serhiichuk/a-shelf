@@ -16,7 +16,10 @@ export function useLastAttendings(args: UseLastAttendingsArgs): UseLastAttending
     const [productIds, setProductIds] = useState<Array<string>>([]);
     
     const { useLastAttendingsQuery } = productApi
-    const { data, isLoading, isError } = useLastAttendingsQuery({ productIds, id: args?.id })
+    const { data, isLoading, isError } = useLastAttendingsQuery(
+        { productIds, id: args?.id },
+        { skip: !productIds?.length }
+    )
 
     useEffect(() => {
         if(args.id) {

@@ -1,18 +1,13 @@
 'use client'
 
+import { accountApi } from "@/api/account";
 import { LayoutCategories } from "@/components/LayoutCategories";
-import { useQuery } from "@tanstack/react-query";
 
 export default function Page() {
+    const { useMeQuery } = accountApi
+    const { data } = useMeQuery(undefined)
 
-    const { isPending, error, data } = useQuery<User>({
-        queryKey: ['account'],
-        // enabled: !!id,
-        queryFn: () =>
-            fetch(`http://127.0.0.1:1337/api/users/1`).then((res) =>
-                res.json(),
-            ),
-    })
+    console.log(data)
 
     return (
         <LayoutCategories>
