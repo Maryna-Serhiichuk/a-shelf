@@ -2,7 +2,6 @@
 
 import { FC } from "react";
 import { Category } from "./components/Category";
-import { useQuery } from '@tanstack/react-query'
 import { productApi } from "@/api/product";
 
 export const Categories: FC = () => {

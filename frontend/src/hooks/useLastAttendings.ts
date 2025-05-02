@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { productApi } from "@/api/product";
 
 export interface UseLastAttendingsArgs {
     id?: string
@@ -13,25 +13,10 @@ type UseLastAttendingsResponse = {
 const lastAttendingsName = "lastAttendings"
 
 export function useLastAttendings(args: UseLastAttendingsArgs): UseLastAttendingsResponse {
-    const [productIds, setProductIds] = useState<Maybe<Array<string>>>(null);
-
-    const { isPending, error, data } = useQuery<Response<Array<Product>>>({
-        queryKey: ['lastAttendings', productIds],
-        enabled: !!productIds && productIds.length > 0,
-        queryFn: async () => {
-            if(productIds && productIds.length > 0) {
-                const actualIds = args.id ? productIds.slice(1,5) : productIds.slice(0,4)
-                const queryString = actualIds.map(idn => `filters[documentId][$in]=${idn}`).join('&');
-
-                const res = await fetch(`http://127.0.0.1:1337/api/products?${queryString}&populate=illustration`)
-                const json = await res.json();
-
-                const sortedProducts: Array<Product> = json?.data.sort((a: Product, b: Product) => productIds.indexOf(a.documentId) - productIds.indexOf(b.documentId))
-                return Promise.resolve({ ...json, data: sortedProducts })
-            }
-            return Promise.resolve({ data: [] });
-        }
-    })
+    const [productIds, setProductIds] = useState<Array<string>>([]);
+    
+    const { useLastAttendingsQuery } = productApi
+    const { data, isLoading, isError } = useLastAttendingsQuery({ productIds, id: args?.id })
 
     useEffect(() => {
         if(args.id) {
@@ -45,20 +30,20 @@ export function useLastAttendings(args: UseLastAttendingsArgs): UseLastAttending
         setProductIds(ids)
     }
 
-    const getLastAttendings = (): Maybe<Array<string>> => {
+    const getLastAttendings = (): Array<string> => {
         const lastAttendingsString: Maybe<string> = localStorage.getItem(lastAttendingsName)
-        return lastAttendingsString ? JSON.parse(lastAttendingsString) : null
+        return lastAttendingsString ? JSON.parse(lastAttendingsString) : []
     }
 
     const setLastAttendings = (id: string) => {
-        const parsedLastAttendings: Maybe<Array<string>> = getLastAttendings()
+        const parsedLastAttendings: Array<string> = getLastAttendings()
 
         if(!parsedLastAttendings) {
             saveLastAttendings([id])
             return
         }
 
-        const withNewLastAttendinds: Maybe<Array<string>> = [id, ...parsedLastAttendings?.filter(ident => ident !== id)]
+        const withNewLastAttendinds: Array<string> = [id, ...parsedLastAttendings?.filter(ident => ident !== id)]
         const slicedLastAttendings: Array<string> = withNewLastAttendinds.slice(0, 5)
 
         saveLastAttendings(slicedLastAttendings)
@@ -71,6 +56,6 @@ export function useLastAttendings(args: UseLastAttendingsArgs): UseLastAttending
     
     return {
         data: data?.data,
-        isPending
+        isPending: isLoading
     }
 }

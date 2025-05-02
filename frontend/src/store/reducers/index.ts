@@ -1,7 +1,7 @@
+import { baseApi } from '@/api';
 import { combineReducers } from '@reduxjs/toolkit';
-import { productApi } from '@/api/product';
 
 const rootReducer = combineReducers({
-    [productApi.reducerPath]: productApi.reducer
+    [baseApi.reducerPath]: baseApi.reducer,
 });
 export default rootReducer;

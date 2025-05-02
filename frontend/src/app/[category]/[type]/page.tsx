@@ -4,8 +4,6 @@ import { Bargain } from "@/components/Bargain";
 import { Categories } from "@/components/Categories";
 import { Container } from "@/components/Container";
 import { Products } from "@/components/Products";
-import { Types } from "@/components/Types";
-import { useQuery } from "@tanstack/react-query";
 import { use } from "react";
 
 export default function Page({ params }: { params: Promise<{ type: string }> }) {
