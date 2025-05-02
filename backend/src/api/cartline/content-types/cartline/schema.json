@@ -1,0 +1,28 @@
+{
+  "kind": "collectionType",
+  "collectionName": "cartlines",
+  "info": {
+    "singularName": "cartline",
+    "pluralName": "cartlines",
+    "displayName": "Cartline"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "cartlines"
+    },
+    "product": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::product.product"
+    },
+    "quantity": {
+      "type": "integer"
+    }
+  }
+}

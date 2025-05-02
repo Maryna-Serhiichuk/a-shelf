@@ -3,15 +3,11 @@
 import { FC } from "react";
 import { Category } from "./components/Category";
 import { useQuery } from '@tanstack/react-query'
+import { productApi } from "@/api/product";
 
 export const Categories: FC = () => {
-    const { isPending, error, data } = useQuery<Response<Array<Category>>>({
-        queryKey: ['categories'],
-        queryFn: () =>
-            fetch('http://127.0.0.1:1337/api/categories').then((res) =>
-                res.json(),
-            ),
-    })
+    const { useCategoriesQuery } = productApi
+    const { data, isLoading, isError } = useCategoriesQuery(undefined)
       
     return <div className="w-full flex flex-col gap-3">
         {data?.data?.map(category => (

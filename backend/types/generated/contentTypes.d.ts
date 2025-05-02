@@ -399,6 +399,39 @@ export interface ApiBargainBargain extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiCartlineCartline extends Struct.CollectionTypeSchema {
+  collectionName: 'cartlines';
+  info: {
+    displayName: 'Cartline';
+    pluralName: 'cartlines';
+    singularName: 'cartline';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::cartline.cartline'
+    > &
+      Schema.Attribute.Private;
+    product: Schema.Attribute.Relation<'oneToOne', 'api::product.product'>;
+    publishedAt: Schema.Attribute.DateTime;
+    quantity: Schema.Attribute.Integer;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    user: Schema.Attribute.Relation<
+      'manyToOne',
+      'plugin::users-permissions.user'
+    >;
+  };
+}
+
 export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
   collectionName: 'categories';
   info: {
@@ -996,6 +1029,7 @@ export interface PluginUsersPermissionsUser
   };
   attributes: {
     blocked: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    cartlines: Schema.Attribute.Relation<'oneToMany', 'api::cartline.cartline'>;
     confirmationToken: Schema.Attribute.String & Schema.Attribute.Private;
     confirmed: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     createdAt: Schema.Attribute.DateTime;
@@ -1049,6 +1083,7 @@ declare module '@strapi/strapi' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
       'api::bargain.bargain': ApiBargainBargain;
+      'api::cartline.cartline': ApiCartlineCartline;
       'api::category.category': ApiCategoryCategory;
       'api::ingredient.ingredient': ApiIngredientIngredient;
       'api::product.product': ApiProductProduct;

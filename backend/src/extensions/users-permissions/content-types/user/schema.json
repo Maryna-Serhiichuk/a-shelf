@@ -75,6 +75,12 @@
       "relation": "manyToMany",
       "target": "api::product.product",
       "inversedBy": "users"
+    },
+    "cartlines": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::cartline.cartline",
+      "mappedBy": "user"
     }
   }
 }

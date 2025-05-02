@@ -4,6 +4,16 @@ const enhanceApi = baseApi.enhanceEndpoints({})
 
 export const productApi = enhanceApi.injectEndpoints({
     endpoints: (builder) => ({
+        categories: builder.query<Category[], undefined>({
+            query: () => {
+                console.log('wowowo')
+                return ({
+                    url: `categories`,
+                    method: 'GET',
+                    // body
+                })
+            },
+        }),
         product: builder.query<Product, { id: string }>({
             // providesTags: 'PRODUCT',
             query: (id) => `product/${id}`,
@@ -11,11 +21,12 @@ export const productApi = enhanceApi.injectEndpoints({
             //     return {}
             // }
         }),
-        addProductToCart: builder.mutation({
+        addProductToCart: builder.mutation<User, { id: string }>({
             query: (id) => ({
-                url: `cart/${id}`,
-                method: 'POST'
+                url: `cart`,
+                method: 'POST',
+                body: { id }
             }),
-        })
+        }),
     })
 })
