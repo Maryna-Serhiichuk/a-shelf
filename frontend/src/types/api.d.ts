@@ -73,10 +73,17 @@ declare global {
         price: number
     }
 
+    interface Cartline {
+        documentId: string
+        quantity: number
+        product: Product
+        user: User
+    }
+
     interface User {
         email: string
         username: string
-        products?: Array<Product>
+        cartlines?: Array<Cartline>
     }
 
     interface RegisterInput {

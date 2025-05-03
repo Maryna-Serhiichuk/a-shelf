@@ -10,10 +10,19 @@ export const accountApi = enhanceApi.injectEndpoints({
                 url: `users/1`,
                 method: 'GET',
                 params: {
-                    'populate[0]': 'products.illustration',
-                    'populate[1]': 'products.discount',
+                    'populate[2]': 'cartlines.product',
+                    'populate[3]': 'cartlines.product.illustration',
+                    'populate[4]': 'cartlines.product.discount',
                 },
             }),
+        }),
+        createCartline: builder.mutation<Cartline, { id: string }>({
+          query: ({ id }) => ({
+            url: `cartlines`,
+            method: 'POST',
+            body: { id }
+          }),
+          invalidatesTags: ['User'],
         }),
         login: builder.mutation<LoginResponse, LoginInput>({
             query: (body) => ({

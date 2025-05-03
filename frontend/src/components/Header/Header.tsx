@@ -41,9 +41,9 @@ export const Header: FC = () => {
                 </div>
                 <div className="relative">
                     <NavLink href={'/cart'}>
-                        {data?.products && data?.products?.length > 0 &&
+                        {data?.cartlines && data?.cartlines?.length > 0 &&
                             <div className="absolute left-6 flex justify-center items-center text-sm h-[20px] w-[20px] bg-red-700 rounded-[50%] text-stone-100">
-                                {data?.products?.length}
+                                {data?.cartlines?.length}
                             </div>
                         }
                         <Button variant={'link'} Icon={ShoppingCartIcon}>

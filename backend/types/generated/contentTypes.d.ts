@@ -402,12 +402,13 @@ export interface ApiBargainBargain extends Struct.CollectionTypeSchema {
 export interface ApiCartlineCartline extends Struct.CollectionTypeSchema {
   collectionName: 'cartlines';
   info: {
+    description: '';
     displayName: 'Cartline';
     pluralName: 'cartlines';
     singularName: 'cartline';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
     createdAt: Schema.Attribute.DateTime;
@@ -421,7 +422,9 @@ export interface ApiCartlineCartline extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     product: Schema.Attribute.Relation<'oneToOne', 'api::product.product'>;
     publishedAt: Schema.Attribute.DateTime;
-    quantity: Schema.Attribute.Integer;
+    quantity: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<1>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -429,6 +432,7 @@ export interface ApiCartlineCartline extends Struct.CollectionTypeSchema {
       'manyToOne',
       'plugin::users-permissions.user'
     >;
+    uuid: Schema.Attribute.UID;
   };
 }
 
@@ -533,10 +537,6 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    users: Schema.Attribute.Relation<
-      'manyToMany',
-      'plugin::users-permissions.user'
-    >;
     volume: Schema.Attribute.String;
   };
 }
@@ -1040,7 +1040,6 @@ export interface PluginUsersPermissionsUser
       Schema.Attribute.SetMinMaxLength<{
         minLength: 6;
       }>;
-    items: Schema.Attribute.Relation<'manyToMany', 'api::product.product'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -1052,7 +1051,6 @@ export interface PluginUsersPermissionsUser
       Schema.Attribute.SetMinMaxLength<{
         minLength: 6;
       }>;
-    products: Schema.Attribute.Relation<'oneToMany', 'api::product.product'>;
     provider: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
     resetPasswordToken: Schema.Attribute.String & Schema.Attribute.Private;

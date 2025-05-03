@@ -8,12 +8,12 @@ export default function Page() {
     const { useMeQuery } = accountApi
     const { data, isLoading, isError } = useMeQuery(undefined)
 
-    const products = data?.products
+    const cartlines = data?.cartlines
 
     return (
         <LayoutCategories>
             <div className="flex flex-col gap-5 max-w-[900px]">
-                {products?.map((product, index) => (
+                {cartlines?.map((product, index) => (
                     <Desire key={product?.documentId + index} {...product} />
                 ))}
             </div>

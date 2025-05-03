@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { Button } from "@/components/Button";
 import { Price } from "@/components/Price";
 import { NavLink } from "@/components/NavLink";

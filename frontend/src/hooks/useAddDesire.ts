@@ -1,20 +1,15 @@
-import { productApi } from "@/api/product";
+import { accountApi } from "@/api/account";
 
 type UseAddDesire = {
   addDesire: (id: string) => void
 }
 
 export function useAddDesire(): UseAddDesire {
-    const { useAddProductToCartMutation } = productApi
-    const [updateProduct, {
-      isSuccess,
-      error,
-      isLoading: editing,
-      reset: resetEditing,
-  }] = useAddProductToCartMutation();
+  const { useCreateCartlineMutation } = accountApi
+  const [createCartline, {}] = useCreateCartlineMutation();
 
   const addDesire: UseAddDesire['addDesire'] = (id) => {
-    updateProduct({ id });
+    createCartline({ id });
   }
 
   return {

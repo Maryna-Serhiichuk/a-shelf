@@ -55,14 +55,6 @@ export const productApi = enhanceApi.injectEndpoints({
                 },
             }),
         }),
-        addProductToCart: builder.mutation<User, { id: string }>({
-            query: ({ id }) => ({
-                url: `cart`,
-                method: 'POST',
-                body: { id }
-            }),
-            invalidatesTags: ['User'],
-        }),
         lastAttendings: builder.query<Response<Array<Product>>, { productIds: Array<string>, id?: string }>({
             query: ({ productIds, id }) => {
               const actualIds = id ? productIds?.slice(1, 5) : productIds?.slice(0, 4);

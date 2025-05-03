@@ -1,26 +1,24 @@
 'use client'
 
 import { productApi } from "@/api/product";
-import { accountApi } from "@/api/account";
 import { Bargain } from "@/components/Bargain";
 import { Container } from "@/components/Container";
 import { LastAttendings } from "@/components/LastAttendings";
 import { Product } from "@/components/Product";
 import { Fragment, use } from "react";
+import { useCartlines } from "@/hooks/useCartlines";
 
 export default function Page({ params }: { params: Promise<{ id: string }> }) {
     const { id } = use(params);
 
-    const { useMeQuery } = accountApi
-    const { data: meData } = useMeQuery(undefined)
-    const choosenProducts = meData?.products?.map(it => it?.documentId)
+    const { carlineProductIds } = useCartlines()
 
     const { useProductQuery } = productApi
     const { data, isLoading, isError } = useProductQuery({ id })
 
     return (
         <Fragment>
-            {data?.data && <Product {...data?.data} isCart={choosenProducts?.includes(id)} />}
+            {data?.data && <Product {...data?.data} isCart={carlineProductIds?.includes(id)} />}
             <Container>
                 <Bargain id={id} />
             </Container>
