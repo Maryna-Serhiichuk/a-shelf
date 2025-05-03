@@ -28,7 +28,7 @@ export default factories.createCoreController('api::product.product', ({ strapi 
     },
     async addProduct(ctx) {
         const { id } = ctx.request.body
-
+        
         if(!id) return {}
 
         const product = await strapi.db.query('api::product.product').findOne({

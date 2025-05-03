@@ -7,8 +7,6 @@ export default function Page() {
     const { useMeQuery } = accountApi
     const { data } = useMeQuery(undefined)
 
-    console.log(data)
-
     return (
         <LayoutCategories>
             Account

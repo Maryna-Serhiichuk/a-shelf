@@ -4,8 +4,15 @@ import { Price } from "@/components/Price";
 import { NavLink } from "@/components/NavLink";
 import { Img } from "@/components/Img";
 import classNames from "classnames";
+import { useAddDesire } from "@/hooks/useAddDesire";
 
-export const ProductPreview: FC<Product & { className?: string }> = ({ documentId, illustration, name, price, discount, volume, className }) => {
+export const ProductPreview: FC<Product & { className?: string }> = ({ documentId, illustration, name, price, discount, volume, className, isCart }) => {
+    const { addDesire } = useAddDesire()
+
+    const addToCart = () => {
+        addDesire(documentId)
+    }
+
     return <div key={documentId} className={classNames("flex flex-col justify-between px-6 py-6 bg-stone-100 dark:bg-stone-300", className)}>
         <div className="flex items-end justify-center h-[200px]">
             {illustration?.url &&
@@ -22,9 +29,14 @@ export const ProductPreview: FC<Product & { className?: string }> = ({ documentI
                 <Price price={price} discount={discount} mini />
             </div>
             <div className="flex justify-center">
-                <Button>
-                    Add to Card
-                </Button>
+                {isCart
+                    ? <Button variant={'outlined'}>
+                        Added
+                    </Button>
+                    : <Button onClick={addToCart}>
+                        Add to Card
+                    </Button>
+                }
             </div>
         </div>
     </div>

@@ -52,6 +52,7 @@ declare global {
         discount: Discount
         volume: string
         ingredients: Array<Ingredient>
+        isCart?: boolean
     }
 
     interface Ingredient {

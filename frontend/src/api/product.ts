@@ -1,3 +1,4 @@
+import { getAttendings } from "@/utils/getAttendings";
 import { baseApi } from ".";
 
 const enhanceApi = baseApi.enhanceEndpoints({})
@@ -33,7 +34,6 @@ export const productApi = enhanceApi.injectEndpoints({
             }),
         }),
         product: builder.query<Response<Product>, { id: string }>({
-            // providesTags: 'PRODUCT',
             query: ({ id }) => ({
                 url: `products/${id}`,
                 method: 'GET',
@@ -42,9 +42,6 @@ export const productApi = enhanceApi.injectEndpoints({
                     'populate[1]': 'discount',
                 },
             }),
-            // transformResponse: (res) => {
-            //     return {}
-            // }
         }),
         bargains: builder.query<Response<Array<Bargain>>, { id?: string, type?: string }>({
             query: ({ id, type }) => ({
@@ -59,11 +56,12 @@ export const productApi = enhanceApi.injectEndpoints({
             }),
         }),
         addProductToCart: builder.mutation<User, { id: string }>({
-            query: (id) => ({
+            query: ({ id }) => ({
                 url: `cart`,
                 method: 'POST',
                 body: { id }
             }),
+            invalidatesTags: ['User'],
         }),
         lastAttendings: builder.query<Response<Array<Product>>, { productIds: Array<string>, id?: string }>({
             query: ({ productIds, id }) => {

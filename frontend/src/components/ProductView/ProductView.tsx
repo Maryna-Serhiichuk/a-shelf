@@ -27,7 +27,7 @@ Gel Cream is a type of moisturizer that combines the properties of a gel and a c
 This product is perfect for use in the summer or in humid conditions when you need to keep the skin hydrated without feeling heavy.
 `
 
-export const ProductView: FC<Product> = ({ documentId, name, price, type, illustration, discount, volume }) => {
+export const ProductView: FC<Product> = ({ documentId, name, price, type, illustration, discount, volume, isCart }) => {
     const { addDesire } = useAddDesire()
 
     const addToCart = () => {
@@ -52,9 +52,15 @@ export const ProductView: FC<Product> = ({ documentId, name, price, type, illust
                             <Button size="large">
                                 Buy Now
                             </Button>
-                            <Button variant="outlined" onClick={addToCart}>
-                                Add to Cart
-                            </Button>
+                            {isCart
+                                ? <Button variant="outlined">
+                                    Added
+                                </Button>
+                                : <Button variant="outlined" onClick={addToCart}>
+                                    Add to Cart
+                                </Button>
+                            }
+                            
                         </div>
                     </div>
                 </div>

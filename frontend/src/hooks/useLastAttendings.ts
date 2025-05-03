@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { productApi } from "@/api/product";
+import { getAttendings, lastAttendingsName } from "../utils/getAttendings";
 
 export interface UseLastAttendingsArgs {
     id?: string
@@ -9,8 +10,6 @@ type UseLastAttendingsResponse = {
     data: Maybe<Array<Product>>
     isPending: boolean
 }
-
-const lastAttendingsName = "lastAttendings"
 
 export function useLastAttendings(args: UseLastAttendingsArgs): UseLastAttendingsResponse {
     const [productIds, setProductIds] = useState<Array<string>>([]);
@@ -34,8 +33,7 @@ export function useLastAttendings(args: UseLastAttendingsArgs): UseLastAttending
     }
 
     const getLastAttendings = (): Array<string> => {
-        const lastAttendingsString: Maybe<string> = localStorage.getItem(lastAttendingsName)
-        return lastAttendingsString ? JSON.parse(lastAttendingsString) : []
+        return getAttendings()
     }
 
     const setLastAttendings = (id: string) => {

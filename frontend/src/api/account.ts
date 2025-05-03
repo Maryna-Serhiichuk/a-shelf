@@ -5,6 +5,7 @@ const enhanceApi = baseApi.enhanceEndpoints({})
 export const accountApi = enhanceApi.injectEndpoints({
     endpoints: (builder) => ({
         me: builder.query<User, undefined>({
+            providesTags: ['User'],
             query: () => ({
                 url: `users/1`,
                 method: 'GET',
