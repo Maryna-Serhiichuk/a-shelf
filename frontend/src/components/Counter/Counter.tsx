@@ -1,8 +1,12 @@
 import { FC, useEffect, useState } from "react";
 import { PlusIcon, MinusIcon } from "@heroicons/react/24/outline";
 
-export const Counter: FC<{ onChange?: (count: number) => void }> = ({ onChange }) => {
-    const [count, setCount] = useState<number>(1)
+export const Counter: FC<{ onChange?: (count: number) => void, value?: Cartline['quantity'] }> = ({ onChange, value }) => {
+    const [count, setCount] = useState<number>(value ?? 1)
+
+    useEffect(() => {
+        value && setCount(value)
+    }, [value])
 
     useEffect(() => {
         onChange && onChange(count)

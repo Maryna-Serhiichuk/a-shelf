@@ -1,15 +1,68 @@
-import { FC } from "react";
+import { FC, useCallback, useEffect, useState } from "react";
+import debounce from 'lodash.debounce';
 import { NavLink } from "@/components/NavLink";
 import { Img } from "@/components/Img";
 import { Price } from "@/components/Price";
 import { TrashIcon } from "@heroicons/react/24/outline";
 import { Button } from "@/components/Button";
 import { Counter } from "@/components/Counter";
+import { cartApi } from "@/api/cart";
 
-export const Desire: FC<Cartline> = ({ documentId, product }) => {
+export const Desire: FC<Cartline> = ({ documentId, product, quantity }) => {
+    const { useDeleteCartlineMutation, useUpdateCartlineMutation } = cartApi
+    const [deleteCartline, { isLoading, isError }] = useDeleteCartlineMutation()
+    const [updateCartline, { }] = useUpdateCartlineMutation()
+
+    const [productQuantity, setQuantity] = useState(quantity)
+    const [price, setPrice] = useState<number>(product?.price * quantity)
+
+    const updatePrice = (count: number) => {
+        setPrice(product?.price * count)
+    }
+
+    const valuesControler = (quant: number) => {
+        updatePrice(quant)
+        setQuantity(quant)
+    }
+
+    const resetValues = () => {
+        valuesControler(quantity)
+    }
+
+    useEffect(() => {
+        quantityControler(productQuantity)
+    }, [productQuantity])
+
+    const quantityControler = useCallback((value: number) => {
+        if(quantity !== value) {
+            valuesControler(value)
+            changeQuantity(value)
+        }
+    }, [quantity])
+
+    const changeQuantity = useCallback(
+        debounce((value: number) => {
+            try {
+                updateCartline({ id: documentId, quantity: value })
+                // throw Error()
+            } catch (e) {
+                resetValues()
+                // + alert
+            }
+            
+            // TODO: then().error()
+        }, 1000),
+        []
+    )
 
     const removeItem = () => {
-        // removeProduct(documentId)
+        try {
+            deleteCartline({ id: documentId })
+        } catch (e) {
+            // + alert
+        }
+        
+        // TODO: then().error()
     }
 
     return <div className="grid grid-cols-[200px_1fr] grid-rows-[200px] bg-stone-100 overflow-hidden">
@@ -29,10 +82,10 @@ export const Desire: FC<Cartline> = ({ documentId, product }) => {
                     {product?.volume}
                 </div>
                 <div className="text-xl font-medium text-stone-700">
-                    <Price price={product?.price} discount={product?.discount} />
+                    <Price price={price} discount={product?.discount} />
                 </div>
                 <div>
-                    <Counter/>
+                    <Counter value={productQuantity} onChange={quantityControler}/>
                 </div>
             </div>
             <div>

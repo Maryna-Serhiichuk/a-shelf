@@ -5,7 +5,7 @@ const enhanceApi = baseApi.enhanceEndpoints({})
 export const accountApi = enhanceApi.injectEndpoints({
     endpoints: (builder) => ({
         me: builder.query<User, undefined>({
-            providesTags: ['User'],
+            providesTags: ['Cartline'],
             query: () => ({
                 url: `users/1`,
                 method: 'GET',
@@ -15,14 +15,6 @@ export const accountApi = enhanceApi.injectEndpoints({
                     'populate[4]': 'cartlines.product.discount',
                 },
             }),
-        }),
-        createCartline: builder.mutation<Cartline, { id: string }>({
-          query: ({ id }) => ({
-            url: `cartlines`,
-            method: 'POST',
-            body: { id }
-          }),
-          invalidatesTags: ['User'],
         }),
         login: builder.mutation<LoginResponse, LoginInput>({
             query: (body) => ({

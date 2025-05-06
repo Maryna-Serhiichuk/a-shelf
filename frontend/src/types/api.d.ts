@@ -80,6 +80,11 @@ declare global {
         user: User
     }
 
+    interface CartlineInput {
+        id: string
+        quantity: number
+    }
+
     interface User {
         email: string
         username: string
