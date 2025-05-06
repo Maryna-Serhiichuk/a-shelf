@@ -2,14 +2,16 @@
 
 import { ButtonHTMLAttributes, ComponentType, FC, PropsWithChildren } from "react";
 import classNames from 'classnames';
+import { ArrowPathIcon } from '@heroicons/react/24/outline';
 
 export interface ButtonArgs extends PropsWithChildren<ButtonHTMLAttributes<HTMLButtonElement>> {
     variant?: 'default' | 'text' | 'link' | 'outlined'
     size?: 'default' | 'large'
-    Icon?: ComponentType<React.SVGProps<SVGSVGElement>>
+    Icon?: ComponentType<React.SVGProps<SVGSVGElement>>,
+    loading?: boolean
 }
 
-export const Button: FC<ButtonArgs> = ({ children, variant = 'default', size = 'default', Icon, ...props }) => {
+export const Button: FC<ButtonArgs> = ({ children, variant = 'default', size = 'default', Icon, loading, ...props }) => {
 
     const buttonType: {[key in NonNullable<ButtonArgs['variant']>]: string} = {
         link: 'text-stone-800 hover:text-stone-500 dark:text-stone-400 hover:underline px-3',
@@ -23,12 +25,14 @@ export const Button: FC<ButtonArgs> = ({ children, variant = 'default', size = '
         default: 'py-2'
     }
 
-    return <button {...props} className={classNames(
-        'flex justify-center items-center cursor-pointer text-stone-50 duration-200 font-sans gap-2 whitespace-nowrap', 
+    return <button {...props} disabled={loading} className={classNames(
+        'flex justify-center items-center cursor-pointer text-stone-50 duration-200 font-sans gap-2 whitespace-nowrap duration-<200>', 
         buttonType[variant],
         buttonSize[size], 
-        props?.className
+        props?.className,
+        { "opacity-50 cursor-cell": loading }
     )}>
+        {loading && <ArrowPathIcon className="w-6 h-6 text-stone-100 animate-spin" />}
         {Icon && <Icon className="size-6"/>}
         {children}
     </button>

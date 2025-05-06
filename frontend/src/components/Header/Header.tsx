@@ -14,7 +14,7 @@ import { accountApi } from "@/api/account";
 export const Header: FC = () => {
     const [isOpen, setOpen] = useState(false)
     const { useMeQuery } = accountApi
-    const { data } = useMeQuery(undefined) 
+    const { data } = useMeQuery(undefined)
 
     return <Fragment>
         <div className="w-full flex justify-between px-4 py-2">

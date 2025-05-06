@@ -1,5 +1,7 @@
 declare global {
 
+    type ID = string | number
+
     type Maybe<T> = T | null | undefined;
 
     interface Request<T> extends Omit<T, 'slug'> {}
@@ -86,6 +88,7 @@ declare global {
     }
 
     interface User {
+        id?: ID
         email: string
         username: string
         cartlines?: Array<Cartline>

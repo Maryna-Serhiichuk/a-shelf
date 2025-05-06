@@ -1,23 +1,36 @@
-import { FC, Fragment, useState } from "react";
-import { UserIcon, ArrowLeftEndOnRectangleIcon } from '@heroicons/react/24/outline'
+import { FC, Fragment, useEffect, useState } from "react";
+import { accountApi } from "@/api/account";
+import { ArrowLeftEndOnRectangleIcon, ArrowLeftStartOnRectangleIcon } from '@heroicons/react/24/outline'
 import { Modal } from "@/components/Modal";
 import { Button } from "@/components/Button";
 import { Login } from "@/components/Login";
 import { SignUp } from "@/components/SignUp";
-import { NavLink } from "@/components/NavLink";
+import { jwt } from "@/utils/jwt";
 
 export const Auth: FC = () => {
+    const { useMeQuery } = accountApi
+    const { data } = useMeQuery(undefined)
+
     const [isAuth, setAuth] = useState(false)
     const [isExist, setExist] = useState(true)
     const [open, setOpen] = useState(false)
 
+    useEffect(() => {
+        if(data?.id) {
+            setAuth(true)
+        }
+    }, [data])
+
+    const logout = () => {
+        jwt.remove()
+        location.reload() // TODO: without reload
+    }
+
     return <Fragment>
         {isAuth
-            ? <NavLink href={'/account'}>
-                <Button variant={'link'} Icon={UserIcon}>
-                    <span className="hidden lg:block">Account</span>
-                </Button>
-            </NavLink>
+            ? <Button variant={'text'} Icon={ArrowLeftStartOnRectangleIcon} onClick={logout}>
+                Log Out
+            </Button>
             : <Button variant={'text'} Icon={ArrowLeftEndOnRectangleIcon} onClick={() => setOpen(true)}>
                 Log In
             </Button>

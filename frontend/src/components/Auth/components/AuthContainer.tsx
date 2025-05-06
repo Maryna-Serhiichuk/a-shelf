@@ -8,7 +8,7 @@ export const AuthContainer: FC<PropsWithChildren<{ title: string, driverTitle: s
         </div>
         <div className="flex flex-col gap-10">
             {children}
-            <div className="flex gap-4 items-center">
+            {/* <div className="flex gap-4 items-center">
                 <div className="h-[1px] bg-stone-300 w-full" />
                 <div className="text-center text-xl whitespace-nowrap text-stone-400">
                     {driverTitle}
@@ -19,7 +19,7 @@ export const AuthContainer: FC<PropsWithChildren<{ title: string, driverTitle: s
                 <Button>
                     Google
                 </Button>
-            </div>
+            </div> */}
         </div>
     </div>
 }

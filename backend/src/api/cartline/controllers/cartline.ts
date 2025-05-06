@@ -17,7 +17,7 @@ export default factories.createCoreController('api::cartline.cartline', ({ strap
         const cartline = await strapi.db.query('api::cartline.cartline').create({
             data: {
                 user: {
-                    connect: [1] // ctx.state.user.id
+                    connect: [ctx?.state?.user?.id]
                 },
                 product: {
                     connect: [product.id]
