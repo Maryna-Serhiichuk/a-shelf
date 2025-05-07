@@ -1,0 +1,24 @@
+{
+  "kind": "collectionType",
+  "collectionName": "support_pages",
+  "info": {
+    "singularName": "support-page",
+    "pluralName": "support-pages",
+    "displayName": "SupportPage",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "slug": {
+      "type": "uid"
+    },
+    "content": {
+      "type": "richtext"
+    },
+    "label": {
+      "type": "string"
+    }
+  }
+}

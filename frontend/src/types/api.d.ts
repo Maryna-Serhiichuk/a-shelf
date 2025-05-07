@@ -114,6 +114,13 @@ declare global {
         jwt: string
         user: User
     }
+
+    interface SupportPage {
+        documentId: string
+        slug: string
+        label?: string
+        content: string
+    }
 }
 
 export {};
