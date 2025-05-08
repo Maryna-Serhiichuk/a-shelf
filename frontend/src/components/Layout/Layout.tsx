@@ -11,7 +11,9 @@ const poppins = Poppins({ subsets: ["latin"], weight: ["100", "200", "300", "400
 export const Layout: FC<PropsWithChildren> = ({ children }) => {
     return <div className={classNames("w-full bg-stone-50 dark:bg-stone-900", poppins.className)}>
         <Header/>
-        {children}
+        <div className="min-h-screen">
+            {children}
+        </div>
         <Footer/>
     </div>
 }

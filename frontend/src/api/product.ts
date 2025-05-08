@@ -72,7 +72,7 @@ export const productApi = enhanceApi.injectEndpoints({
                 params,
               };
             },
-            transformResponse: (response: Response<Product[]>, meta, arg) => {
+            transformResponse: (response: Response<Array<Product>>, meta, arg) => {
               const sorted = response.data.sort(
                 (a, b) =>
                   arg.productIds.indexOf(a.documentId) - arg.productIds.indexOf(b.documentId)

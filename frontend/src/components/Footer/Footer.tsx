@@ -60,7 +60,7 @@ export const Footer: FC = () => {
                         </div>
                         <div className={pagesStyle.wrap}>
                             {pages?.map(page => (
-                                <div className="w-1/2 sm:w-full md:w-1/2 hover:underline">
+                                <div key={page?.href} className="w-1/2 sm:w-full md:w-1/2 hover:underline">
                                     <NavLink href={page?.href}>
                                         {page?.label}
                                     </NavLink>
@@ -74,7 +74,7 @@ export const Footer: FC = () => {
                         </div>
                         <div className={pagesStyle.wrap}>
                             {data?.data?.map(page => (
-                                <div className="w-1/2 sm:w-full md:w-1/2 hover:underline">
+                                <div key={page?.slug} className="w-1/2 sm:w-full md:w-1/2 hover:underline">
                                     <NavLink href={`/support/${page.slug}`}>
                                         {page?.label}
                                     </NavLink>
