@@ -25,9 +25,11 @@ export const Header: FC = () => {
                         Shop
                     </Button>
                 </NavLink>
-                <Button variant={'link'}>
-                    About
-                </Button>
+                <NavLink href={'/about'}>
+                    <Button variant={'link'}>
+                        About
+                    </Button>
+                </NavLink>
                 <Button variant={'link'}>
                     Contact Us
                 </Button>

@@ -8,7 +8,7 @@ export const Markdown: FC<{data: string | undefined}> = ({ data }) => {
         // img: ({src, alt}) => (src ? <img className={"markdown-image"} src={src} alt={alt}/> : null),
         ul: ({children}) => <ul className="mt-2 mb-4">{children}</ul>,
         a: ({href, children}) => <a href={href} className="text-cyan-700 underline">{children}</a>,
-        p: ({children}) => <div className="dark:text-stone-50">{children}</div>,
+        p: ({children}) => <div className="dark:text-stone-50 pb-5">{children}</div>,
         // h1: ({children}) => children,
         h2: ({children}) => <div className="text-2xl font-bold dark:text-stone-50 pb-3">{children}</div>,
         // h3: ({children}) => children,

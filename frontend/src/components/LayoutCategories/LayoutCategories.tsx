@@ -1,7 +1,7 @@
 import { FC, PropsWithChildren } from "react";
-import { Container } from "../Container";
-import { Categories } from "../Categories";
-import { Bargain } from "../Bargain";
+import { Container } from "@/components/Container";
+import { Categories } from "@/components/Categories";
+import { Bargain } from "@/components/Bargain";
 
 export const LayoutCategories: FC<PropsWithChildren> = ({ children }) => {
     return (

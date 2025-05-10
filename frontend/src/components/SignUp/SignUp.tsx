@@ -2,7 +2,7 @@ import { FC } from "react";
 import { Formik, Form, ErrorMessage, FormikConfig } from 'formik';
 import { Button } from "@/components/Button";
 import { Entry } from "@/components/Entry";
-import { AuthContainer } from "../Auth/components/AuthContainer";
+import { AuthContainer } from "@/components/Auth/components/AuthContainer";
 import { accountApi } from "@/api/account";
 import { passwordValidate } from "@/utils/passwordValidate";
 

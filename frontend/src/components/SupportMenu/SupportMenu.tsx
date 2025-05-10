@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { pageApi } from "@/api/page";
-import { NavLink } from "../NavLink";
+import { NavLink } from "@/components/NavLink";
 
 export const SupportMenu: FC = () => {
     const { useSupportQuery } = pageApi

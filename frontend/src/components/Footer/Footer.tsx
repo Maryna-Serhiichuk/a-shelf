@@ -2,7 +2,7 @@ import { FC } from "react";
 import { Container } from "@/components/Container";
 import { Logo } from "@/components/Logo";
 import { pageApi } from "@/api/page";
-import { NavLink } from "../NavLink";
+import { NavLink } from "@/components/NavLink";
 import classNames from "classnames";
 
 export const Footer: FC = () => {

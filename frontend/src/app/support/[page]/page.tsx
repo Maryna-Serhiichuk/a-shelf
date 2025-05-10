@@ -1,7 +1,7 @@
 'use client'
 
 import { Container } from "@/components/Container";
-import { use, useEffect, useState } from "react";
+import { use } from "react";
 import { pageApi } from "@/api/page";
 import { Support } from "@/components/Support";
 import { SupportMenu } from "@/components/SupportMenu";
@@ -13,7 +13,7 @@ export default function Page({ params }: { params: Promise<{ page: string }> }) 
     const { usePageQuery } = pageApi
     const { data, isLoading } = usePageQuery({ slug: page })
 
-    // if(isLoading) return <Loader/>
+    if(isLoading) return <Loader/>
 
     return (
         <Container>

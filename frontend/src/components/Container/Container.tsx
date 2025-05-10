@@ -1,7 +1,7 @@
 import { FC, PropsWithChildren } from "react";
 import classNames from "classnames";
 
-export const Container: FC<PropsWithChildren<{ theme?: 'default' | 'dimming' | 'background' }>> = ({ children, theme }) => {
+export const Container: FC<PropsWithChildren<{ theme?: 'default' | 'dimming' | 'background', full?: boolean }>> = ({ children, theme, full }) => {
     return <div className={classNames(
         "flex justify-center w-full relative",
         {
@@ -17,9 +17,9 @@ export const Container: FC<PropsWithChildren<{ theme?: 'default' | 'dimming' | '
             </div>
         }
         <div className={classNames("font-[family-name:var(--font-geist-sans)]",
-            "p-2 sm:p-4 lg:p-8",
             "max-w-[1440px] w-[100%]",
-            "relative z-[2]"
+            "relative z-[2]",
+            { "p-2 sm:p-4 lg:p-8": !full }
         )}>
             {children}
         </div>

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { productApi } from "@/api/product";
-import { getAttendings, lastAttendingsName } from "../utils/getAttendings";
+import { getAttendings, lastAttendingsName } from "@/utils/getAttendings";
 
 export interface UseLastAttendingsArgs {
     id?: string
