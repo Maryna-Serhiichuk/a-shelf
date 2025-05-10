@@ -1,5 +1,6 @@
 import { FC } from "react";
 import { ImageDescription } from "@/components/ImageDescription";
+import delivery from "@/images/packing.jpg"
 
 const text = `
 At the heart of our brand is a simple belief: skincare should be gentle, effective, and rooted in nature. We are not about covering up, but about caring — providing your skin with what it truly needs to feel healthy, nourished, and balanced.
@@ -11,6 +12,6 @@ We are a small, passionate team, and we believe that real beauty comes from feel
 
 export const WhyChooseUs: FC = () => {
     return <div className="pt-10 pb-20">
-        <ImageDescription description={text} title="Why Choose Us" position="right" />
+        <ImageDescription image={delivery.src} description={text} title="Why Choose Us" position="right" />
     </div>
 }

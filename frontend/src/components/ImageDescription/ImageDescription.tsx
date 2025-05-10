@@ -12,10 +12,10 @@ export interface ImageDescriptionProps {
 
 export const ImageDescription: FC<ImageDescriptionProps> = ({ image, title, description, position }) => {
     return <div className="grid grid-cols-2 gap-5">
-        <div className={classNames("col-span-1", { "order-2": position === 'right' })}>
+        <div className={classNames("col-span-2 xl:col-span-1", { "order-1 xl:order-2": position === 'right' })}>
             <img src={image} className="h-full w-full object-cover" />
         </div>
-        <div className={classNames("col-span-1 pr-12 text-lg", { "order-1": position === 'right' })}>
+        <div className={classNames("col-span-2 xl:col-span-1 pr-12 text-lg", { "order-2 xl:order-1": position === 'right' })}>
             <Container>
                 <div className="flex flex-col">
                     <div className="text-5xl font-semibold mb-8">
