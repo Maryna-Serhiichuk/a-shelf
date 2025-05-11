@@ -1,0 +1,20 @@
+{
+  "collectionName": "components_ui_icon_descriptions",
+  "info": {
+    "displayName": "IconDescriptionComponent",
+    "icon": "dashboard",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "heading": {
+      "type": "string"
+    },
+    "items": {
+      "displayName": "IconDescription",
+      "type": "component",
+      "repeatable": true,
+      "component": "molecule.icon-description"
+    }
+  }
+}

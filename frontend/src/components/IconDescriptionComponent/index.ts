@@ -1,6 +1,5 @@
-import { IconDescriptionComponent, type IconDescriptionComponentProps } from "./IconDescriptionComponent";
+import { IconDescriptionComponent } from "./IconDescriptionComponent";
 
 export {
-    IconDescriptionComponent,
-    IconDescriptionComponentProps
+    IconDescriptionComponent
 }

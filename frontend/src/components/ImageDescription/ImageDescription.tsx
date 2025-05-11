@@ -2,18 +2,12 @@ import { FC } from "react";
 import { Container } from "@/components/Container";
 import { Markdown } from "@/components/Markdown";
 import classNames from "classnames";
+import { Img } from "../Img";
 
-export interface ImageDescriptionProps {
-    image?: string
-    title?: string
-    description?: string
-    position?: 'left' | 'right'
-}
-
-export const ImageDescription: FC<ImageDescriptionProps> = ({ image, title, description, position }) => {
+export const ImageDescription: FC<ImageDescription> = ({ image, title, description, position }) => {
     return <div className="grid grid-cols-2 gap-5">
         <div className={classNames("col-span-2 xl:col-span-1", { "order-1 xl:order-2": position === 'right' })}>
-            <img src={image} className="h-full w-full object-cover" />
+            <Img src={image?.url} className="h-full w-full object-cover" />
         </div>
         <div className={classNames("col-span-2 xl:col-span-1 pr-12 text-lg", { "order-2 xl:order-1": position === 'right' })}>
             <Container>

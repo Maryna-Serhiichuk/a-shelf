@@ -1,5 +1,6 @@
 'use client'
 
+import { pageApi } from "@/api/page"
 import { AboutUs } from "@/components/AboutUs"
 import { Container } from "@/components/Container"
 import { Cta } from "@/components/Cta"
@@ -10,16 +11,19 @@ import { WhyChooseUs } from "@/components/WhyChooseUs"
 import { Fragment } from "react"
 
 export default function Page() {
+    const { useAboutQuery } = pageApi
+    const { data } = useAboutQuery(undefined)
+
     return <Fragment>
         <Container full>
-            <Hero />
-            <AboutUs />
+            {data?.data?.hero && <Hero {...data?.data?.hero}/>}
+            {data?.data?.about && <AboutUs {...data?.data?.about}/>}
         </Container>
-        <OurValues />
+        {data?.data?.values && <OurValues {...data?.data?.values}/>}
         <Container full>
-            <Formula />
-            <WhyChooseUs />
+            {data?.data?.formula && <Formula {...data?.data?.formula}/>}
+            {data?.data?.choose && <WhyChooseUs {...data?.data?.choose}/>}
         </Container>
-        <Cta />
+        {data?.data?.cta && <Cta {...data?.data?.cta}/>}
     </Fragment>
 }

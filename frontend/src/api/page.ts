@@ -27,5 +27,21 @@ export const pageApi = enhanceApi.injectEndpoints({
                 }
               },
         }),
+        about: builder.query<Response<AboutPage>, undefined>({
+            query: () => ({
+                url: `about`,
+                method: 'GET',
+                params: {
+                    'populate[0]': 'hero.button',
+                    'populate[1]': 'hero.main',
+                    'populate[2]': 'about.image',
+                    'populate[3]': 'values.items',
+                    'populate[4]': 'formula.left',
+                    'populate[5]': 'formula.right',
+                    'populate[6]': 'choose.image',
+                    'populate[7]': 'cta.button',
+                },
+            }),
+        }),
     })
 })

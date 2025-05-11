@@ -1,0 +1,49 @@
+{
+  "kind": "singleType",
+  "collectionName": "abouts",
+  "info": {
+    "singularName": "about",
+    "pluralName": "abouts",
+    "displayName": "About",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "hero": {
+      "displayName": "hero",
+      "type": "component",
+      "repeatable": false,
+      "component": "ui.hero"
+    },
+    "about": {
+      "displayName": "ImageDescription",
+      "type": "component",
+      "repeatable": false,
+      "component": "ui.image-description"
+    },
+    "values": {
+      "displayName": "IconDescription",
+      "type": "component",
+      "repeatable": false,
+      "component": "ui.icon-description"
+    },
+    "formula": {
+      "displayName": "ImageShortDescription",
+      "type": "component",
+      "repeatable": false,
+      "component": "ui.image-short-description"
+    },
+    "choose": {
+      "type": "component",
+      "repeatable": false,
+      "component": "ui.image-description"
+    },
+    "cta": {
+      "type": "component",
+      "repeatable": false,
+      "component": "ui.banner"
+    }
+  }
+}

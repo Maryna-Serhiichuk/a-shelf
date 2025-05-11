@@ -2,6 +2,9 @@ import { FC, PropsWithChildren } from "react";
 import classNames from "classnames";
 
 export const Container: FC<PropsWithChildren<{ theme?: 'default' | 'dimming' | 'background', full?: boolean }>> = ({ children, theme, full }) => {
+    
+    if(!children) return null
+    
     return <div className={classNames(
         "flex justify-center w-full relative",
         {

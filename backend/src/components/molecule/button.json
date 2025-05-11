@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_molecule_buttons",
+  "info": {
+    "displayName": "button",
+    "icon": "play"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string"
+    },
+    "href": {
+      "type": "string"
+    }
+  }
+}
