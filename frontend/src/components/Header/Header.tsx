@@ -18,7 +18,7 @@ export const Header: FC = () => {
 
     return <Fragment>
         <div className="w-full flex justify-between px-4 py-2">
-            <Logo/>
+            <Logo />
             <div className="hidden lg:flex items-center">
                 <NavLink href={'/'}>
                     <Button variant={'link'}>
@@ -30,16 +30,18 @@ export const Header: FC = () => {
                         About
                     </Button>
                 </NavLink>
-                <Button variant={'link'}>
-                    Contact Us
-                </Button>
+                <NavLink href={'/contact'}>
+                    <Button variant={'link'}>
+                        Contact Us
+                    </Button>
+                </NavLink>
             </div>
             <div className="items-center hidden sm:flex">
-                <Search/>
+                <Search />
             </div>
             <div className="flex items-center">
                 <div className="items-center flex sm:hidden">
-                    <Button onClick={() => setOpen(!isOpen)} variant={'link'} Icon={MagnifyingGlassIcon}/>
+                    <Button onClick={() => setOpen(!isOpen)} variant={'link'} Icon={MagnifyingGlassIcon} />
                 </div>
                 <div className="relative">
                     <NavLink href={'/cart'}>
@@ -53,7 +55,7 @@ export const Header: FC = () => {
                         </Button>
                     </NavLink>
                 </div>
-                <Auth/>
+                <Auth />
                 <div className="block lg:hidden">
                     <Burger />
                 </div>
@@ -62,7 +64,7 @@ export const Header: FC = () => {
         <div className={classNames("w-full flex px-4 py-4 duration-200", "max-h-0 opacity-0", "flex sm:hidden", {
             "max-h-100 opacity-100": isOpen,
         })}>
-            <Search/>
+            <Search />
         </div>
     </Fragment>
 }

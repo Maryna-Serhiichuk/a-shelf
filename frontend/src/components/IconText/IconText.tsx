@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Illustration } from "../Illustration";
+import { Illustration } from "@/components/Illustration";
 
 export const IconText: FC<IconDescription> = ({ heading, description, illustration }) => {
     return <div className="flex flex-row items-center sm:flex-col gap-3 grid-span-1">

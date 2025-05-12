@@ -32,7 +32,7 @@ export const Button: FC<ButtonArgs> = ({ children, variant = 'default', size = '
         props?.className,
         { "opacity-50 cursor-cell": loading }
     )}>
-        {loading && <ArrowPathIcon className="w-6 h-6 text-stone-100 animate-spin" />}
+        {loading && <ArrowPathIcon className="size-6 text-stone-100 animate-spin" />}
         {Icon && <Icon className="size-6"/>}
         {children}
     </button>

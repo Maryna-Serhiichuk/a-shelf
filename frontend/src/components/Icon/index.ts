@@ -1,5 +1,6 @@
-import { Icon } from "./Icon";
+import { Icon, type IconTypeProp } from "./Icon";
 
 export {
-    Icon
+    Icon,
+    IconTypeProp
 }

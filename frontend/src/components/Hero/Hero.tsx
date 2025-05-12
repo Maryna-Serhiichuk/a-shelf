@@ -5,7 +5,8 @@ import classNames from "classnames";
 import face from '@/images/image.png'
 import { Comforter_Brush } from "next/font/google";
 import { NavLink } from "@/components/NavLink";
-import { Img } from "../Img";
+import { Img } from "@/components/Img";
+import { Decor } from "@/components/Decor";
 
 const comforter = Comforter_Brush({ subsets: ["latin"], weight: ["400"] });
 
@@ -44,9 +45,8 @@ export const Hero: FC<Hero> = ({ heading, main, button }) => {
                     </div>
                 </div>
             </div>
-            <div className={classNames("absolute z-3 text-right select-none tracking-[60px] text-teal-800 opacity-10 text-[250px]/55 top-[180px] left-13/40 transform-[rotate(5deg)]", comforter.className)}>
-                <div>Facial</div>
-                <div>Natural</div>
+            <div className="absolute top-[180px] left-13/40 ">
+                <Decor/>
             </div>
         </div>
     </Container>

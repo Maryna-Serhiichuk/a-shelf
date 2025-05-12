@@ -2,7 +2,7 @@ import { FC } from "react";
 import { Container } from "@/components/Container";
 import { Markdown } from "@/components/Markdown";
 import classNames from "classnames";
-import { Img } from "../Img";
+import { Img } from "@/components/Img";
 
 export const ImageDescription: FC<ImageDescription> = ({ image, title, description, position }) => {
     return <div className="grid grid-cols-2 gap-5">

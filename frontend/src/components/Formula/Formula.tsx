@@ -1,6 +1,6 @@
 import { FC } from "react";
-import { Container } from "../Container";
-import { Img } from "../Img";
+import { Container } from "@/components/Container";
+import { Img } from "@/components/Img";
 
 export const Formula: FC<ImageShortDescription> = ({ title, description, left, right }) => {
     return <Container>
