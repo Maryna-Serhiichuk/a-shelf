@@ -2,6 +2,8 @@ declare global {
 
     type ImageDescriptionPosition = 'left' | 'right'
 
+    type IllustrationType = 'flask' | 'leaf' | 'pet' | 'drop'
+
     interface Button {
         label: string
         href: string
@@ -38,6 +40,7 @@ declare global {
     interface IconDescription {
         heading: string
         description: string
+        illustration: IllustrationType
     }
 
     interface ImageShortDescription {

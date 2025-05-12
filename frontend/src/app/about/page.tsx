@@ -16,14 +16,14 @@ export default function Page() {
 
     return <Fragment>
         <Container full>
-            {data?.data?.hero && <Hero {...data?.data?.hero}/>}
-            {data?.data?.about && <AboutUs {...data?.data?.about}/>}
+            {data?.data?.hero && <Hero {...data?.data?.hero} />}
+            {data?.data?.about && <AboutUs {...data?.data?.about} />}
         </Container>
-        {data?.data?.values && <OurValues {...data?.data?.values}/>}
+        {data?.data?.values && <OurValues {...data?.data?.values} />}
         <Container full>
-            {data?.data?.formula && <Formula {...data?.data?.formula}/>}
-            {data?.data?.choose && <WhyChooseUs {...data?.data?.choose}/>}
+            {data?.data?.formula && <Formula {...data?.data?.formula} />}
+            {data?.data?.choose && <WhyChooseUs {...data?.data?.choose} />}
         </Container>
-        {data?.data?.cta && <Cta {...data?.data?.cta}/>}
+        {data?.data?.cta && <Cta {...data?.data?.cta} />}
     </Fragment>
 }

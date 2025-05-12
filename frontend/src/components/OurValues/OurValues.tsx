@@ -1,6 +1,5 @@
 import { FC } from "react";
 import { Container } from "@/components/Container";
-import { Pslab, Leaf, Pet, Water } from "@/components/Icons"
 import { IconDescriptionComponent } from "@/components/IconDescriptionComponent";
 import bottle from "@/images/toner.png"
 import { IconText } from "@/components/IconText";

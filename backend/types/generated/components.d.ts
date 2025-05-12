@@ -15,12 +15,16 @@ export interface MoleculeButton extends Struct.ComponentSchema {
 export interface MoleculeIconDescription extends Struct.ComponentSchema {
   collectionName: 'components_molecule_icon_descriptions';
   info: {
+    description: '';
     displayName: 'IconDescription';
     icon: 'seed';
   };
   attributes: {
     description: Schema.Attribute.Text;
     heading: Schema.Attribute.String;
+    illustration: Schema.Attribute.Enumeration<
+      ['flask', 'leaf', 'pet', 'drop']
+    >;
   };
 }
 
