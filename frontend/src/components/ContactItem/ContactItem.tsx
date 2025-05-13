@@ -6,13 +6,15 @@ export const ContactItem: FC<PropsWithChildren<{ title?: string, icon: IconTypeP
         <div className="w-9">
             <Icon type={icon} className="size-7 relative top-[1px]" />
         </div>
-        {title &&
-            <div className="w-35 text-2xl font-bold">
-                {title}
+        <div className="flex flex-col lg:flex-row">
+            {title &&
+                <div className="w-35 text-2xl font-bold shrink-0">
+                    {title}
+                </div>
+            }
+            <div className="">
+                {children}
             </div>
-        }
-        <div className="">
-            {children}
         </div>
     </div>
 }

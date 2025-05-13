@@ -17,7 +17,7 @@ export const ContactForm: FC = () => {
         {({ errors, handleSubmit }) => (
             <Form onSubmit={handleSubmit}>
                 <div className="flex flex-col gap-14">
-                    <div className="flex flex-col gap-10">
+                    <div className="flex flex-col gap-6 lg:gap-10">
                         <ErrorMessage component="div" name="identifier">{msg => (
                             <div className="text-red-700 flex justify-center">{msg}</div>
                         )}</ErrorMessage>
