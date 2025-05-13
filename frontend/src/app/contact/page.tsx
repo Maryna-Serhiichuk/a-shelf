@@ -16,9 +16,9 @@ export default function Page() {
     const shadow = "shadow-[0_0_30px_rgba(0,0,0,.2)]"
     const card = ["bg-stone-100 p-6 lg:p-10", shadow].join(' ')
     
-    return <div className="relative">
+    return <div className="relative h-full">
         <div className="absolute h-full w-full">
-            <img src={map.src} className="h-full w-full object-cover blur-xs opacity-70" />
+            <img src={map.src} className="h-full w-full object-cover blur-sm opacity-70" />
         </div>
         <div className="relative z-5">
             <Container>
