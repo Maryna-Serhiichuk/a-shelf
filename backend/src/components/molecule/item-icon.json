@@ -1,0 +1,28 @@
+{
+  "collectionName": "components_molecule_item_icons",
+  "info": {
+    "displayName": "ItemIcon",
+    "icon": "bulletList"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "value": {
+      "type": "text"
+    },
+    "link": {
+      "type": "string"
+    },
+    "icon": {
+      "type": "enumeration",
+      "enum": [
+        "clock",
+        "map_pin",
+        "envelope",
+        "phone"
+      ]
+    }
+  }
+}

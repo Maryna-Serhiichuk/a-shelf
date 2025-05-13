@@ -28,6 +28,22 @@ export interface MoleculeIconDescription extends Struct.ComponentSchema {
   };
 }
 
+export interface MoleculeItemIcon extends Struct.ComponentSchema {
+  collectionName: 'components_molecule_item_icons';
+  info: {
+    displayName: 'ItemIcon';
+    icon: 'bulletList';
+  };
+  attributes: {
+    icon: Schema.Attribute.Enumeration<
+      ['clock', 'map_pin', 'envelope', 'phone']
+    >;
+    link: Schema.Attribute.String;
+    title: Schema.Attribute.String;
+    value: Schema.Attribute.Text;
+  };
+}
+
 export interface SaleDiscount extends Struct.ComponentSchema {
   collectionName: 'components_sale_discounts';
   info: {
@@ -116,6 +132,7 @@ declare module '@strapi/strapi' {
     export interface ComponentSchemas {
       'molecule.button': MoleculeButton;
       'molecule.icon-description': MoleculeIconDescription;
+      'molecule.item-icon': MoleculeItemIcon;
       'sale.discount': SaleDiscount;
       'ui.banner': UiBanner;
       'ui.hero': UiHero;

@@ -43,5 +43,15 @@ export const pageApi = enhanceApi.injectEndpoints({
                 },
             }),
         }),
+        contact: builder.query<Response<ContactPage>, undefined>({
+            query: () => ({
+                url: `contact`,
+                method: 'GET',
+                params: {
+                    'populate[0]': 'items',
+                    'populate[1]': 'illustration',
+                },
+            }),
+        }),
     })
 })

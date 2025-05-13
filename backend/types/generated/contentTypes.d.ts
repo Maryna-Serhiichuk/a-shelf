@@ -505,6 +505,40 @@ export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiContactContact extends Struct.SingleTypeSchema {
+  collectionName: 'contacts';
+  info: {
+    description: '';
+    displayName: 'Contact';
+    pluralName: 'contacts';
+    singularName: 'contact';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    illustration: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
+    items: Schema.Attribute.Component<'molecule.item-icon', true>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::contact.contact'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    subtitle: Schema.Attribute.Text;
+    title: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiIngredientIngredient extends Struct.CollectionTypeSchema {
   collectionName: 'ingredients';
   info: {
@@ -1150,6 +1184,7 @@ declare module '@strapi/strapi' {
       'api::bargain.bargain': ApiBargainBargain;
       'api::cartline.cartline': ApiCartlineCartline;
       'api::category.category': ApiCategoryCategory;
+      'api::contact.contact': ApiContactContact;
       'api::ingredient.ingredient': ApiIngredientIngredient;
       'api::product.product': ApiProductProduct;
       'api::support-page.support-page': ApiSupportPageSupportPage;

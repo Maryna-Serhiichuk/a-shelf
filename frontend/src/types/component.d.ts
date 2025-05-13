@@ -54,6 +54,20 @@ declare global {
         text?: string
         button?: Button
     }
+
+    interface ContactPage {
+        title: string
+        subtitle?: string
+        items?: Array<ItemIcon>
+        illustration?: Media
+    }
+
+    interface ItemIcon {
+        title?: string
+        value: string
+        link?: string
+        icon?: any
+    }
 }
 
 export {};
