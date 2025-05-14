@@ -509,12 +509,13 @@ export interface ApiContactRequestContactRequest
   extends Struct.CollectionTypeSchema {
   collectionName: 'contact_requests';
   info: {
+    description: '';
     displayName: 'ContactRequest';
     pluralName: 'contact-requests';
     singularName: 'contact-request';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
     createdAt: Schema.Attribute.DateTime;
