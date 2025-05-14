@@ -14,6 +14,7 @@ export const ContactForm: FC = () => {
             await contactRequest(input).unwrap()
             // TODO: message
         } catch (err: any) {
+            console.log(err)
             // TODO: error message
         }
     }
