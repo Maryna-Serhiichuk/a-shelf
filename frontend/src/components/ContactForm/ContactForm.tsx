@@ -1,5 +1,6 @@
 import { FC } from "react";
 import { Formik, Form, ErrorMessage, FormikConfig } from 'formik';
+import debounce from 'lodash.debounce';
 import { Button } from "@/components/Button";
 import { Entry } from "@/components/Entry";
 import { FormLabel } from "@/components/FormLabel";
@@ -8,8 +9,8 @@ import { pageApi } from "@/api/page";
 export const ContactForm: FC = () => {
     const { useCreateContactRequestMutation } = pageApi
     const [contactRequest, { isLoading }] = useCreateContactRequestMutation()
-
-    const onLogin: FormikConfig<ContactRequestInput>['onSubmit'] = async (input, onSubmitProps) => {
+    
+    const onSend: FormikConfig<ContactRequestInput>['onSubmit'] = async (input, onSubmitProps) => {
         try {
             await contactRequest(input).unwrap()
             // TODO: message
@@ -19,9 +20,11 @@ export const ContactForm: FC = () => {
         }
     }
 
+    const debouncedOnSend = debounce(onSend, 5000)
+
     return <Formik
         initialValues={{ name: '', subject: '', email: '', message: '' }}
-        onSubmit={onLogin}
+        onSubmit={debouncedOnSend}
     >
         {({ errors, handleSubmit }) => (
             <Form onSubmit={handleSubmit}>
