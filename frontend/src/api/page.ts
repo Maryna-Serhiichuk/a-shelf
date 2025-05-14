@@ -20,12 +20,12 @@ export const pageApi = enhanceApi.injectEndpoints({
             }),
             transformResponse: (response: Response<Array<SupportPage> | undefined>, meta, arg) => {
                 const page = response?.data?.[0]
-        
+
                 return {
                     ...response,
                     data: page
                 }
-              },
+            },
         }),
         about: builder.query<Response<AboutPage>, undefined>({
             query: () => ({
@@ -53,5 +53,16 @@ export const pageApi = enhanceApi.injectEndpoints({
                 },
             }),
         }),
+        createContactRequest: builder.mutation<{ ok?: boolean }, ContactRequestInput>({
+            query: (body) => ({
+                url: 'contact-requests',
+                method: 'POST',
+                body: { data: body },
+            }),
+
+            transformResponse: (response: { data: { id: string } }) => {
+                return { ok: !!response?.data?.id };
+            },
+        })
     })
 })

@@ -68,6 +68,13 @@ declare global {
         link?: string
         icon?: any
     }
+
+    interface ContactRequestInput {
+        name: string
+        subject: string
+        message: string
+        email: string
+    }
 }
 
 export {};

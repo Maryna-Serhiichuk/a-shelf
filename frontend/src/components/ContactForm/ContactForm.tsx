@@ -3,15 +3,23 @@ import { Formik, Form, ErrorMessage, FormikConfig } from 'formik';
 import { Button } from "@/components/Button";
 import { Entry } from "@/components/Entry";
 import { FormLabel } from "@/components/FormLabel";
+import { pageApi } from "@/api/page";
 
 export const ContactForm: FC = () => {
+    const { useCreateContactRequestMutation } = pageApi
+    const [contactRequest, { isLoading }] = useCreateContactRequestMutation()
 
-    const onLogin: FormikConfig<{ name: string, email: string, text: string }>['onSubmit'] = async (input, onSubmitProps) => {
-        console.log(input)
+    const onLogin: FormikConfig<ContactRequestInput>['onSubmit'] = async (input, onSubmitProps) => {
+        try {
+            await contactRequest(input).unwrap()
+            // TODO: message
+        } catch (err: any) {
+            // TODO: error message
+        }
     }
 
     return <Formik
-        initialValues={{ name: '', email: '', text: '' }}
+        initialValues={{ name: '', subject: '', email: '', message: '' }}
         onSubmit={onLogin}
     >
         {({ errors, handleSubmit }) => (
@@ -29,16 +37,16 @@ export const ContactForm: FC = () => {
                         </FormLabel>
 
                         <FormLabel label="Subject">
-                            <Entry type="email" name="email" placeholder="Subject" />
+                            <Entry type="text" name="subject" placeholder="Subject" />
                         </FormLabel>
 
                         <FormLabel label="Your Message">
-                            <Entry rows={3} as="textarea" type="text" name="description" placeholder="Type here..." />
+                            <Entry rows={3} as="textarea" name="message" placeholder="Type here..." />
                         </FormLabel>
                         <ErrorMessage className="text-red-700" component="div" name="password" />
                     </div>
                     <div>
-                        <Button size="large" className="w-full" type="submit">
+                        <Button size="large" className="w-full" type="submit" loading={isLoading}>
                             Send
                         </Button>
                     </div>
