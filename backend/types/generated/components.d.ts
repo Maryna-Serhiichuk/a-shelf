@@ -23,7 +23,7 @@ export interface MoleculeIconDescription extends Struct.ComponentSchema {
     description: Schema.Attribute.Text;
     heading: Schema.Attribute.String;
     illustration: Schema.Attribute.Enumeration<
-      ['flask', 'leaf', 'pet', 'drop']
+      ['flask', 'leaf', 'pet', 'drop', 'face', 'diamond', 'clock', 'glass']
     >;
   };
 }

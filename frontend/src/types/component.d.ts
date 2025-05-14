@@ -2,7 +2,7 @@ declare global {
 
     type ImageDescriptionPosition = 'left' | 'right'
 
-    type IllustrationType = 'flask' | 'leaf' | 'pet' | 'drop'
+    type IllustrationType = 'flask' | 'leaf' | 'pet' | 'drop' | 'face' | 'diamond' | 'clock' | 'glass'
 
     interface Button {
         label: string

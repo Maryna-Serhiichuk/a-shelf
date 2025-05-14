@@ -19,7 +19,11 @@
         "flask",
         "leaf",
         "pet",
-        "drop"
+        "drop",
+        "face",
+        "diamond",
+        "clock",
+        "glass"
       ]
     }
   }
