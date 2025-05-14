@@ -37,6 +37,8 @@ declare global {
     interface Product {
         documentId: string
         name: string
+        subname?: string
+        description: string
         price: number
         type: Type
         illustration: Media
@@ -44,6 +46,9 @@ declare global {
         volume: string
         ingredients: Array<Ingredient>
         isCart?: boolean
+        composition?: string
+        using?: string
+        purpose?: string
     }
 
     interface Ingredient {

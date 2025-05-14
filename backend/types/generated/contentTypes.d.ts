@@ -615,9 +615,11 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
   };
   attributes: {
     bargains: Schema.Attribute.Relation<'manyToMany', 'api::bargain.bargain'>;
+    composition: Schema.Attribute.Text;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    description: Schema.Attribute.RichText;
     discount: Schema.Attribute.Component<'sale.discount', false>;
     illustration: Schema.Attribute.Media<
       'images' | 'files' | 'videos' | 'audios'
@@ -635,10 +637,13 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
     name: Schema.Attribute.String;
     price: Schema.Attribute.Decimal;
     publishedAt: Schema.Attribute.DateTime;
+    purpose: Schema.Attribute.Text;
+    subname: Schema.Attribute.String;
     type: Schema.Attribute.Relation<'manyToOne', 'api::type.type'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    using: Schema.Attribute.Text;
     volume: Schema.Attribute.String;
   };
 }

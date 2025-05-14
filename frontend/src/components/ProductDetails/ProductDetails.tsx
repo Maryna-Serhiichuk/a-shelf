@@ -4,13 +4,14 @@ import Image from "next/image";
 import { Collapse } from "@/components/Collapse";
 import { Container } from "@/components/Container";
 
-const collapse = [
-    { label: 'Ingredients', description: 'Aqua (Water), Glycerin, Cetearyl Alcohol, Caprylic/Capric Triglyceride, Butyrospermum Parkii (Shea) Butter, Niacinamide, Panthenol, Tocopherol (Vitamin E), Sodium Hyaluronate, Allantoin, Aloe Barbadensis Leaf Juice, Chamomilla Recutita (Matricaria) Flower Extract, Phenoxyethanol, Ethylhexylglycerin, Parfum (Fragrance).' },
-    { label: 'How to Use', description: 'Apply a small amount to clean, dry skin. Gently massage into the face and neck using upward, circular motions until fully absorbed. Use morning and evening for best results. Avoid contact with eyes.' },
-    { label: 'Purpose', description: 'This moisturizing cream is designed to hydrate and nourish the skin, improve elasticity, and protect against environmental stressors. Suitable for all skin types, including sensitive skin.' },
-]
+export const ProductDetails: FC<Product> = ({ composition, using, purpose }) => {
 
-export const ProductDetails: FC<Product> = () => {
+    const collapse = [
+        ...(composition ? [{ label: 'Ingredients', description: composition }] : []),
+        ...(using ? [{ label: 'How to Use', description: using }] : []),
+        ...(purpose ? [{ label: 'Purpose', description: purpose }] : []),
+    ].filter(Boolean);
+
     return <div className="relative grid grid-cols-1 md:grid-cols-[300px_1fr] shadow-[inset_0px_0px_20px_rgba(0,0,0,.2))]">
         <div className="absolute md:relative h-full w-full">
             <Image src={leaves} alt="" className="w-full h-full object-cover" />

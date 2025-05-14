@@ -40,6 +40,7 @@ export const productApi = enhanceApi.injectEndpoints({
                 params: {
                     'populate[0]': 'illustration',
                     'populate[1]': 'discount',
+                    'populate[2]': 'ingredients',
                 },
             }),
         }),

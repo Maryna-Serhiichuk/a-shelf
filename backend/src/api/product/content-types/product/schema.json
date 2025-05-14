@@ -53,6 +53,21 @@
       "relation": "manyToMany",
       "target": "api::ingredient.ingredient",
       "mappedBy": "products"
+    },
+    "subname": {
+      "type": "string"
+    },
+    "description": {
+      "type": "richtext"
+    },
+    "composition": {
+      "type": "text"
+    },
+    "using": {
+      "type": "text"
+    },
+    "purpose": {
+      "type": "text"
     }
   }
 }
