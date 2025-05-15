@@ -54,13 +54,8 @@ export default function Page() {
                             </div>
                         }
                     </div>
-                    <div className={classNames("col-span-9 md:col-span-5 flex flex-col gap-10", card)}>
-                        <div className="text-5xl font-bold">
-                            We're here to help
-                        </div>
-                        <div>
-                            <ContactForm />
-                        </div>
+                    <div className={classNames("col-span-9 md:col-span-5", card)}>
+                        <ContactForm />
                     </div>
                 </div>
             </Container>

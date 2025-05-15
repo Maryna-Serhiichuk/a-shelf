@@ -10,6 +10,8 @@ declare global {
         data: T;
         meta: Meta;
     }
+
+    type SVGType = SVGProps<SVGSVGElement>
 }
 
 export {};
