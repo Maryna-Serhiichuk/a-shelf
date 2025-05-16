@@ -5,6 +5,7 @@ import { Entry } from "@/components/Entry";
 import { AuthContainer } from "@/components/Auth/components/AuthContainer";
 import { accountApi } from "@/api/account";
 import { passwordValidate } from "@/utils/passwordValidate";
+import { checkRequireFields } from "@/utils/checkRequireFields";
 
 export const Login: FC = () => {
     const { useLoginMutation } = accountApi
@@ -16,31 +17,36 @@ export const Login: FC = () => {
             location.reload() // TODO: change to without reload
         } catch (err: any) {
             if(err?.data?.error?.message === 'Invalid identifier or password'){
-                onSubmitProps.setFieldError('identifier', 'Invalid email or password')
+                onSubmitProps.setFieldError('form', 'Invalid email or password')
             }
         }
+    }
+
+    const validateForm = (values: LoginInput) => {
+        const passwordChecked = passwordValidate({ password: values?.password })
+        const requireChecked = checkRequireFields<LoginInput>(values, ['identifier', 'password'])
+        return { ...passwordChecked, ...requireChecked }
     }
 
     return <AuthContainer title="Login" driverTitle="Or login with">
         <Formik
             initialValues={{ identifier: '', password: '' }}
             onSubmit={onLogin}
-            validate={passwordValidate}
+            validate={validateForm}
         >
             {({ errors, handleSubmit }) => (
                 <Form onSubmit={handleSubmit}>
                     <div className="flex flex-col gap-14">
                         <div className="flex flex-col gap-5">
-                            <ErrorMessage component="div" name="identifier">{msg => (
+                            <ErrorMessage component="div" name="form">{msg => (
                                 <div className="text-red-700 flex justify-center">{msg}</div>
                             )}</ErrorMessage>
                             <div>
-                                <Entry type="email" name="identifier" placeholder="Email" />
+                                <Entry type="email" name="identifier" placeholder="Email" errorAlert />
                             </div>
                             <div>
-                                <Entry type="password" name="password" placeholder="Password" />
+                                <Entry type="password" name="password" placeholder="Password" errorAlert />
                             </div>
-                            <ErrorMessage className="text-red-700" component="div" name="password"/>
                         </div>
                         <div>
                             <Button size="large" className="w-full" type="submit" loading={isLoading}>

@@ -5,7 +5,7 @@ import { Button } from "@/components/Button";
 import { Entry } from "@/components/Entry";
 import { FormLabel } from "@/components/FormLabel";
 import { pageApi } from "@/api/page";
-import { contactRequireFields } from "@/utils/contactRequireFields";
+import { checkRequireFields } from "@/utils/checkRequireFields";
 import { Result, ResultType } from "../Result";
 
 export const ContactForm: FC = () => {
@@ -60,7 +60,7 @@ export const ContactForm: FC = () => {
                 <Formik
                     initialValues={{ name: '', subject: '', email: '', message: '' }}
                     onSubmit={handleDebouncedSend}
-                    validate={contactRequireFields}
+                    validate={value => checkRequireFields<ContactRequestInput>(value, ['name', 'email', 'subject', 'message'])}
                 >
                     {({ errors, handleSubmit }) => (
                         <Form onSubmit={handleSubmit}>

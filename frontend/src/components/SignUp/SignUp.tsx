@@ -5,12 +5,15 @@ import { Entry } from "@/components/Entry";
 import { AuthContainer } from "@/components/Auth/components/AuthContainer";
 import { accountApi } from "@/api/account";
 import { passwordValidate } from "@/utils/passwordValidate";
+import { checkRequireFields } from "@/utils/checkRequireFields";
+
+type SignUpFormProps = Omit<RegisterInput, 'username'> & { firstName: string, lastName: string }
 
 export const SignUp: FC = () => {
     const { useRegisterMutation } = accountApi
     const [register, { isLoading }] = useRegisterMutation();
-    
-    const signup: FormikConfig<Omit<RegisterInput, 'username'> & { firstName: string, lastName: string }>['onSubmit'] = async (input, onSubmitProps) => {
+
+    const signup: FormikConfig<SignUpFormProps>['onSubmit'] = async (input, onSubmitProps) => {
         try {
             await register({
                 ...input,
@@ -18,38 +21,43 @@ export const SignUp: FC = () => {
             }).unwrap()
             location.reload() // TODO: change to without reload
         } catch (err: any) {
-            if(err?.data?.error?.message){
-                onSubmitProps.setFieldError('firstName', err?.data?.error?.message)
+            if (err?.data?.error?.message) {
+                onSubmitProps.setFieldError('form', err?.data?.error?.message)
             }
         }
+    }
+
+    const validateForm = (values: SignUpFormProps) => {
+        const passwordChecked = passwordValidate({ password: values?.password })
+        const requireChecked = checkRequireFields<SignUpFormProps>(values, ['firstName', 'lastName', 'email', 'password'])
+        return { ...passwordChecked, ...requireChecked }
     }
 
     return <AuthContainer title="Sign Up" driverTitle="Or sign up by">
         <Formik
             initialValues={{ firstName: '', lastName: '', email: '', password: '' }}
             onSubmit={signup}
-            validate={passwordValidate}
+            validate={validateForm}
         >
             {({ errors, handleSubmit }) => (
                 <Form onSubmit={handleSubmit}>
                     <div className="flex flex-col gap-14">
-                        <ErrorMessage component="div" name="firstName" className="text-red-700 flex justify-center" />
+                        <ErrorMessage component="div" name="form" className="text-red-700 flex justify-center" />
                         <div className="flex flex-col gap-5">
                             <div className="flex gap-[inherit]">
                                 <div>
-                                    <Entry name="firstName" placeholder="First Name" />
+                                    <Entry name="firstName" placeholder="First Name" errorAlert />
                                 </div>
                                 <div>
-                                    <Entry name="lastName" placeholder="Last Name" />
+                                    <Entry name="lastName" placeholder="Last Name" errorAlert />
                                 </div>
                             </div>
                             <div>
-                                <Entry type="email" name="email" placeholder="Email" />
+                                <Entry type="email" name="email" placeholder="Email" errorAlert />
                             </div>
                             <div>
-                                <Entry type="password" name="password" placeholder="Password" />
+                                <Entry type="password" name="password" placeholder="Password" errorAlert />
                             </div>
-                            <ErrorMessage component="div" name="password" className="text-red-700" />
                         </div>
                         <div>
                             <Button loading={isLoading} size="large" className="w-full" type="submit">
