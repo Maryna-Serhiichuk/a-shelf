@@ -1,12 +1,13 @@
 const localStorageName = 'cart'
 
-type CartlineStoreType = { id: string, quantity: number }
+type CartlineStoreType = { documentId: string, id: string, quantity: number }
 
 type UseCartLocalStorage = {
     addProduct: (id: string) => void
     getProductsIds: () => Array<string>
     getCartlines: () => Array<CartlineStoreType>
-    changeQuantity: (id: string, type: 'increment' | 'decrement') => void
+    changeQuantity: (id: string, quantity: number) => void
+    removeLine: (id: string) => void
 }
 
 export function useCartLocalStorage(): UseCartLocalStorage {
@@ -14,11 +15,11 @@ export function useCartLocalStorage(): UseCartLocalStorage {
         const products = getCartlines()
 
         if (!products?.length) {
-            setCart([{ id, quantity: 1 }])
+            setCart([{ documentId: '0', id, quantity: 1 }])
             return
         }
 
-        setCart(products.concat({ id, quantity: 1 }))
+        setCart(products.concat({ documentId: products?.length?.toString(), id, quantity: 1 }))
     }
 
     const setCart = (cart: Array<CartlineStoreType>) => {
@@ -29,6 +30,7 @@ export function useCartLocalStorage(): UseCartLocalStorage {
         if (typeof window === 'undefined') return []
 
         const cartString = localStorage.getItem('cart')
+
         if (!cartString) return []
 
         return JSON.parse(cartString)
@@ -40,18 +42,21 @@ export function useCartLocalStorage(): UseCartLocalStorage {
         return lines?.map(it => it?.id)
     }
 
-    const changeQuantity = (id: string, type: 'increment' | 'decrement') => {
+    const changeQuantity: UseCartLocalStorage['changeQuantity'] = (id, quantity) => {
         const lines = getCartlines()
 
-        const changed = lines?.map(it => it?.id === id ? ({
+        const changed = lines?.map(it => it?.documentId === id ? ({
             ...it,
-            quantity: type === 'increment'
-                ? it?.quantity + 1
-                : (it?.quantity <= 1
-                    ? it?.quantity
-                    : it?.quantity - 1
-                )
+            quantity
         }) : it)
+
+        setCart(changed)
+    }
+
+    const removeLine: UseCartLocalStorage['removeLine'] = (id) => {
+        const lines = getCartlines()
+
+        const changed = lines?.filter(it => it?.documentId !== id)
 
         setCart(changed)
     }
@@ -60,6 +65,7 @@ export function useCartLocalStorage(): UseCartLocalStorage {
         addProduct,
         getProductsIds,
         getCartlines,
-        changeQuantity
+        changeQuantity,
+        removeLine
     }
 }

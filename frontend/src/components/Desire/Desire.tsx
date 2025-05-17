@@ -6,12 +6,10 @@ import { Price } from "@/components/Price";
 import { TrashIcon } from "@heroicons/react/24/outline";
 import { Button } from "@/components/Button";
 import { Counter } from "@/components/Counter";
-import { cartApi } from "@/api/cart";
+import { useCartlines } from "@/hooks/useCartlines";
 
 export const Desire: FC<Cartline> = ({ documentId, product, quantity }) => {
-    const { useDeleteCartlineMutation, useUpdateCartlineMutation } = cartApi
-    const [deleteCartline, { isLoading, isError }] = useDeleteCartlineMutation()
-    const [updateCartline, { }] = useUpdateCartlineMutation()
+    const { changeCartline, removeCartline } = useCartlines()
 
     const [productQuantity, setQuantity] = useState(quantity)
     const [price, setPrice] = useState<number>(product?.price * quantity)
@@ -43,7 +41,7 @@ export const Desire: FC<Cartline> = ({ documentId, product, quantity }) => {
     const changeQuantity = useCallback(
         debounce((value: number) => {
             try {
-                updateCartline({ id: documentId, quantity: value })
+                changeCartline({ id: documentId, quantity: value })
                 // throw Error()
             } catch (e) {
                 resetValues()
@@ -57,7 +55,7 @@ export const Desire: FC<Cartline> = ({ documentId, product, quantity }) => {
 
     const removeItem = () => {
         try {
-            deleteCartline({ id: documentId })
+            removeCartline(documentId)
         } catch (e) {
             // + alert
         }

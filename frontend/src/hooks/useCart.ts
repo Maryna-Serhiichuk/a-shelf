@@ -34,7 +34,7 @@ export function useCart(): UseCart {
             if(!(products && products?.length > 0)) return []
 
             const response: Array<Cartline> = products?.map((prod, index) => ({
-                documentId: index?.toString(),
+                documentId: lines?.find(line => line?.id === prod?.documentId)!.documentId,
                 product: prod,
                 quantity: lines?.find(line => line?.id === prod?.documentId)?.quantity ?? 1
             }))
@@ -51,9 +51,8 @@ export function useCart(): UseCart {
         return { data: products }
     }
 
-    
-
     return {
-        getCartProducts: cartResponse
+        getCartProducts: cartResponse,
+
     }
 }
