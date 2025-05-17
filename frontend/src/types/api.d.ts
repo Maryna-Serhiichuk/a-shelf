@@ -73,7 +73,6 @@ declare global {
         documentId: string
         quantity: number
         product: Product
-        user: User
     }
 
     interface CartlineInput {

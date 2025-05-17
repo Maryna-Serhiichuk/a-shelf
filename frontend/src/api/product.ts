@@ -33,6 +33,13 @@ export const productApi = enhanceApi.injectEndpoints({
                 },
             }),
         }),
+        getProducts: builder.mutation<Response<Array<Product>>, { ids?: Array<string> }>({
+            query: ({ ids }) => ({
+                url: `products-by-ids`,
+                method: 'POST',
+                body: { ids, populate: { illustration: true, discount: true } },
+            }),
+        }),
         product: builder.query<Response<Product>, { id: string }>({
             query: ({ id }) => ({
                 url: `products/${id}`,

@@ -1,15 +1,25 @@
 import { accountApi } from "@/api/account";
+import { useCartLocalStorage } from "./useCartLocalStorage";
 
-type UseAddDesire = {
+type UseCartline = {
     carlineProductIds: Array<string>
 }
 
-export function useCartlines(): UseAddDesire {
+export function useCartlines(): UseCartline {
+    const { getProductsIds } = useCartLocalStorage()
+    
     const { useMeQuery } = accountApi
     const { data: meData } = useMeQuery(undefined)
-    const carlineProductIds = meData?.cartlines?.map(it => it?.product?.documentId) ?? []
+
+    const cartlineProducts = () => {
+        if(meData?.id) {
+            return meData?.cartlines?.map(it => it?.product?.documentId) ?? []
+        }
+
+        return getProductsIds()
+    }
 
     return {
-        carlineProductIds
+        carlineProductIds: cartlineProducts()
     }
 }
