@@ -6,23 +6,17 @@ import { useCart } from "@/hooks/useCart";
 import { useEffect, useState } from "react";
 
 export default function Page() {
-    const [data, setData] = useState<Array<Cartline>>([])
-    const { getCartProducts } = useCart()
+    const [lines, setData] = useState<Array<Cartline>>([])
+    const { data } = useCart()
 
     useEffect(() => {
-        const fetchCart = async () => {
-            const { data } = await getCartProducts()
-            setData(data)
-        }
-
-        fetchCart()
-    }, [])
-
+        setData(data)
+    }, [data])
 
     return (
         <LayoutCategories>
             <div className="flex flex-col gap-5 max-w-[900px]">
-                {data?.map((product, index) => (
+                {lines?.map((product, index) => (
                     <Desire key={product?.documentId + index} {...product} />
                 ))}
             </div>

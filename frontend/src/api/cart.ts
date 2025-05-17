@@ -4,6 +4,14 @@ const enhanceApi = baseApi.enhanceEndpoints({})
 
 export const cartApi = enhanceApi.injectEndpoints({
     endpoints: (builder) => ({
+        createCartlines: builder.mutation<Cartline, { data: Array<{ id: string, quantity: number }> }>({
+          query: ({ data }) => ({
+            url: `create-cartlines`,
+            method: 'POST',
+            body: { data }
+          }),
+          invalidatesTags: ['Cartline'],
+        }),
         createCartline: builder.mutation<Cartline, { id: string }>({
           query: ({ id }) => ({
             url: `cartlines`,

@@ -8,6 +8,7 @@ type UseCartLocalStorage = {
     getCartlines: () => Array<CartlineStoreType>
     changeQuantity: (id: string, quantity: number) => void
     removeLine: (id: string) => void
+    clearCart: () => void
 }
 
 export function useCartLocalStorage(): UseCartLocalStorage {
@@ -61,11 +62,16 @@ export function useCartLocalStorage(): UseCartLocalStorage {
         setCart(changed)
     }
 
+    const clearCart = () => {
+        localStorage.removeItem(localStorageName)
+    }
+
     return {
         addProduct,
         getProductsIds,
         getCartlines,
         changeQuantity,
-        removeLine
+        removeLine,
+        clearCart
     }
 }
