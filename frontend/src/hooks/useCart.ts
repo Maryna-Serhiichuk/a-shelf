@@ -6,6 +6,7 @@ import { cartApi } from "@/api/cart";
 
 type UseCart = {
     data: Array<Cartline>
+    getCartProductsFromLocalStorage: () => Promise<Array<Cartline>>
 }
 
 export function useCart(): UseCart {
@@ -33,24 +34,28 @@ export function useCart(): UseCart {
         fetchCart();
     }, [data]);
 
+    const getCartProductsFromLocalStorage = async (): Promise<Array<Cartline>>  => {
+        const lines = getCartlines()
+
+        if (!(lines && lines?.length > 0)) return []
+
+        const result = await getProductsByIds({ ids: lines?.map(it => it?.id) })
+        const products = result?.data?.data
+
+        if (!(products && products?.length > 0)) return []
+
+        const response: Array<Cartline> = products?.map((prod, index) => ({
+            documentId: lines?.find(line => line?.id === prod?.documentId)!.documentId,
+            product: prod,
+            quantity: lines?.find(line => line?.id === prod?.documentId)?.quantity ?? 1
+        }))
+
+        return response
+    }
+
     const getCartProducts = async (): Promise<Array<Cartline>> => {
         if (!data?.id) {
-            const lines = getCartlines()
-
-            if (!(lines && lines?.length > 0)) return []
-
-            const result = await getProductsByIds({ ids: lines?.map(it => it?.id) })
-            const products = result?.data?.data
-
-            if (!(products && products?.length > 0)) return []
-
-            const response: Array<Cartline> = products?.map((prod, index) => ({
-                documentId: lines?.find(line => line?.id === prod?.documentId)!.documentId,
-                product: prod,
-                quantity: lines?.find(line => line?.id === prod?.documentId)?.quantity ?? 1
-            }))
-
-            return response
+            return await getCartProductsFromLocalStorage()
         }
 
         await storeCartlines()
@@ -69,6 +74,7 @@ export function useCart(): UseCart {
     }
 
     return {
-        data: cart
+        data: cart,
+        getCartProductsFromLocalStorage
     }
 }

@@ -1,6 +1,6 @@
 const localStorageName = 'cart'
 
-type CartlineStoreType = { documentId: string, id: string, quantity: number }
+export type CartlineStoreType = { documentId: string, id: string, quantity: number }
 
 type UseCartLocalStorage = {
     addProduct: (id: string) => void

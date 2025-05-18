@@ -2,16 +2,16 @@
 
 import { LayoutCategories } from "@/components/LayoutCategories";
 import { Desire } from '@/components/Desire';
-import { useCart } from "@/hooks/useCart";
 import { useEffect, useState } from "react";
+import { useProviderContext } from "@/components/App/ContextProvider/ContextProvider";
 
 export default function Page() {
     const [lines, setData] = useState<Array<Cartline>>([])
-    const { data } = useCart()
+    const { productsFromLocalStorage } = useProviderContext()
 
     useEffect(() => {
-        setData(data)
-    }, [data])
+        setData(productsFromLocalStorage)
+    }, [productsFromLocalStorage])
 
     return (
         <LayoutCategories>

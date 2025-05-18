@@ -9,11 +9,11 @@ import { Burger } from "./components/Burger";
 import classNames from "classnames";
 import { NavLink } from "@/components/NavLink";
 import { Auth } from "@/components/Auth";
-import { useCart } from "@/hooks/useCart";
+import { useProviderContext } from "../App/ContextProvider/ContextProvider";
 
 export const Header: FC = () => {
     const [isOpen, setOpen] = useState(false)
-    const { data } = useCart()
+    const { localStorageCart } = useProviderContext()
 
     return <Fragment>
         <div className="w-full flex justify-between px-4 py-2">
@@ -44,9 +44,9 @@ export const Header: FC = () => {
                 </div>
                 <div className="relative">
                     <NavLink href={'/cart'}>
-                        {data?.length > 0 &&
+                        {localStorageCart?.length > 0 &&
                             <div className="absolute left-6 flex justify-center items-center text-sm h-[20px] w-[20px] bg-red-700 rounded-[50%] text-stone-100">
-                                {data?.length}
+                                {localStorageCart?.length}
                             </div>
                         }
                         <Button variant={'link'} Icon={ShoppingCartIcon}>

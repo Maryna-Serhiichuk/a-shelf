@@ -1,6 +1,6 @@
 import { accountApi } from "@/api/account";
 import { cartApi } from "@/api/cart";
-import { useCartLocalStorage } from "./useCartLocalStorage";
+import { useProviderContext } from "@/components/App/ContextProvider/ContextProvider";
 
 type UseAddDesire = {
   addDesire: (id: string) => void
@@ -10,7 +10,7 @@ export function useAddDesire(): UseAddDesire {
   const { useMeQuery } = accountApi
   const { data } = useMeQuery(undefined)
 
-  const { addProduct } = useCartLocalStorage()
+  const { addToLocalStorageCart } = useProviderContext()
 
   const { useCreateCartlineMutation } = cartApi
   const [createCartline, {}] = useCreateCartlineMutation();
@@ -21,7 +21,7 @@ export function useAddDesire(): UseAddDesire {
       return
     }
 
-    addProduct(id)
+    addToLocalStorageCart(id)
   }
 
   return {

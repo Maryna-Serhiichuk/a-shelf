@@ -6,19 +6,19 @@ import { Container } from "@/components/Container";
 import { LastAttendings } from "@/components/LastAttendings";
 import { Product } from "@/components/Product";
 import { Fragment, use } from "react";
-import { useCartlines } from "@/hooks/useCartlines";
+import { useProviderContext } from "@/components/App/ContextProvider/ContextProvider";
 
 export default function Page({ params }: { params: Promise<{ id: string }> }) {
     const { id } = use(params);
 
-    const { carlineProductIds } = useCartlines()
+    const { localStorageCart } = useProviderContext()
 
     const { useProductQuery } = productApi
     const { data, isLoading, isError } = useProductQuery({ id })
 
     return (
         <Fragment>
-            {data?.data && <Product {...data?.data} isCart={carlineProductIds?.includes(id)} />}
+            {data?.data && <Product {...data?.data} isCart={localStorageCart?.map(it => it?.id)?.includes(id)} />}
             <Container>
                 <Bargain id={id} />
             </Container>
