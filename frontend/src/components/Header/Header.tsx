@@ -13,7 +13,7 @@ import { useProviderContext } from "../App/ContextProvider/ContextProvider";
 
 export const Header: FC = () => {
     const [isOpen, setOpen] = useState(false)
-    const { localStorageCart } = useProviderContext()
+    const { cart } = useProviderContext()
 
     return <Fragment>
         <div className="w-full flex justify-between px-4 py-2">
@@ -44,9 +44,9 @@ export const Header: FC = () => {
                 </div>
                 <div className="relative">
                     <NavLink href={'/cart'}>
-                        {localStorageCart?.length > 0 &&
+                        {cart?.length > 0 &&
                             <div className="absolute left-6 flex justify-center items-center text-sm h-[20px] w-[20px] bg-red-700 rounded-[50%] text-stone-100">
-                                {localStorageCart?.length}
+                                {cart?.length}
                             </div>
                         }
                         <Button variant={'link'} Icon={ShoppingCartIcon}>

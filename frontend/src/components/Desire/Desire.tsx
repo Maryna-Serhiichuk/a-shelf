@@ -6,10 +6,10 @@ import { Price } from "@/components/Price";
 import { TrashIcon } from "@heroicons/react/24/outline";
 import { Button } from "@/components/Button";
 import { Counter } from "@/components/Counter";
-import { useProviderContext } from "../App/ContextProvider/ContextProvider";
+import { useCartlines } from "@/hooks/useCartlines";
 
 export const Desire: FC<Cartline> = ({ documentId, product, quantity }) => {
-    const { updLocalStorageCartline, removeLocalStorageCartline } = useProviderContext()
+    const { changeCartline, removeCartline } = useCartlines()
 
     const [productQuantity, setQuantity] = useState(quantity)
     const [price, setPrice] = useState<number>(product?.price * quantity)
@@ -41,7 +41,7 @@ export const Desire: FC<Cartline> = ({ documentId, product, quantity }) => {
     const changeQuantity = useCallback(
         debounce((value: number) => {
             try {
-                updLocalStorageCartline(documentId, value)
+                changeCartline({id: documentId, quantity: value})
                 // throw Error()
             } catch (e) {
                 resetValues()
@@ -55,7 +55,7 @@ export const Desire: FC<Cartline> = ({ documentId, product, quantity }) => {
 
     const removeItem = () => {
         try {
-            removeLocalStorageCartline(documentId)
+            removeCartline(documentId)
         } catch (e) {
             // + alert
         }

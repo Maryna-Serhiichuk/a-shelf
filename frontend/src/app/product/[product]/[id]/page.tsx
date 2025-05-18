@@ -11,14 +11,14 @@ import { useProviderContext } from "@/components/App/ContextProvider/ContextProv
 export default function Page({ params }: { params: Promise<{ id: string }> }) {
     const { id } = use(params);
 
-    const { localStorageCart } = useProviderContext()
+    const { cart } = useProviderContext()
 
     const { useProductQuery } = productApi
     const { data, isLoading, isError } = useProductQuery({ id })
 
     return (
         <Fragment>
-            {data?.data && <Product {...data?.data} isCart={localStorageCart?.map(it => it?.id)?.includes(id)} />}
+            {data?.data && <Product {...data?.data} isCart={cart?.map(it => it?.product?.documentId)?.includes(id)} />}
             <Container>
                 <Bargain id={id} />
             </Container>

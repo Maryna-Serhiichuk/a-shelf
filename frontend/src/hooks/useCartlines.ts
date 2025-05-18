@@ -1,15 +1,14 @@
 import { accountApi } from "@/api/account";
 import { cartApi } from "@/api/cart";
-import { useCartLocalStorage } from "./useCartLocalStorage";
+import { useProviderContext } from "@/components/App/ContextProvider/ContextProvider";
 
 type UseCartlineProps = {
-    carlineProductIds: Array<string>
     changeCartline: (props: { id: string, quantity: number }) => void
     removeCartline: (id: string) => void
 }
 
 export function useCartlines(): UseCartlineProps {
-    const { getProductsIds, changeQuantity, removeLine } = useCartLocalStorage()
+    const { updLocalStorageCartline, removeLocalStorageCartline } = useProviderContext()
     
     const { useMeQuery } = accountApi
     const { data: meData } = useMeQuery(undefined)
@@ -24,7 +23,7 @@ export function useCartlines(): UseCartlineProps {
             return
         }
 
-        removeLine(id)
+        removeLocalStorageCartline(id)
     }
 
     const changeCartline: UseCartlineProps['changeCartline'] = ({ id, quantity }) => {
@@ -33,19 +32,10 @@ export function useCartlines(): UseCartlineProps {
             return
         }
 
-        changeQuantity(id, quantity)
-    }
-
-    const cartlineProducts = () => {
-        if(meData?.id) {
-            return meData?.cartlines?.map(it => it?.product?.documentId) ?? []
-        }
-
-        return getProductsIds()
+        updLocalStorageCartline(id, quantity)
     }
 
     return {
-        carlineProductIds: cartlineProducts(),
         changeCartline,
         removeCartline
     }

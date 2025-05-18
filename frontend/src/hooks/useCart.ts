@@ -1,15 +1,15 @@
 import { accountApi } from "@/api/account";
 import { useCartLocalStorage } from "./useCartLocalStorage";
-import { productApi } from "@/api/product";
 import { useEffect, useState } from "react";
 import { cartApi } from "@/api/cart";
+// import { useProviderContext } from "@/components/App/ContextProvider/ContextProvider";
 
 type UseCart = {
     data: Array<Cartline>
-    getCartProductsFromLocalStorage: () => Promise<Array<Cartline>>
 }
 
 export function useCart(): UseCart {
+    // const { productsFromLocalStorage } = useProviderContext()
     const [cart, setCart] = useState<Array<Cartline>>([])
 
     const { useMeQuery } = accountApi
@@ -19,48 +19,21 @@ export function useCart(): UseCart {
 
     const { getCartlines, clearCart } = useCartLocalStorage()
 
-    const { useGetProductsMutation } = productApi
-    const [getProductsByIds] = useGetProductsMutation()
-
     const { useCreateCartlinesMutation } = cartApi
     const [setCartToStore] = useCreateCartlinesMutation()
 
     useEffect(() => {
-        const fetchCart = async () => {
-            const cartResponse = await getCartProducts();
-            setCart(cartResponse);
-        };
-
-        fetchCart();
+        getCartProducts()
     }, [data]);
 
-    const getCartProductsFromLocalStorage = async (): Promise<Array<Cartline>>  => {
-        const lines = getCartlines()
-
-        if (!(lines && lines?.length > 0)) return []
-
-        const result = await getProductsByIds({ ids: lines?.map(it => it?.id) })
-        const products = result?.data?.data
-
-        if (!(products && products?.length > 0)) return []
-
-        const response: Array<Cartline> = products?.map((prod, index) => ({
-            documentId: lines?.find(line => line?.id === prod?.documentId)!.documentId,
-            product: prod,
-            quantity: lines?.find(line => line?.id === prod?.documentId)?.quantity ?? 1
-        }))
-
-        return response
-    }
-
-    const getCartProducts = async (): Promise<Array<Cartline>> => {
+    const getCartProducts = () => {
         if (!data?.id) {
-            return await getCartProductsFromLocalStorage()
+            // setCart(productsFromLocalStorage)
+            return
         }
-
-        await storeCartlines()
-
-        return cartlines
+        storeCartlines()
+        setCart(cartlines)
+        return
     }
 
     const storeCartlines = async () => {
@@ -75,6 +48,5 @@ export function useCart(): UseCart {
 
     return {
         data: cart,
-        getCartProductsFromLocalStorage
     }
 }

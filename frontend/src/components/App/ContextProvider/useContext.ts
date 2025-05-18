@@ -1,23 +1,37 @@
-import { useCart } from "@/hooks/useCart"
 import { useCartLocalStorage, type CartlineStoreType } from "@/hooks/useCartLocalStorage"
 import { useEffect, useState } from "react"
+import { productApi } from "@/api/product";
+import { accountApi } from "@/api/account";
+import { cartApi } from "@/api/cart";
 
 export type IContext = {
-    localStorageCart: Array<CartlineStoreType>
     addToLocalStorageCart: (id: string) => void
     updLocalStorageCartline: (id: string, quantity: number) => void
     removeLocalStorageCartline: (id: string) => void
-    productsFromLocalStorage: Array<Cartline>
+    cart: Array<Cartline>
 }
 
 export const useContext = (): IContext => {
-    const { getCartProductsFromLocalStorage } = useCart()
-    const { getCartlines, addProduct, changeQuantity, removeLine } = useCartLocalStorage()
-    const [localStorageCart, setLocalStorageCart] = useState<Array<CartlineStoreType>>([])
-    const [productsFromLocalStorage, setProductsFromLocalStorage] = useState<Array<Cartline>>([])
+    const { getCartlines, addProduct, changeQuantity, removeLine, clearCart } = useCartLocalStorage()
+
+    const { useMeQuery } = accountApi
+    const { data, isLoading, isError } = useMeQuery(undefined)
+    const cartlines: Array<Cartline> = data?.cartlines ?? []
+
+    const [cart, setCart] = useState<Array<Cartline>>([])
+
+    const { useGetProductsMutation } = productApi
+    const [getProductsByIds] = useGetProductsMutation()
+
+    const { useCreateCartlinesMutation } = cartApi
+    const [setCartToStore] = useCreateCartlinesMutation()
 
     useEffect(() => {
         updateCartLocalStorage()
+    }, [])
+
+    useEffect(() => {
+        getCartProductsFromLocalStorage()
     }, [])
 
     const addToLocalStorageCart: IContext['addToLocalStorageCart'] = (id) => {
@@ -36,17 +50,56 @@ export const useContext = (): IContext => {
     }
 
     const updateCartLocalStorage = async () => {
-        const cart = getCartlines()
-        setLocalStorageCart(cart)
-        const products = await getCartProductsFromLocalStorage()
-        setProductsFromLocalStorage(products)
+        getCartProductsFromLocalStorage()
+    }
+
+    const getCartProductsFromLocalStorage = async () => {
+        const lines = getCartlines()
+
+        if (!(lines && lines?.length > 0)) return []
+
+        const result = await getProductsByIds({ ids: lines?.map(it => it?.id) })
+        const products = result?.data?.data
+
+        if (!(products && products?.length > 0)) return []
+
+        const response: Array<Cartline> = products?.map((prod, index) => ({
+            documentId: lines?.find(line => line?.id === prod?.documentId)!.documentId,
+            product: prod,
+            quantity: lines?.find(line => line?.id === prod?.documentId)?.quantity ?? 1
+        }))
+
+        setCart(response)
+    }
+
+    useEffect(() => {
+        getCartProducts()
+    }, [data]);
+
+    const getCartProducts = () => {
+        if (!data?.id) {
+            getCartProductsFromLocalStorage()
+            return
+        }
+        storeCartlines()
+        setCart(cartlines)
+        return
+    }
+
+    const storeCartlines = async () => {
+        const lines = getCartlines()
+
+        if (!(lines && lines?.length > 0)) return
+
+        await setCartToStore({ data: lines?.map(line => ({ id: line?.id, quantity: line?.quantity })) })
+
+        clearCart()
     }
 
     return {
-        localStorageCart,
         addToLocalStorageCart,
         updLocalStorageCartline,
         removeLocalStorageCartline,
-        productsFromLocalStorage
+        cart
     }
 }

@@ -7,10 +7,9 @@ type UseAddDesire = {
 }
 
 export function useAddDesire(): UseAddDesire {
+  const { addToLocalStorageCart } = useProviderContext()
   const { useMeQuery } = accountApi
   const { data } = useMeQuery(undefined)
-
-  const { addToLocalStorageCart } = useProviderContext()
 
   const { useCreateCartlineMutation } = cartApi
   const [createCartline, {}] = useCreateCartlineMutation();

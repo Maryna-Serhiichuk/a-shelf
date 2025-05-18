@@ -6,12 +6,12 @@ import { useEffect, useState } from "react";
 import { useProviderContext } from "@/components/App/ContextProvider/ContextProvider";
 
 export default function Page() {
+    const { cart } = useProviderContext()
     const [lines, setData] = useState<Array<Cartline>>([])
-    const { productsFromLocalStorage } = useProviderContext()
 
     useEffect(() => {
-        setData(productsFromLocalStorage)
-    }, [productsFromLocalStorage])
+        setData(cart)
+    }, [cart])
 
     return (
         <LayoutCategories>
