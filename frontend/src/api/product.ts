@@ -22,16 +22,26 @@ export const productApi = enhanceApi.injectEndpoints({
                 },
             }),
         }),
-        products: builder.query<Response<Array<Product>>, { type?: string }>({
-            query: ({ type }) => ({
+        products: builder.query<Response<Array<Product>>, { type?: string, search?: string }>({
+            query: ({ type, search }) => {
+                console.log(search)
+                return {
                 url: `products`,
                 method: 'GET',
                 params: {
-                    ...(type && { 'filters[type][slug][$eq]': type }),
+                    ...((type && !search) && { 'filters[type][slug][$eq]': type }),
+                    ...(search && { 'filters[$or][0][name][$containsi]': search }),
+                    ...(search && { 'filters[$or][1][ingredients][label][$containsi]': search }),
+                    ...(search && { 'filters[$or][2][subname][$containsi]': search }),
+                    ...(search && { 'filters[$or][3][composition][$containsi]': search }),
+                    ...(search && { 'filters[$or][4][using][$containsi]': search }),
+                    ...(search && { 'filters[$or][5][purpose][$containsi]': search }),
+                    ...(search && { 'filters[$or][6][description][$containsi]': search }),
                     'populate[0]': 'illustration',
                     'populate[1]': 'discount',
                 },
-            }),
+            }
+            },
         }),
         getProducts: builder.mutation<Response<Array<Product>>, { ids?: Array<string> }>({
             query: ({ ids }) => ({
