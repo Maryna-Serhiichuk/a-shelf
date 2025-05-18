@@ -37,14 +37,24 @@ export default factories.createCoreController('api::cartline.cartline', ({ strap
             return;
         }
 
+        const cartlines = await strapi.db.query('api::cartline.cartline').findMany({
+            where: { user: { id: ctx?.state?.user?.id } },
+            populate: { product: true }
+        })
+        
+        const existCartlineIds = cartlines?.map(line => line?.product?.documentId)
+
+        const filteredData = data?.filter(line => !existCartlineIds?.includes(line?.id))
+
         const cartline = await Promise.all(
-            data.map(async (product) => {
+            filteredData.map(async (product) => {
                 const prod = await strapi.db.query('api::product.product').findOne({
                     where: { documentId: product?.id }
                 });
 
                 return strapi.db.query('api::cartline.cartline').create({
                     data: {
+                        quantity: product?.quantity,
                         user: {
                             connect: [ctx?.state?.user?.id],
                         },
