@@ -5,11 +5,11 @@ import { Price } from "@/components/Price";
 import { Button } from "@/components/Button";
 import { Img } from "@/components/Img";
 import { Markdown } from "@/components/Markdown";
-import { Ingredients } from "@/components/Ingredients";
 import { useAddDesire } from "@/hooks/useAddDesire";
 import { ActiveIngredients } from "../ActiveIngredients";
+import classNames from "classnames";
 
-export const ProductView: FC<Product> = ({ documentId, name, subname, description, ingredients, price, type, illustration, discount, volume, isCart, composition, using, purpose }) => {
+export const ProductView: FC<Product> = ({ documentId, name, subname, description, ingredients, price, type, illustration, discount, volume, isCart, composition, using, purpose, isOutOfStock }) => {
     const { addDesire } = useAddDesire()
 
     const addToCart = () => {
@@ -27,26 +27,33 @@ export const ProductView: FC<Product> = ({ documentId, name, subname, descriptio
                         <div className="text-xl font-extralight dark:text-stone-400">
                             {volume}
                         </div>
-                        <div className="text-2xl font-bold">
-                            <Price price={price} discount={discount} />
-                        </div>
-                        <div className="flex flex-nowrap flex-col gap-1">
-                            <Button size="large">
-                                Buy Now
-                            </Button>
-                            {isCart
-                                ? <Button variant="outlined">
-                                    Added
-                                </Button>
-                                : <Button variant="outlined" onClick={addToCart}>
-                                    Add to Cart
-                                </Button>
-                            }
+                        {!isOutOfStock &&
+                            <Fragment>
+                                <div className="text-2xl font-bold">
+                                    <Price price={price} discount={discount} />
+                                </div>
+                                <div className="flex flex-nowrap flex-col gap-1">
+                                    <Button size="large">
+                                        Buy Now
+                                    </Button>
+                                    {isCart
+                                        ? <Button variant="outlined">
+                                            Added
+                                        </Button>
+                                        : <Button variant="outlined" onClick={addToCart}>
+                                            Add to Cart
+                                        </Button>
+                                    }
 
-                        </div>
+                                </div>
+                            </Fragment>
+                        }
                     </div>
                 </div>
-                <div className="flex justify-center col-span-6 md:col-span-3 lg:col-span-2 h-[300px] md:h-[600px]">
+                <div className={classNames(
+                    "flex justify-center col-span-6 md:col-span-3 lg:col-span-2 h-[300px] md:h-[600px]",
+                    { "contrast-50": isOutOfStock }
+                    )}>
                     <Img src={illustration?.url} />
                 </div>
                 <div className="hidden md:flex justify-center col-span-3 lg:col-span-2">

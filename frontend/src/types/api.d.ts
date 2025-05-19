@@ -49,6 +49,7 @@ declare global {
         composition?: string
         using?: string
         purpose?: string
+        isOutOfStock?: boolean
     }
 
     interface Ingredient {

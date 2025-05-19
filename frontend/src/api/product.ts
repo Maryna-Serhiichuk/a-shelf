@@ -23,9 +23,7 @@ export const productApi = enhanceApi.injectEndpoints({
             }),
         }),
         products: builder.query<Response<Array<Product>>, { type?: string, search?: string }>({
-            query: ({ type, search }) => {
-                console.log(search)
-                return {
+            query: ({ type, search }) => ({
                 url: `products`,
                 method: 'GET',
                 params: {
@@ -39,9 +37,9 @@ export const productApi = enhanceApi.injectEndpoints({
                     ...(search && { 'filters[$or][6][description][$containsi]': search }),
                     'populate[0]': 'illustration',
                     'populate[1]': 'discount',
+                    'sort[0]': 'isOutOfStock:asc'
                 },
-            }
-            },
+            }),
         }),
         getProducts: builder.mutation<Response<Array<Product>>, { ids?: Array<string> }>({
             query: ({ ids }) => ({

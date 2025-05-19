@@ -100,6 +100,6 @@ export const useContext = (): IContext => {
         addToLocalStorageCart,
         updLocalStorageCartline,
         removeLocalStorageCartline,
-        cart
+        cart: cart?.filter(line => !line?.product?.isOutOfStock)
     }
 }

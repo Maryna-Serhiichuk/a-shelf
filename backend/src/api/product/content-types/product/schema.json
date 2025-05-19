@@ -68,6 +68,11 @@
     },
     "purpose": {
       "type": "text"
+    },
+    "isOutOfStock": {
+      "type": "boolean",
+      "default": false,
+      "required": false
     }
   }
 }
