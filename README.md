@@ -1,8 +1,10 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
 
-# DigiCore
+# A-Shelf
 
-## The project was built with responsive design using the following technologies:
+This project is a fully functional e-commerce web application that allows users to browse products, add items to a cart, and complete purchases through a secure checkout process. The app includes features such as user authentication, product filtering, order management, and responsive design for mobile and desktop devices
+
+## Key Technologies:
 
 <table align="center">
     <tr>
