@@ -12,7 +12,10 @@ fi
 
 if [ "$DEPENDENCIES_CHANGED" = "true" ] || [ "$NEW_HASH" != "$OLD_HASH" ]; then
   echo "Changes to package.json or yarn.lock detected. Updating node_modules..."
-  yarn --cwd ./backend install
+  cd $BACKEND_DIR
+  yarn install
+  cd - > /dev/null
+  echo "Current directory: $(pwd)"
   echo $NEW_HASH > $HASHFILE
 else
   echo "No changes to dependencies. Skipping yarn install."
