@@ -25,6 +25,14 @@ jobs:
         run: |
           rsync -avz --exclude '.git' ./ ${{ secrets.USERNAME }}@${{ secrets.HOST }}:${{ secrets.TARGET_DIR }}
 
+      - name: Pull latest changes on server
+        run: |
+          ssh ${{ secrets.USERNAME }}@${{ secrets.HOST }} "
+            cd ${{ secrets.TARGET_DIR }} &&
+            git config --global --add safe.directory ${{ secrets.TARGET_DIR }} &&
+            git pull origin main
+          "
+
       - name: Check if dependencies have changed
         run: |
           ssh ${{ secrets.USERNAME }}@${{ secrets.HOST }} "
