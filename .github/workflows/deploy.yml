@@ -21,6 +21,10 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H ${{ secrets.HOST }} >> ~/.ssh/known_hosts
 
+      - name: Copy project files to server
+        run: |
+          rsync -avz --exclude '.git' ./ ${{ secrets.USERNAME }}@${{ secrets.HOST }}:${{ secrets.TARGET_DIR }}
+
       - name: Check if dependencies have changed
         run: |
           ssh ${{ secrets.USERNAME }}@${{ secrets.HOST }} "
@@ -28,10 +32,6 @@ jobs:
             chmod +x deploy.sh &&
             ./deploy.sh
           "
-
-      - name: Copy project files to server
-        run: |
-          rsync -avz --exclude '.git' ./ ${{ secrets.USERNAME }}@${{ secrets.HOST }}:${{ secrets.TARGET_DIR }}
 
       - name: Restart containers
         run: |
