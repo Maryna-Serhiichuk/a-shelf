@@ -9,12 +9,16 @@ if [ -f $HASHFILE ]; then
 else
   OLD_HASH=""
 fi
-
+echo "1"
 if [ "$DEPENDENCIES_CHANGED" = "true" ] || [ "$NEW_HASH" != "$OLD_HASH" ]; then
   echo "Changes to package.json or yarn.lock detected. Updating node_modules..."
+  echo "2"
   cd $BACKEND_DIR
+  echo "3"
   yarn install
+  echo "4"
   cd -
+  echo "5"
   echo $NEW_HASH > $HASHFILE
 else
   echo "No changes to dependencies. Skipping yarn install."
