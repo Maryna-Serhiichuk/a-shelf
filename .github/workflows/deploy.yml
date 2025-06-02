@@ -14,10 +14,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Check if backend/package.json changed
-        id: check_package_json
+      - name: Check if dependencies have changed
         run: |
-          echo "changed=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep -q '^backend/package.json$' && echo true || echo false)" >> $GITHUB_OUTPUT
+          ssh ${{ secrets.USERNAME }}@${{ secrets.HOST }} "
+            cd ${{ secrets.TARGET_DIR }} &&
+            chmod +x deploy.sh &&
+            ./deploy.sh
+          "
 
       - name: Set up SSH key
         run: |
@@ -30,6 +33,9 @@ jobs:
         run: |
           rsync -avz --exclude '.git' ./ ${{ secrets.USERNAME }}@${{ secrets.HOST }}:${{ secrets.TARGET_DIR }}
 
-      - name: Run deploy script and restart containers
+      - name: Restart containers
         run: |
-          ssh ${{ secrets.USERNAME }}@${{ secrets.HOST }} "cd ${{ secrets.TARGET_DIR }} && chmod +x deploy.sh && ./deploy.sh && docker-compose up -d --build"
+          ssh ${{ secrets.USERNAME }}@${{ secrets.HOST }} "
+            cd ${{ secrets.TARGET_DIR }} &&
+            docker-compose up -d --build
+          "
