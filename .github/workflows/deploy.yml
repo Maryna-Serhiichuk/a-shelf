@@ -44,9 +44,11 @@ jobs:
             NEXT_PUBLIC_HOST=${{ secrets.NEXT_PUBLIC_HOST }}
           "
 
-      - name: Restart containers
+      - name: Clean up dangling images and restart containers
         run: |
           ssh ${{ secrets.USERNAME }}@${{ secrets.HOST }} "
             cd ${{ secrets.TARGET_DIR }} &&
+            docker image prune -f &&
+            docker container prune -f &&
             docker-compose up -d --build
           "
