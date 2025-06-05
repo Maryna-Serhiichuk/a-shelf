@@ -25,12 +25,17 @@ jobs:
         run: |
           rsync -avz --exclude '.git' ./ ${{ secrets.USERNAME }}@${{ secrets.HOST }}:${{ secrets.TARGET_DIR }}
 
-      - name: Check if dependencies have changed
+      - name: Create .env file on server
         run: |
           ssh ${{ secrets.USERNAME }}@${{ secrets.HOST }} "
-            cd ${{ secrets.TARGET_DIR }} &&
-            chmod +x deploy.sh &&
-            ./deploy.sh
+            cat <<EOF > ${{ secrets.TARGET_DIR }}/backend/.env
+            APP_KEYS=${{ secrets.APP_KEYS }}
+            API_TOKEN_SALT=${{ secrets.API_TOKEN_SALT }}
+            ADMIN_JWT_SECRET=${{ secrets.ADMIN_JWT_SECRET }}
+            TRANSFER_TOKEN_SALT=${{ secrets.TRANSFER_TOKEN_SALT }}
+            DATABASE_CLIENT=${{ secrets.DATABASE_CLIENT }}
+            DATABASE_FILENAME=${{ secrets.DATABASE_FILENAME }}
+            JWT_SECRET=${{ secrets.JWT_SECRET }}
           "
 
       - name: Restart containers
