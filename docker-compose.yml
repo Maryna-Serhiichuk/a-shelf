@@ -10,25 +10,15 @@ services:
     volumes:
       - ./backend/.tmp:/app/.tmp
       - ./backend/public/uploads:/app/public/uploads
-    # environment:
-    #   NODE_ENV: development
-    #   DATABASE_CLIENT: sqlite
-    # working_dir: /app/backend
     command: yarn start
+
+  frontend:
+    build:
+      context: ./frontend
+    container_name: frontend
+    ports:
+      - "3000:3000"
+    command: yarn dev
 
 volumes:
   backend_node_modules:
-
-  # frontend:
-  #   build:
-  #     context: ./frontend
-  #   container_name: frontend
-  #   ports:
-  #     - "3000:3000"
-  #   volumes:
-  #     - ./frontend:/app/frontend
-  #     - /app/frontend/node_modules
-  #   environment:
-  #     NODE_ENV: development
-  #   working_dir: /app/frontend
-  #   command: yarn dev
