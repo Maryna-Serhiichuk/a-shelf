@@ -11,7 +11,7 @@ services:
     #   NODE_ENV: development
     #   DATABASE_CLIENT: sqlite
     # working_dir: /app/backend
-    command: yarn dev
+    command: yarn start
 
 volumes:
   backend_node_modules:
