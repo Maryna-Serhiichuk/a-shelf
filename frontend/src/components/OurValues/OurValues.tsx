@@ -7,7 +7,7 @@ import classNames from "classnames";
 
 export const OurValues: FC<IconDescriptionComponent> = ({ heading, items }) => {
     const cardWidth = "w-[250px] xl:w-[300px] 2xl:w-[400px]"
-    return <div className="bg-[linear-gradient(transparent,_#AFCBC9)] pt-40">
+    return <section className="bg-[linear-gradient(transparent,_#AFCBC9)] pt-40">
         <Container>
             {heading &&
                 <div className="text-6xl font-semibold flex justify-center">
@@ -44,5 +44,5 @@ export const OurValues: FC<IconDescriptionComponent> = ({ heading, items }) => {
                 </div>
             </div>
         </Container>
-    </div>
+    </section>
 }

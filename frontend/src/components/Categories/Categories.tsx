@@ -8,9 +8,9 @@ export const Categories: FC = () => {
     const { useCategoriesQuery } = productApi
     const { data, isLoading, isError } = useCategoriesQuery(undefined)
       
-    return <div className="w-full flex flex-col gap-3">
+    return <nav className="w-full flex flex-col gap-3">
         {data?.data?.map(category => (
             <Category key={category?.slug} {...category} />
         ))}
-    </div>
+    </nav>
 }

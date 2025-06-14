@@ -4,7 +4,7 @@ import { Img } from "@/components/Img";
 
 export const Formula: FC<ImageShortDescription> = ({ title, description, left, right }) => {
     return <Container>
-        <div className="relative grid grid-cols-8 md:grid-cols-3 md:h-[300px] lg:h-[500px] xl:h-[700px] gap-8 lg:gap-15 items-center my-10 md:my-40">
+        <section className="relative grid grid-cols-8 md:grid-cols-3 md:h-[300px] lg:h-[500px] xl:h-[700px] gap-8 lg:gap-15 items-center my-10 md:my-40">
             {title &&
                 <div className="block md:hidden col-span-8 relative z-3 text-3xl">
                     <div className="flex justify-center font-semibold text-center">
@@ -35,6 +35,6 @@ export const Formula: FC<ImageShortDescription> = ({ title, description, left, r
                     {description}
                 </div>
             }
-        </div>
+        </section>
     </Container>
 }

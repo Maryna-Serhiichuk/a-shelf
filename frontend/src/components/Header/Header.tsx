@@ -26,9 +26,9 @@ export const Header: FC = () => {
     }, [router, searchParams]);
 
     return <Fragment>
-        <div className="w-full flex justify-between px-4 py-2">
+        <header className="w-full flex justify-between px-4 py-2">
             <Logo />
-            <div className="hidden lg:flex items-center">
+            <nav className="hidden lg:flex items-center">
                 <NavLink href={'/'}>
                     <Button variant={'link'}>
                         Shop
@@ -44,7 +44,7 @@ export const Header: FC = () => {
                         Contact Us
                     </Button>
                 </NavLink>
-            </div>
+            </nav>
             <div className="items-center hidden sm:flex">
                 <Search onChange={onSearch} />
             </div>
@@ -52,7 +52,7 @@ export const Header: FC = () => {
                 <div className="items-center flex sm:hidden">
                     <Button onClick={() => setOpen(!isOpen)} variant={'link'} Icon={MagnifyingGlassIcon} />
                 </div>
-                <div className="relative">
+                <nav className="relative">
                     <NavLink href={'/cart'}>
                         {cart?.length > 0 &&
                             <div className="absolute left-6 flex justify-center items-center text-sm h-[20px] w-[20px] bg-red-700 rounded-[50%] text-stone-100">
@@ -63,13 +63,13 @@ export const Header: FC = () => {
                             <span className="hidden lg:block">Cart</span>
                         </Button>
                     </NavLink>
-                </div>
+                </nav>
                 <Auth />
                 <div className="block lg:hidden">
                     <Burger />
                 </div>
             </div>
-        </div>
+        </header>
         <div className={classNames("w-full flex px-4 py-4 duration-200", "max-h-0 opacity-0", "flex sm:hidden", {
             "max-h-100 opacity-100": isOpen,
         })}>

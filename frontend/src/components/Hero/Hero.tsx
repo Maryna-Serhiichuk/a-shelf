@@ -12,7 +12,7 @@ const comforter = Comforter_Brush({ subsets: ["latin"], weight: ["400"] });
 
 export const Hero: FC<Hero> = ({ heading, main, button }) => {
     return <Container>
-        <div className="grid grid-cols-3 lg:grid-cols-2 my-2 md:my-10 gap-2 sm:gap-8">
+        <section className="grid grid-cols-3 lg:grid-cols-2 my-2 md:my-10 gap-2 sm:gap-8">
             <div className="col-span-2 lg:col-span-1 flex flex-col gap-8 py-[10px] sm:py-[30px] lg:py-0 xl:py-[50px]">
                 <div className="font-bold uppercase text-3xl/10 sm:text-4xl/11 md:text-5xl/14 lg:text-6xl/20">
                     {heading}
@@ -48,6 +48,6 @@ export const Hero: FC<Hero> = ({ heading, main, button }) => {
             <div className="absolute top-[180px] left-13/40 ">
                 <Decor/>
             </div>
-        </div>
+        </section>
     </Container>
 }

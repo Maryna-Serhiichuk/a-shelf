@@ -9,7 +9,7 @@ import { NavLink } from "@/components/NavLink";
 
 export const Cta: FC<Banner> = ({ text, button }) => {
     const shadow = "shadow-[0_0_30px_rgba(0,0,0,.2)]"
-    return <div className="relative bg-[linear-gradient(transparent,#D6D6D6)] pt-20 lg:pt-40">
+    return <section className="relative bg-[linear-gradient(transparent,#D6D6D6)] pt-20 lg:pt-40">
         <Container full>
             <div className="absolute top-0">
                 <img src={patch.src} className={classNames("w-[200px] lg:w-[350px]", shadow)} />
@@ -44,5 +44,5 @@ export const Cta: FC<Banner> = ({ text, button }) => {
                 </div>
             </div>
         </Container>
-    </div>
+    </section>
 }

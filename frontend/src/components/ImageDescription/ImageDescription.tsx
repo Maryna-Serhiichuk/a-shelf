@@ -5,7 +5,7 @@ import classNames from "classnames";
 import { Img } from "@/components/Img";
 
 export const ImageDescription: FC<ImageDescription> = ({ image, title, description, position }) => {
-    return <div className="grid grid-cols-2 gap-5">
+    return <section className="grid grid-cols-2 gap-5">
         <div className={classNames("col-span-2 xl:col-span-1", { "order-1 xl:order-2": position === 'right' })}>
             <Img src={image?.url} className="h-full w-full object-cover" />
         </div>
@@ -19,5 +19,5 @@ export const ImageDescription: FC<ImageDescription> = ({ image, title, descripti
                 </div>
             </Container>
         </div>
-    </div>
+    </section>
 }

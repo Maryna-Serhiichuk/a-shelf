@@ -11,9 +11,9 @@ export const Types: FC<{ category?: string }> = ({ category }) => {
 
     if (isLoading) return <Loader/>
 
-    return <div className="grid grid-cols-2 lg:grid-cols-4 gap-5">
+    return <nav className="grid grid-cols-2 lg:grid-cols-4 gap-5">
         {data?.data?.map(type => (
             <TypePreview key={type?.slug} {...type} />
         ))}
-    </div>
+    </nav>
 }

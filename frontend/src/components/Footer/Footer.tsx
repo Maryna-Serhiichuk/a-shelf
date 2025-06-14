@@ -27,7 +27,7 @@ export const Footer: FC = () => {
         container: "w-full sm:w-1/2 md:w-full flex flex-col lg:flex-row gap-4 md:gap-6 items-start"
     }
 
-    return <div className="w-full bg-stone-900 text-stone-50 dark py-8 px-3">
+    return <footer className="w-full bg-stone-900 text-stone-50 dark py-8 px-3">
         <Container>
             <div className={classNames("grid gap-8 sm:gap-16", cols.wrap)}>
                 <div className={classNames(cols.left)}>
@@ -58,21 +58,21 @@ export const Footer: FC = () => {
                         <div className={pagesStyle.title}>
                             Company
                         </div>
-                        <div className={pagesStyle.wrap}>
+                        <nav className={pagesStyle.wrap}>
                             {pages?.map(page => (
                                 <div key={page?.href} className="w-1/2 sm:w-full md:w-1/2 hover:underline">
-                                    <NavLink href={page?.href}>
+                                    <NavLink href={'/' + page?.href}>
                                         {page?.label}
                                     </NavLink>
                                 </div>
                             ))}
-                        </div>
+                        </nav>
                     </div>
                     <div className={pagesStyle.container}>
                         <div className={pagesStyle.title}>
                             Support
                         </div>
-                        <div className={pagesStyle.wrap}>
+                        <nav className={pagesStyle.wrap}>
                             {data?.data?.map(page => (
                                 <div key={page?.slug} className="w-1/2 sm:w-full md:w-1/2 hover:underline">
                                     <NavLink href={`/support/${page.slug}`}>
@@ -80,10 +80,10 @@ export const Footer: FC = () => {
                                     </NavLink>
                                 </div>
                             ))}
-                        </div>
+                        </nav>
                     </div>
                 </div>
             </div>
         </Container>
-    </div>
+    </footer>
 }
