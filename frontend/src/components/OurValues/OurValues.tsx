@@ -7,10 +7,10 @@ import classNames from "classnames";
 
 export const OurValues: FC<IconDescriptionComponent> = ({ heading, items }) => {
     const cardWidth = "w-[250px] xl:w-[300px] 2xl:w-[400px]"
-    return <section className="bg-[linear-gradient(transparent,_#AFCBC9)] pt-40">
+    return <section className="bg-[linear-gradient(transparent,_#AFCBC9)] dark:bg-[linear-gradient(transparent,_rgba(77,103,103,1))] pt-40">
         <Container>
             {heading &&
-                <div className="text-6xl font-semibold flex justify-center">
+                <div className="text-6xl font-semibold flex justify-center dark:text-stone-100">
                     {heading}
                 </div>
             }
@@ -28,7 +28,7 @@ export const OurValues: FC<IconDescriptionComponent> = ({ heading, items }) => {
                         </div>
                     </div>
                     <div className="relative flex justify-center items-center">
-                        <div className="bg-stone-800 opacity-30 h-[500px] w-[500px] rounded-[50%]" />
+                        <div className="bg-stone-800 dark:bg-stone-100 opacity-30 h-[500px] w-[500px] rounded-[50%]" />
                         <div className="absolute h-full" >
                             <img src={bottle.src} className="h-full transform-[rotate(15deg)_scale(1.2)_translate(-15px,-80px)]" />
                         </div>

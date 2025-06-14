@@ -2,7 +2,7 @@ import { FC, PropsWithChildren } from "react"
 import { Icon, IconTypeProp } from "@/components/Icon"
 
 export const ContactItem: FC<PropsWithChildren<{ title?: string, icon: IconTypeProp }>> = ({ children, title, icon }) => {
-    return <div className="flex">
+    return <div className="flex dark:text-stone-200">
         <div className="w-9">
             <Icon type={icon} className="size-7 relative top-[1px]" />
         </div>

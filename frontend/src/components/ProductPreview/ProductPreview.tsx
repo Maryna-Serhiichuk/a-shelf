@@ -14,7 +14,7 @@ export const ProductPreview: FC<Product & { className?: string }> = ({ documentI
     }
 
     return <div key={documentId} className={classNames(
-        "flex flex-col justify-between px-6 py-6 bg-stone-100 dark:bg-stone-300",
+        "flex flex-col justify-between px-6 py-6 bg-stone-100 dark:bg-stone-700",
         className,
         { "opacity-40": isOutOfStock }
     )}>
@@ -25,18 +25,18 @@ export const ProductPreview: FC<Product & { className?: string }> = ({ documentI
         </div>
         <div>
             <NavLink href={`/product/${name?.replaceAll(' ', '-')}/${documentId}`}>
-                <div className="py-3 text-stone-950 flex justify-center text-xl text-center hover:underline cursor-pointer">
+                <div className="py-3 text-stone-950 dark:text-stone-200 flex justify-center text-xl text-center hover:underline cursor-pointer">
                     <span>{name}, <span className="whitespace-nowrap">{volume}</span></span>
                 </div>
             </NavLink>
             {!isOutOfStock &&
                 <Fragment>
-                    <div className="font-bold pb-3 text-stone-950 flex justify-center text-xl text-center">
+                    <div className="font-bold pb-3 text-stone-950 dark:text-stone-200 flex justify-center text-xl text-center">
                         <Price price={price} discount={discount} mini />
                     </div>
                     <div className="flex justify-center">
                         {isCart
-                            ? <Button variant={'outlined'}>
+                            ? <Button variant={'outlined'} className="dark:text-stone-200 dark:hover:dark:text-stone-400">
                                 Added
                             </Button>
                             : <Button onClick={addToCart}>

@@ -12,7 +12,7 @@ export const ImageDescription: FC<ImageDescription> = ({ image, title, descripti
         <div className={classNames("col-span-2 xl:col-span-1 pr-12 text-lg", { "order-2 xl:order-1": position === 'right' })}>
             <Container>
                 <div className="flex flex-col">
-                    <div className="text-5xl font-semibold mb-8">
+                    <div className="text-5xl font-semibold mb-8 dark:text-stone-100">
                         {title}
                     </div>
                     <Markdown data={description} />
