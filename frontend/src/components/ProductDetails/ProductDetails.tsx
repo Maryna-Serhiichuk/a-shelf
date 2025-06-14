@@ -18,7 +18,7 @@ export const ProductDetails: FC<Product> = ({ composition, using, purpose }) => 
         </div>
         <Container>
             <div className="flex justify-center py-20">
-                <div className="max-w-[800px] w-full py-4 px-8 border-3 border-stone-900 shadow-lg  bg-[rgba(255,255,255,.9)] md:bg-stone-50">
+                <div className="max-w-[800px] w-full py-4 px-8 border-3 border-stone-900 dark:border-stone-700 shadow-lg bg-[rgba(255,255,255,.9)] md:bg-stone-50 dark:bg-stone-800">
                     <Collapse items={collapse} />
                 </div>
             </div>

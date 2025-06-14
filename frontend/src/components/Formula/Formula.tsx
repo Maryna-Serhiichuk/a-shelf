@@ -20,12 +20,12 @@ export const Formula: FC<ImageShortDescription> = ({ title, description, left, r
             </div>
             <div className="hidden md:block col-span-4 md:col-span-1 text-xl lg:text-2xl">
                 {title &&
-                    <div className="relative z-3 text-3xl lg:text-6xl/18 sm:w-[125%] sm:left-[-25%] top-[-20px] lg:top-[-60px]">
+                    <div className="relative z-3 text-3xl lg:text-6xl/18 sm:w-[125%] sm:left-[-25%] top-[-20px] lg:top-[-60px] dark:text-stone-200">
                         {title}
                     </div>
                 }
                 {description &&
-                    <div>
+                    <div className="dark:text-stone-400">
                         {description}
                     </div>
                 }

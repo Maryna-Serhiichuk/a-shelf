@@ -63,7 +63,7 @@ export const Desire: FC<Cartline> = ({ documentId, product, quantity }) => {
         // TODO: then().error()
     }
 
-    return <div className="grid grid-cols-[200px_1fr] grid-rows-[200px] bg-stone-100 overflow-hidden">
+    return <div className="grid grid-cols-[200px_1fr] grid-rows-[200px] bg-stone-100 dark:bg-stone-700 overflow-hidden">
         <NavLink href={`/product/${product?.name?.replaceAll(' ', '-')}/${documentId}`}>
             <div className="flex items-center py-2 w-full h-full">
                 <Img src={product?.illustration?.url} mini />
@@ -72,14 +72,14 @@ export const Desire: FC<Cartline> = ({ documentId, product, quantity }) => {
         <div className="flex justify-between py-4 px-4">
             <div className="flex flex-col gap-1 sm:gap-2">
                 <NavLink href={`/product/${product?.name?.replaceAll(' ', '-')}/${documentId}`}>
-                    <div className="text-md sm:text-xl font-semibold hover:underline">
+                    <div className="text-md sm:text-xl font-semibold hover:underline dark:text-stone-200">
                         {product?.name}
                     </div>
                 </NavLink>
-                <div className="text-sm text-stone-500">
+                <div className="text-sm text-stone-500 dark:text-stone-400">
                     {product?.volume}
                 </div>
-                <div className="text-xl font-medium text-stone-700">
+                <div className="text-xl font-medium text-stone-700 dark:text-stone-200">
                     <Price price={price} discount={product?.discount} />
                 </div>
                 <div>
@@ -87,8 +87,8 @@ export const Desire: FC<Cartline> = ({ documentId, product, quantity }) => {
                 </div>
             </div>
             <div>
-                <Button variant='text' onClick={removeItem}>
-                    <TrashIcon height={26} />
+                <Button variant='text' onClick={removeItem} className="dark:hover:bg-stone-500">
+                    <TrashIcon height={26} className="dark:text-stone-200" />
                 </Button>
             </div>
         </div>

@@ -6,7 +6,11 @@ export const Ingredients: FC<{ items: Array<Ingredient> }> = ({ items }) => {
     const [activeContent, setActiveContent] = useState<string>('')
     return <Fragment>
         {items?.map(ingredient => (
-            <Button onClick={() => setActiveContent(ingredient?.description)} key={ingredient?.label} variant='text' className="bg-stone-200 px-3 py-1.5">{ingredient?.label}</Button>
+            <Button onClick={() => setActiveContent(ingredient?.description)} key={ingredient?.label} variant='text' className="bg-stone-200 dark:bg-stone-700 px-3 py-1.5">
+                <div className="dark:text-stone-300">
+                    {ingredient?.label}
+                </div>
+            </Button>
         ))}
         <Modal open={!!activeContent} onClose={() => setActiveContent('')}>
             <div className="text-xl">

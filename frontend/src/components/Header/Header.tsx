@@ -10,10 +10,11 @@ import classNames from "classnames";
 import { NavLink } from "@/components/NavLink";
 import { Auth } from "@/components/Auth";
 import { useProviderContext } from "../App/ContextProvider/ContextProvider";
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams, useParams } from 'next/navigation';
 
 export const Header: FC = () => {
     const router = useRouter();
+    const param = useParams()
     const searchParams = useSearchParams();
 
     const [isOpen, setOpen] = useState(false)
@@ -22,7 +23,12 @@ export const Header: FC = () => {
     const onSearch = useCallback((e: ChangeEvent<HTMLInputElement>) => {
         const params = new URLSearchParams(searchParams.toString());
         params.set('search', e.target.value);
-        router.push(`?${params.toString()}`);
+        if(!param?.type) {
+            router.push(`/shop?${params.toString()}`);
+        } else {
+            router.push(`?${params.toString()}`);
+        }
+        
     }, [router, searchParams]);
 
     return <Fragment>
