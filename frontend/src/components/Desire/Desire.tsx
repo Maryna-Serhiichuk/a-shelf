@@ -33,9 +33,9 @@ export const Desire: FC<Cartline> = ({ documentId, product, quantity }) => {
 
     const quantityControler = useCallback((value: number) => {
         if(quantity !== value) {
-            valuesControler(value)
             changeQuantity(value)
         }
+        valuesControler(value)
     }, [quantity])
 
     const changeQuantity = useCallback(
