@@ -81,7 +81,7 @@ export function useCartLocalStorage(): UseCartLocalStorage {
 
     const removeLine: UseCartLocalStorage['removeLine'] = (id) => {
         const lines = getCartlines()
-console.log(id)
+
         const cart: Array<CartLocalStorageType> = types?.map(type => {
             return {
                 [type]: lines?.[type]?.filter(it => it?.documentId !== id)
