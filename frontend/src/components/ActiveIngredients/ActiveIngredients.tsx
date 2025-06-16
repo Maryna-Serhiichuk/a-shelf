@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Ingredients } from "../Ingredients";
+import { Ingredients } from "@/components/Ingredients";
 
 export const ActiveIngredients: FC<{ items?: Array<Ingredient> }> = ({ items }) => {
 

@@ -1,7 +1,7 @@
 'use client'
 
 import { FC } from "react";
-import { NavLink } from "../NavLink";
+import { NavLink } from "@/components/NavLink";
 
 export const Logo: FC = () => {
     // function toggleTheme() {

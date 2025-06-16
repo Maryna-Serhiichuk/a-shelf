@@ -10,6 +10,12 @@ export default {
         handler: "bargain.relevantBargains",
         config: {},
       },
+      {
+        method: "POST",
+        path: "/bargains-by-ids",
+        handler: "bargain.bargainsByIds",
+        config: {},
+      },
     ],
   }
   

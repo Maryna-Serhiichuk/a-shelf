@@ -59,6 +59,13 @@ export const productApi = enhanceApi.injectEndpoints({
                 },
             }),
         }),
+        getBargains: builder.mutation<Response<Array<Bargain>>, { ids?: Array<string> }>({
+            query: ({ ids }) => ({
+                url: `bargains-by-ids`,
+                method: 'POST',
+                body: { ids, populate: { products: { populate: ['illustration'] } } },
+            }),
+        }),
         bargains: builder.query<Response<Array<Bargain>>, { id?: string, type?: string }>({
             query: ({ id, type }) => ({
                 url: `relevantBargains`,

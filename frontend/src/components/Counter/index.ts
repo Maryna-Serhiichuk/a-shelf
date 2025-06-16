@@ -1,5 +1,6 @@
-import { Counter } from "./Counter";
+import { Counter, type CounterArgs } from "./Counter";
 
 export {
-    Counter
+    Counter,
+    CounterArgs
 }

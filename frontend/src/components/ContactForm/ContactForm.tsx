@@ -6,7 +6,7 @@ import { Entry } from "@/components/Entry";
 import { FormLabel } from "@/components/FormLabel";
 import { pageApi } from "@/api/page";
 import { checkRequireFields } from "@/utils/checkRequireFields";
-import { Result, ResultType } from "../Result";
+import { Result, ResultType } from "@/components/Result";
 
 export const ContactForm: FC = () => {
     const [message, setMessage] = useState<Maybe<ResultType>>()

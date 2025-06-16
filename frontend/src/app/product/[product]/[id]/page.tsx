@@ -18,7 +18,7 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
 
     return (
         <Fragment>
-            {data?.data && <Product {...data?.data} isCart={cart?.map(it => it?.product?.documentId)?.includes(id)} />}
+            {data?.data && <Product {...data?.data} isCart={cart?.products?.map(it => it?.product?.documentId)?.includes(id)} />}
             <Container>
                 <Bargain id={id} />
             </Container>
