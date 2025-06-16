@@ -1,0 +1,32 @@
+{
+  "kind": "collectionType",
+  "collectionName": "cart_bargains",
+  "info": {
+    "singularName": "cart-bargain",
+    "pluralName": "cart-bargains",
+    "displayName": "CartBargain",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "uuid": {
+      "type": "uid"
+    },
+    "qantity": {
+      "type": "integer"
+    },
+    "user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "cart_bargains"
+    },
+    "bargain": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::bargain.bargain"
+    }
+  }
+}

@@ -6,14 +6,15 @@ const enhanceApi = baseApi.enhanceEndpoints({})
 export const accountApi = enhanceApi.injectEndpoints({
     endpoints: (builder) => ({
         me: builder.query<User, undefined>({
-            providesTags: ['Cartline'],
+            providesTags: ['Cartline', 'CartBargain'],
             query: () => ({
                 url: `users/me`,
                 method: 'GET',
                 params: {
-                    'populate[2]': 'cartlines.product',
-                    'populate[3]': 'cartlines.product.illustration',
-                    'populate[4]': 'cartlines.product.discount',
+                    'populate[0]': 'cartlines.product',
+                    'populate[1]': 'cartlines.product.illustration',
+                    'populate[2]': 'cartlines.product.discount',
+                    'populate[3]': 'cart_bargains.bargain.products.illustration',
                 },
             }),
         }),

@@ -9,20 +9,27 @@ import { Burger } from "./components/Burger";
 import classNames from "classnames";
 import { NavLink } from "@/components/NavLink";
 import { Auth } from "@/components/Auth";
-import { useProviderContext } from "../App/ContextProvider/ContextProvider";
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useProviderContext } from "@/components/App/ContextProvider/ContextProvider";
+import { useRouter, useSearchParams, useParams } from 'next/navigation';
 
 export const Header: FC = () => {
     const router = useRouter();
+    const param = useParams()
     const searchParams = useSearchParams();
 
     const [isOpen, setOpen] = useState(false)
     const { cart } = useProviderContext()
+    const quantity = (cart?.products?.length ?? 0) + (cart?.bargains?.length ?? 0)
 
     const onSearch = useCallback((e: ChangeEvent<HTMLInputElement>) => {
         const params = new URLSearchParams(searchParams.toString());
         params.set('search', e.target.value);
-        router.push(`?${params.toString()}`);
+        if(!param?.type) {
+            router.push(`/shop?${params.toString()}`);
+        } else {
+            router.push(`?${params.toString()}`);
+        }
+        
     }, [router, searchParams]);
 
     return <Fragment>
@@ -54,9 +61,9 @@ export const Header: FC = () => {
                 </div>
                 <nav className="relative">
                     <NavLink href={'/cart'}>
-                        {cart?.length > 0 &&
+                        {quantity > 0 &&
                             <div className="absolute left-6 flex justify-center items-center text-sm h-[20px] w-[20px] bg-red-700 rounded-[50%] text-stone-100">
-                                {cart?.length}
+                                {quantity}
                             </div>
                         }
                         <Button variant={'link'} Icon={ShoppingCartIcon}>

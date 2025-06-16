@@ -2,28 +2,42 @@ const localStorageName = 'cart'
 
 export type CartlineStoreType = { documentId: string, id: string, quantity: number }
 
+export type CartSectionType = 'bargains' | 'products'
+
+const types: Array<CartSectionType> = ['bargains', 'products']
+
+export type CartLocalStorageType<P = undefined, B = undefined> = { products?: Array<P extends undefined ? CartlineStoreType : P>, bargains?: Array<B extends undefined ? CartlineStoreType : B> }
+
 type UseCartLocalStorage = {
-    addProduct: (id: string) => void
+    addProduct: (id: string, type?: CartSectionType) => void
     getProductsIds: () => Array<string>
-    getCartlines: () => Array<CartlineStoreType>
-    changeQuantity: (id: string, quantity: number) => void
+    getBargainsIds: () => Array<string>
+    getCartlines: () => CartLocalStorageType
+    changeQuantity: (id: string, quantity: number, type?: 'bargains' | 'products') => void
     removeLine: (id: string) => void
     clearCart: () => void
 }
 
-export function useCartLocalStorage(): UseCartLocalStorage {
-    const addProduct = (id: string) => {
-        const products = getCartlines()
+function idFormation(numer: string, type: string) {
+    return type + '-' + numer
+}
 
-        if (!products?.length) {
-            setCart([{ documentId: '0', id, quantity: 1 }])
+export function useCartLocalStorage(): UseCartLocalStorage {
+
+    const addProduct: UseCartLocalStorage['addProduct'] = (id, type) => {
+        const typeOrDefault = type ?? 'products'
+        const cart = getCartlines()
+        const section = cart?.[typeOrDefault] ?? []
+
+        if (!cart) {
+            setCart({ [typeOrDefault]: [{ documentId: idFormation('0', typeOrDefault), id, quantity: 1 }] })
             return
         }
 
-        setCart(products.concat({ documentId: products?.length?.toString(), id, quantity: 1 }))
+        setCart({ ...cart, [typeOrDefault]: section?.concat({ documentId: idFormation(section?.length?.toString(), typeOrDefault), id, quantity: 1 }) })
     }
 
-    const setCart = (cart: Array<CartlineStoreType>) => {
+    const setCart = (cart: CartLocalStorageType) => {
         localStorage.setItem(localStorageName, JSON.stringify(cart))
     }
 
@@ -37,38 +51,61 @@ export function useCartLocalStorage(): UseCartLocalStorage {
         return JSON.parse(cartString)
     }
 
+    const getBargainsIds: UseCartLocalStorage['getBargainsIds'] = () => {
+        const lines = getCartlines()
+
+        return lines?.bargains?.map(it => it?.id) ?? []
+    }
+
     const getProductsIds: UseCartLocalStorage['getProductsIds'] = () => {
         const lines = getCartlines()
 
-        return lines?.map(it => it?.id)
+        return lines?.products?.map(it => it?.id) ?? []
     }
 
     const changeQuantity: UseCartLocalStorage['changeQuantity'] = (id, quantity) => {
         const lines = getCartlines()
 
-        const changed = lines?.map(it => it?.documentId === id ? ({
-            ...it,
-            quantity
-        }) : it)
+        const cart: Array<CartLocalStorageType> = types?.map(type => {
+            return {
+                [type]: lines?.[type]?.map(it => it?.documentId === id ? ({
+                    ...it,
+                    quantity
+                }) : it)
+            }
+        })
 
-        setCart(changed)
+        const cartParsed = cartTypesParses(cart)
+        setCart(cartParsed)
     }
 
     const removeLine: UseCartLocalStorage['removeLine'] = (id) => {
         const lines = getCartlines()
 
-        const changed = lines?.filter(it => it?.documentId !== id)
+        const cart: Array<CartLocalStorageType> = types?.map(type => {
+            return {
+                [type]: lines?.[type]?.filter(it => it?.documentId !== id)
+            }
+        })
 
-        setCart(changed)
+        const cartParsed = cartTypesParses(cart)
+        setCart(cartParsed)
     }
 
     const clearCart = () => {
         localStorage.removeItem(localStorageName)
     }
 
+    const cartTypesParses = (cart: Array<CartLocalStorageType>): CartLocalStorageType => {
+        return cart.reduce((acc, item) => {
+            return { ...acc, ...item };
+        }, {})
+    }
+
     return {
         addProduct,
         getProductsIds,
+        getBargainsIds,
         getCartlines,
         changeQuantity,
         removeLine,

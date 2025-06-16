@@ -434,6 +434,41 @@ export interface ApiBargainBargain extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiCartBargainCartBargain extends Struct.CollectionTypeSchema {
+  collectionName: 'cart_bargains';
+  info: {
+    description: '';
+    displayName: 'CartBargain';
+    pluralName: 'cart-bargains';
+    singularName: 'cart-bargain';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    bargain: Schema.Attribute.Relation<'oneToOne', 'api::bargain.bargain'>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::cart-bargain.cart-bargain'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    qantity: Schema.Attribute.Integer;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    user: Schema.Attribute.Relation<
+      'manyToOne',
+      'plugin::users-permissions.user'
+    >;
+    uuid: Schema.Attribute.UID;
+  };
+}
+
 export interface ApiCartlineCartline extends Struct.CollectionTypeSchema {
   collectionName: 'cartlines';
   info: {
@@ -1168,6 +1203,10 @@ export interface PluginUsersPermissionsUser
   };
   attributes: {
     blocked: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    cart_bargains: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::cart-bargain.cart-bargain'
+    >;
     cartlines: Schema.Attribute.Relation<'oneToMany', 'api::cartline.cartline'>;
     confirmationToken: Schema.Attribute.String & Schema.Attribute.Private;
     confirmed: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
@@ -1221,6 +1260,7 @@ declare module '@strapi/strapi' {
       'admin::user': AdminUser;
       'api::about.about': ApiAboutAbout;
       'api::bargain.bargain': ApiBargainBargain;
+      'api::cart-bargain.cart-bargain': ApiCartBargainCartBargain;
       'api::cartline.cartline': ApiCartlineCartline;
       'api::category.category': ApiCategoryCategory;
       'api::contact-request.contact-request': ApiContactRequestContactRequest;

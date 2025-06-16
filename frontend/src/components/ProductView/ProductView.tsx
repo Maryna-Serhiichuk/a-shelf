@@ -6,7 +6,7 @@ import { Button } from "@/components/Button";
 import { Img } from "@/components/Img";
 import { Markdown } from "@/components/Markdown";
 import { useAddDesire } from "@/hooks/useAddDesire";
-import { ActiveIngredients } from "../ActiveIngredients";
+import { ActiveIngredients } from "@/components/ActiveIngredients";
 import classNames from "classnames";
 
 export const ProductView: FC<Product> = ({ documentId, name, subname, description, ingredients, price, type, illustration, discount, volume, isCart, composition, using, purpose, isOutOfStock }) => {

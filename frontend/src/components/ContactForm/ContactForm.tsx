@@ -6,7 +6,7 @@ import { Entry } from "@/components/Entry";
 import { FormLabel } from "@/components/FormLabel";
 import { pageApi } from "@/api/page";
 import { checkRequireFields } from "@/utils/checkRequireFields";
-import { Result, ResultType } from "../Result";
+import { Result, ResultType } from "@/components/Result";
 
 export const ContactForm: FC = () => {
     const [message, setMessage] = useState<Maybe<ResultType>>()
@@ -54,7 +54,7 @@ export const ContactForm: FC = () => {
                 </Button>
             </div>
             : <div className="flex flex-col gap-10">
-                <div className="text-5xl font-bold">
+                <div className="text-5xl font-bold dark:text-stone-100">
                     We're here to help
                 </div>
                 <Formik
@@ -65,7 +65,7 @@ export const ContactForm: FC = () => {
                     {({ errors, handleSubmit }) => (
                         <Form onSubmit={handleSubmit}>
                             <div className="flex flex-col gap-14">
-                                <div className="flex flex-col gap-6 lg:gap-10">
+                                <div className="flex flex-col gap-6 lg:gap-10 dark:text-stone-100">
                                     <FormLabel label="Your Name">
                                         <Entry type="text" name="name" placeholder="Type Name" errorAlert />
                                     </FormLabel>

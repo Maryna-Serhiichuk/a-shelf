@@ -70,6 +70,12 @@
       "relation": "oneToMany",
       "target": "api::cartline.cartline",
       "mappedBy": "user"
+    },
+    "cart_bargains": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::cart-bargain.cart-bargain",
+      "mappedBy": "user"
     }
   }
 }

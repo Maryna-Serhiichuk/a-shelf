@@ -5,6 +5,7 @@ import { useProviderContext } from "@/components/App/ContextProvider/ContextProv
 type UseCartlineProps = {
     changeCartline: (props: { id: string, quantity: number }) => void
     removeCartline: (id: string) => void
+    removeCartBargain: (id: string) => void
 }
 
 export function useCartlines(): UseCartlineProps {
@@ -13,9 +14,12 @@ export function useCartlines(): UseCartlineProps {
     const { useMeQuery } = accountApi
     const { data: meData } = useMeQuery(undefined)
 
-    const { useDeleteCartlineMutation, useUpdateCartlineMutation } = cartApi
+    const { useDeleteCartlineMutation, useUpdateCartlineMutation, useDeleteCartBargainMutation, useUpdateCartBargainMutation } = cartApi
     const [updateCartline, { }] = useUpdateCartlineMutation()
-    const [deleteCartline, { isLoading, isError }] = useDeleteCartlineMutation()
+    const [deleteCartline, { }] = useDeleteCartlineMutation()
+
+    const [deleteCartBargain, { }] = useDeleteCartBargainMutation()
+    const [updateCartBargain, { isLoading, isError }] = useUpdateCartBargainMutation()
 
     const removeCartline: UseCartlineProps['removeCartline'] = (id) => {
         if(meData?.id) {
@@ -35,8 +39,18 @@ export function useCartlines(): UseCartlineProps {
         updLocalStorageCartline(id, quantity)
     }
 
+    const removeCartBargain: UseCartlineProps['removeCartBargain'] = (id) => {
+        if(meData?.id) {
+            deleteCartBargain({ id })
+            return
+        }
+
+        removeLocalStorageCartline(id)
+    }
+
     return {
         changeCartline,
-        removeCartline
+        removeCartline,
+        removeCartBargain
     }
 }

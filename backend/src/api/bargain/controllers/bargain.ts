@@ -36,5 +36,19 @@ export default factories.createCoreController('api::bargain.bargain', ({ strapi 
         }
 
         return { ...bargains, data: response }
+    },
+    async bargainsByIds(ctx) {
+        const { ids, populate } = ctx.request.body
+
+        const bargains = await strapi.db.query('api::bargain.bargain').findMany({
+            where: {
+                documentId: { $in: ids },
+                publishedAt: { $notNull: true }
+            },
+            populate
+        })
+
+
+        return { data: bargains }
     }
 }));

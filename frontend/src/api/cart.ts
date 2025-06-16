@@ -4,7 +4,7 @@ const enhanceApi = baseApi.enhanceEndpoints({})
 
 export const cartApi = enhanceApi.injectEndpoints({
     endpoints: (builder) => ({
-        createCartlines: builder.mutation<Cartline, { data: Array<{ id: string, quantity: number }> }>({
+        createCartlines: builder.mutation<Cartline, { data: { products?: Array<{ id: string, quantity: number }>, bargains?: Array<{ id: string, quantity: number }> } }>({
           query: ({ data }) => ({
             url: `create-cartlines`,
             method: 'POST',
@@ -34,6 +34,30 @@ export const cartApi = enhanceApi.injectEndpoints({
                 method: 'DELETE'
             }),
             invalidatesTags: ['Cartline'],
+        }),
+
+        createCartBargain: builder.mutation<CartBargain, { id: string }>({
+          query: ({ id }) => ({
+            url: `cart-bargains`,
+            method: 'POST',
+            body: { id }
+          }),
+          invalidatesTags: ['CartBargain'],
+        }),
+        updateCartBargain: builder.mutation<CartBargain, CartlineInput>({
+            query: ({ id, ...data }) => ({
+                url: `cart-bargains/${id}`,
+                method: 'PUT',
+                body: { data }
+            }),
+            invalidatesTags: ['CartBargain'],
+        }),
+        deleteCartBargain: builder.mutation<CartBargain, { id: string }>({
+            query: ({ id }) => ({
+                url: `cart-bargains/${id}`,
+                method: 'DELETE'
+            }),
+            invalidatesTags: ['CartBargain'],
         }),
     })
 })

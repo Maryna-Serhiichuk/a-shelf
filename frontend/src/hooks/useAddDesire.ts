@@ -4,6 +4,7 @@ import { useProviderContext } from "@/components/App/ContextProvider/ContextProv
 
 type UseAddDesire = {
   addDesire: (id: string) => void
+  addBargain: (id: string) => void
 }
 
 export function useAddDesire(): UseAddDesire {
@@ -11,19 +12,30 @@ export function useAddDesire(): UseAddDesire {
   const { useMeQuery } = accountApi
   const { data } = useMeQuery(undefined)
 
-  const { useCreateCartlineMutation } = cartApi
-  const [createCartline, {}] = useCreateCartlineMutation();
+  const { useCreateCartlineMutation, useCreateCartBargainMutation } = cartApi
+  const [createCartline, { }] = useCreateCartlineMutation();
+  const [createCartBargain, { }] = useCreateCartBargainMutation()
 
   const addDesire: UseAddDesire['addDesire'] = (id) => {
-    if(data?.id) {
+    if (data?.id) {
       createCartline({ id });
       return
     }
 
-    addToLocalStorageCart(id)
+    addToLocalStorageCart(id, 'products')
+  }
+
+  const addBargain: UseAddDesire['addBargain'] = (id) => {
+    if (data?.id) {
+      createCartBargain({ id });
+      return
+    }
+
+    addToLocalStorageCart(id, 'bargains')
   }
 
   return {
-    addDesire
+    addDesire,
+    addBargain
   }
 }

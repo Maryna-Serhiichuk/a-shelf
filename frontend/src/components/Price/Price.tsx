@@ -4,10 +4,11 @@ import { FC } from "react";
 import dayjs from "dayjs";
 import relativeTime from 'dayjs/plugin/relativeTime';
 import classNames from "classnames";
+import { getPriceWithDiscount } from "@/utils/getPriceWithDiscount";
 dayjs.extend(relativeTime);
 
-export const Price: FC<{price?: number, discount?: Discount, mini?: boolean}> = ({ price = 0, discount, mini = false }) => {
-    if(!discount || dayjs().isAfter(dayjs(discount?.endDate, 'YYYY-MM-DD'))) return '$' + price.toFixed(2)
+export const Price: FC<{ price?: number, discount?: Discount, mini?: boolean, short?: boolean }> = ({ price = 0, discount, mini = false, short = false }) => {
+    if (!discount || dayjs().isAfter(dayjs(discount?.endDate, 'YYYY-MM-DD'))) return '$' + price.toFixed(2)
 
     return <div className={classNames("flex items-center dark:text-stone-100", {
         "gap-0": mini,
@@ -15,28 +16,29 @@ export const Price: FC<{price?: number, discount?: Discount, mini?: boolean}> = 
     })}>
         <div className="flex gap-x-[inherit] flex-col-reverse">
             <div>
-                ${(discount?.price ? discount?.price : (price * ((100 - discount?.interest) / 100))).toFixed(2)}
+                ${getPriceWithDiscount({ price, discount }).toFixed(2)}
             </div>
-            <div className={classNames("font-light flex justify-center line-through text-stone-500 dark:text-red-400", {
-                "text-sm": mini
-            })}>
-                ${price.toFixed(2)}
-            </div>
+            {!short &&
+                <div className={classNames("font-light flex justify-center line-through text-stone-500 dark:text-red-400", {
+                    "text-sm": mini
+                })}>
+                    ${price.toFixed(2)}
+                </div>
+            }
         </div>
         {!mini &&
             <div className="flex gap-[inherit] flex-wrap">
-                {discount?.interest &&
+                {discount?.interest && !short &&
                     <div className="bg-stone-800 dark:bg-red-800 text-lg text-stone-50 px-3 py-1 whitespace-nowrap">
                         Save {discount?.interest}%
                     </div>
                 }
-                {discount?.endDate &&
+                {discount?.endDate && !short &&
                     <div className="bg-gray-100 px-3 py-1 text-lg font-semibold text-center border border-stone-300 text-stone-600 dark:bg-stone-600 dark:text-stone-50 whitespace-nowrap">
                         <span>Only {dayjs(discount?.endDate).fromNow()}</span>
                     </div>
                 }
             </div>
         }
-        
     </div>
 }
