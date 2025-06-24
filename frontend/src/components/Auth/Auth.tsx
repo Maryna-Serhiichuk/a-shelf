@@ -29,10 +29,10 @@ export const Auth: FC = () => {
     return <Fragment>
         {isAuth
             ? <Button variant={'link'} Icon={ArrowLeftStartOnRectangleIcon} onClick={logout}>
-                <span className="hidden md:block">Log Out</span>
+                <span className="group-[.burger]:block hidden md:block">Log Out</span>
             </Button>
             : <Button variant={'link'} Icon={ArrowLeftEndOnRectangleIcon} onClick={() => setOpen(true)}>
-                <span className="hidden md:block">Log In</span>
+                <span className="group-[.burger]:block hidden md:block">Log In</span>
             </Button>
         }
         <Modal open={open} onClose={() => setOpen(false)}>
