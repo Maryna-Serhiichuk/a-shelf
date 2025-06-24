@@ -10,6 +10,7 @@
     "svg-gen": "yarn svgr --icon --typescript --out-dir src/components/Icons src/icons"
   },
   "dependencies": {
+    "@headlessui/react": "^2.2.4",
     "@heroicons/react": "^2.2.0",
     "@reduxjs/toolkit": "^2.6.1",
     "classnames": "^2.5.1",

@@ -1,16 +1,15 @@
 'use client'
 
 import { ChangeEvent, FC, Fragment, useCallback, useState } from "react";
-import { ShoppingCartIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline'
+import { MagnifyingGlassIcon } from '@heroicons/react/24/outline'
 import { Search } from "@/components/Search";
 import { Button } from "@/components/Button";
 import { Logo } from "@/components/Logo";
 import { Burger } from "./components/Burger";
 import classNames from "classnames";
-import { NavLink } from "@/components/NavLink";
-import { Auth } from "@/components/Auth";
-import { useProviderContext } from "@/components/App/ContextProvider/ContextProvider";
 import { useRouter, useSearchParams, useParams } from 'next/navigation';
+import { HeadNav } from "@/components/Header/components/HeadNav";
+import { PersonNav } from "./components/PersonNav";
 
 export const Header: FC = () => {
     const router = useRouter();
@@ -18,40 +17,24 @@ export const Header: FC = () => {
     const searchParams = useSearchParams();
 
     const [isOpen, setOpen] = useState(false)
-    const { cart } = useProviderContext()
-    const quantity = (cart?.products?.length ?? 0) + (cart?.bargains?.length ?? 0)
 
     const onSearch = useCallback((e: ChangeEvent<HTMLInputElement>) => {
         const params = new URLSearchParams(searchParams.toString());
         params.set('search', e.target.value);
-        if(!param?.type) {
+        if (!param?.type) {
             router.push(`/shop?${params.toString()}`);
         } else {
             router.push(`?${params.toString()}`);
         }
-        
+
     }, [router, searchParams]);
 
     return <Fragment>
         <header className="w-full flex justify-between px-4 py-2">
             <Logo />
-            <nav className="hidden lg:flex items-center">
-                <NavLink href={'/'}>
-                    <Button variant={'link'}>
-                        Shop
-                    </Button>
-                </NavLink>
-                <NavLink href={'/about'}>
-                    <Button variant={'link'}>
-                        About
-                    </Button>
-                </NavLink>
-                <NavLink href={'/contact'}>
-                    <Button variant={'link'}>
-                        Contact Us
-                    </Button>
-                </NavLink>
-            </nav>
+            <div className="hidden lg:flex">
+                <HeadNav />
+            </div>
             <div className="items-center hidden sm:flex">
                 <Search onChange={onSearch} />
             </div>
@@ -59,19 +42,7 @@ export const Header: FC = () => {
                 <div className="items-center flex sm:hidden">
                     <Button onClick={() => setOpen(!isOpen)} variant={'link'} Icon={MagnifyingGlassIcon} />
                 </div>
-                <nav className="relative">
-                    <NavLink href={'/cart'}>
-                        {quantity > 0 &&
-                            <div className="absolute left-6 flex justify-center items-center text-sm h-[20px] w-[20px] bg-red-700 rounded-[50%] text-stone-100">
-                                {quantity}
-                            </div>
-                        }
-                        <Button variant={'link'} Icon={ShoppingCartIcon}>
-                            <span className="hidden lg:block">Cart</span>
-                        </Button>
-                    </NavLink>
-                </nav>
-                <Auth />
+                <PersonNav />
                 <div className="block lg:hidden">
                     <Burger />
                 </div>
