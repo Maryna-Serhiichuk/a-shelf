@@ -45,7 +45,7 @@ export const Hero: FC<Hero> = ({ heading, main, button }) => {
                     </div>
                 </div>
             </div>
-            <div className="absolute top-[180px] left-13/40 ">
+            <div className="absolute top-[180px] left-13/40">
                 <Decor/>
             </div>
         </section>
