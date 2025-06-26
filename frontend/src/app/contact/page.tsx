@@ -1,5 +1,3 @@
-'use server'
-
 import { Container } from "@/components/Container"
 import { ContactForm } from "@/components/ContactForm";
 import { NavLink } from "@/components/NavLink";

@@ -1,5 +1,3 @@
-'use server'
-
 import { pageApi } from "@/api/page"
 import { AboutUs } from "@/components/AboutUs"
 import { Container } from "@/components/Container"
