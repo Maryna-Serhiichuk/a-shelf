@@ -2,7 +2,6 @@ import { FC } from "react";
 import { Ingredients } from "@/components/Ingredients";
 
 export const ActiveIngredients: FC<{ items?: Array<Ingredient> }> = ({ items }) => {
-
     if(!(items && items?.length > 0)) return null
 
     return <div className="flex flex-col gap-2">
