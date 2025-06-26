@@ -6,9 +6,9 @@ import NextTopLoader from 'nextjs-toploader';
 export const Progress: FC = () => {
     return <NextTopLoader
         color="linear-gradient(to right, rgb(6, 182, 212), rgb(45, 212, 191), rgb(15, 118, 110))"
-        initialPosition={1}
+        initialPosition={0.08}
         crawlSpeed={200}
-        height={4}
+        height={3}
         crawl={true}
         showSpinner={true}
         easing="ease"
