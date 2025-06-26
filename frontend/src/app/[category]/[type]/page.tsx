@@ -1,13 +1,12 @@
-'use client'
-
 import { Bargain } from "@/components/Bargain";
 import { Categories } from "@/components/Categories";
 import { Container } from "@/components/Container";
 import { Products } from "@/components/Products";
-import { use } from "react";
 
-export default function Page({ params }: { params: Promise<{ type: string }> }) {
-    const { type } = use(params);
+export const dynamic = 'force-dynamic';
+
+export default async function Page({ params }: { params: { type: string } }) {
+    const { type } = await params;
 
     return (
         <Container>

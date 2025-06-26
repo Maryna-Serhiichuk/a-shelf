@@ -1,12 +1,11 @@
-'use client'
+'use server'
 
-import { FC } from "react";
 import { Category } from "./components/Category";
 import { productApi } from "@/api/product";
+import { fetchFromApi } from "@/utils/fetchFromApi"
 
-export const Categories: FC = () => {
-    const { useCategoriesQuery } = productApi
-    const { data, isLoading, isError } = useCategoriesQuery(undefined)
+export default async function Categories() {
+    const data = await fetchFromApi<Array<Category>>(productApi.endpoints.categories)
       
     return <nav className="w-full flex flex-col gap-3">
         {data?.data?.map(category => (

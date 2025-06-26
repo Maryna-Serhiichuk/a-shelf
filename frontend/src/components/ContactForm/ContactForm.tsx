@@ -1,3 +1,5 @@
+'use client'
+
 import { FC, Fragment, useState } from "react";
 import { Formik, Form, FormikConfig } from 'formik';
 import debounce from 'lodash.debounce';
