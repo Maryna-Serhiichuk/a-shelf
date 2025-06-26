@@ -1,4 +1,3 @@
-import { getAttendings } from "@/utils/getAttendings";
 import { baseApi } from ".";
 
 const enhanceApi = baseApi.enhanceEndpoints({})

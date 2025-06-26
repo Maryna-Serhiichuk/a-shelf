@@ -1,4 +1,4 @@
-import { SupportMenu } from "./SupportMenu";
+import SupportMenu from "./SupportMenu";
 
 export {
     SupportMenu

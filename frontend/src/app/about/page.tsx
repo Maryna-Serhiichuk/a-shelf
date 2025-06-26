@@ -1,4 +1,4 @@
-'use client'
+'use server'
 
 import { pageApi } from "@/api/page"
 import { AboutUs } from "@/components/AboutUs"
@@ -9,10 +9,12 @@ import { Hero } from "@/components/Hero"
 import { OurValues } from "@/components/OurValues"
 import { WhyChooseUs } from "@/components/WhyChooseUs"
 import { Fragment } from "react"
+import { fetchFromApi } from "@/utils/fetchFromApi"
 
-export default function Page() {
-    const { useAboutQuery } = pageApi
-    const { data } = useAboutQuery(undefined)
+export const dynamic = 'force-dynamic';
+
+export default async function Page() {
+    const data = await fetchFromApi<AboutPage>(pageApi.endpoints.about)
 
     return <Fragment>
         <Container full>

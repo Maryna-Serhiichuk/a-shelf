@@ -1,11 +1,10 @@
-'use client'
-
 import { LayoutCategories } from "@/components/LayoutCategories";
 import { Types } from "@/components/Types";
-import { use } from "react";
 
-export default function Page({ params }: { params: Promise<{ category: string }> }) {
-    const { category } = use(params);
+export const dynamic = 'force-dynamic';
+
+export default async function Page({ params }: { params: { category: string } }) {
+    const { category } = await params;
 
     return <LayoutCategories>
         <Types category={category}/>

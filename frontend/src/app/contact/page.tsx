@@ -1,4 +1,4 @@
-'use client'
+'use server'
 
 import { Container } from "@/components/Container"
 import { ContactForm } from "@/components/ContactForm";
@@ -9,10 +9,12 @@ import { ContactItem } from "@/components/ContactItem";
 import { pageApi } from "@/api/page";
 import { Img } from "@/components/Img";
 import classNames from "classnames";
+import { fetchFromApi } from "@/utils/fetchFromApi"
 
-export default function Page() {
-    const { useContactQuery } = pageApi
-    const { data } = useContactQuery(undefined)
+export const dynamic = 'force-dynamic';
+
+export default async function Page() {
+    const data = await fetchFromApi<ContactPage>(pageApi.endpoints.contact)
 
     const shadow = "shadow-[0_0_30px_rgba(0,0,0,.2)]"
     const card = ["bg-stone-100 dark:bg-stone-900 p-6 lg:p-10", shadow].join(' ')

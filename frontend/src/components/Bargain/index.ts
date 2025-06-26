@@ -1,4 +1,4 @@
-import { Bargain } from "./Bargain";
+import Bargain from "./Bargain";
 
 export {
     Bargain
