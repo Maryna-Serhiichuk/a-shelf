@@ -12,7 +12,7 @@ export const PersonNav: FC = () => {
     return <Fragment>
         <nav className="relative">
             <NavLink href={'/cart'}>
-                {quantity && quantity > 0 &&
+                {(!!quantity && quantity > 0) &&
                     <div className="absolute left-6 flex justify-center items-center text-sm h-[20px] w-[20px] bg-red-700 rounded-[50%] text-stone-100">
                         {quantity}
                     </div>
