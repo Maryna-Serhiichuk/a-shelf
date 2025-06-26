@@ -9,7 +9,7 @@ import { HeadNav } from "./HeadNav";
 import { Drawer } from "@/components/Drawer";
 
 export const Burger: FC<ButtonHTMLAttributes<HTMLButtonElement>> = (props) => {
-    const [open, setOpen] = useState(true)
+    const [open, setOpen] = useState(false)
 
     const onClose = () => {
         setOpen(false)

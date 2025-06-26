@@ -1,10 +1,11 @@
-import { FC } from "react";
+'use server'
+
 import { pageApi } from "@/api/page";
 import { NavLink } from "@/components/NavLink";
+import { fetchFromApi } from "@/utils/fetchFromApi"
 
-export const SupportMenu: FC = () => {
-    const { useSupportQuery } = pageApi
-    const { data } = useSupportQuery(undefined)
+export default async function SupportMenu () {
+    const data = await fetchFromApi<Array<SupportPage>>(pageApi.endpoints.support)
 
     return <div className="flex flex-col gap-3 dark:text-stone-200">
         <div className="text-2xl font-medium">

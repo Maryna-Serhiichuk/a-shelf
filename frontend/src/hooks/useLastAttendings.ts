@@ -1,3 +1,5 @@
+'use client'
+
 import { useEffect, useState } from "react";
 import { productApi } from "@/api/product";
 import { getAttendings, lastAttendingsName } from "@/utils/getAttendings";

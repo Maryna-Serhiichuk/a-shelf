@@ -1,29 +1,20 @@
-'use client'
+'use server'
 
-import { FC } from "react";
-import { useSearchParams } from 'next/navigation';
-import { Loader } from "@/components/Loader";
-import { ProductPreview } from "@/components/ProductPreview";
 import { productApi } from "@/api/product";
-import { useProviderContext } from "@/components/App/ContextProvider/ContextProvider";
+import { ProductsList } from "./components/ProductsList";
+import { fetchFromApi } from "@/utils/fetchFromApi"
 
-interface ProductsArgs {
+interface ProductsArgs { 
     type: string
+    search?: string
 }
 
-export const Products: FC<ProductsArgs> = ({ type }) => {
-    const searchParams = useSearchParams();
+export default async function Products ({ type, search: searchParams }: ProductsArgs) {
+    const search = searchParams ?? undefined
 
-    const { cart } = useProviderContext()
-
-    const { useProductsQuery } = productApi
-    const { data, isLoading, isError } = useProductsQuery({ type, search: searchParams.get('search') ?? undefined })
-
-    if (isLoading) return <Loader />
+    const data = await fetchFromApi<Array<Product>>(productApi.endpoints.products, { type, search })
 
     return <div className="grid grid-cols-4 gap-5">
-        {data?.data?.map(product => (
-            <ProductPreview key={product?.documentId} {...product} isCart={cart?.products?.map(it => it?.product?.documentId)?.includes(product?.documentId)} className="col-span-2 lg:col-span-1" />
-        ))}
+        <ProductsList items={data?.data} />
     </div>
 }
