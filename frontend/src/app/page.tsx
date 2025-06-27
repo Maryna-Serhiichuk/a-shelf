@@ -1,5 +1,3 @@
-'use client'
-
 import { LayoutCategories } from "@/components/LayoutCategories";
 import { Types } from "@/components/Types";
 

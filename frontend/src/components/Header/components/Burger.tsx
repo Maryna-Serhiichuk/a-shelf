@@ -5,11 +5,20 @@ import { Button } from "@/components/Button";
 import { Logo } from "@/components/Logo";
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { ButtonHTMLAttributes, FC, Fragment, useState } from "react";
+
 import { HeadNav } from "./HeadNav";
 import { Drawer } from "@/components/Drawer";
 
 export const Burger: FC<ButtonHTMLAttributes<HTMLButtonElement>> = (props) => {
     const [open, setOpen] = useState(false)
+    // const router = useRouter();
+
+    // useEffect(() => {
+    //     console.log(router.asPath)
+    //     if (open) {
+    //         setOpen(false);
+    //     }
+    // }, [router.asPath]);
 
     const onClose = () => {
         setOpen(false)

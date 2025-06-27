@@ -1,5 +1,3 @@
-'use client'
-
 import { LayoutCategories } from "@/components/LayoutCategories";
 
 export default function NotFound() {
