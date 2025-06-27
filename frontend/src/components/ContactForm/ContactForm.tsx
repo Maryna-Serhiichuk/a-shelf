@@ -55,8 +55,8 @@ export const ContactForm: FC = () => {
                     Go to Shop
                 </Button>
             </div>
-            : <div className="flex flex-col gap-10">
-                <div className="text-5xl font-bold dark:text-stone-100">
+            : <div className="flex flex-col gap-6 sm:gap-10">
+                <div className="font-heading text-3xl sm:text-5xl font-bold dark:text-stone-100">
                     We're here to help
                 </div>
                 <Formik
@@ -66,8 +66,8 @@ export const ContactForm: FC = () => {
                 >
                     {({ errors, handleSubmit }) => (
                         <Form onSubmit={handleSubmit}>
-                            <div className="flex flex-col gap-14">
-                                <div className="flex flex-col gap-6 lg:gap-10 dark:text-stone-100">
+                            <div className="flex flex-col gap-8 sm:gap-14">
+                                <div className="flex flex-col gap-4 sm:gap-6 lg:gap-10 dark:text-stone-100">
                                     <FormLabel label="Your Name">
                                         <Entry type="text" name="name" placeholder="Type Name" errorAlert />
                                     </FormLabel>

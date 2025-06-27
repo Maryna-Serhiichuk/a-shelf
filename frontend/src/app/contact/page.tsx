@@ -24,11 +24,11 @@ export default async function Page() {
         </div>
         <div className="relative z-5">
             <Container>
-                <div className="relative z-5 grid grid-cols-9 gap-x-6 lg:gap-x-12 gap-y-6 md:gap-y-20 pt-5 pb-30 items-center">
+                <div className="relative z-5 grid grid-cols-9 gap-x-6 lg:gap-x-12 gap-y-6 md:gap-y-20 pt-5 pb-10 sm:pb-30 items-center">
                     <div className="col-span-9 md:col-span-4 flex flex-col gap-6 lg:gap-10">
                         <div className="flex flex-col gap-4">
-                            {data?.data?.title && <div className="text-5xl font-bold dark:text-stone-100">{data?.data?.title}</div>}
-                            {data?.data?.subtitle && <div className="text-xl dark:text-stone-200">{data?.data?.subtitle}</div>}
+                            {data?.data?.title && <div className="font-heading text-5xl font-bold dark:text-stone-100">{data?.data?.title}</div>}
+                            {data?.data?.subtitle && <div className="sm:text-xl dark:text-stone-200">{data?.data?.subtitle}</div>}
                         </div>
                         {data?.data?.illustration?.url &&
                             <div className="col-span-1">

@@ -13,7 +13,7 @@ export default async function Bargain({ id, type }: BargainArgs) {
   const data = await fetchFromApi<Array<Bargain>>(productApi.endpoints.bargains, { type, id })
 
   return (
-    <div className="mt-30">
+    <div className="pb-10 sm:pb-0 mt-10 sm:mt-30">
       <BargainSlider items={data?.data} />
     </div>
   )

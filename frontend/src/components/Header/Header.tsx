@@ -30,7 +30,7 @@ export const Header: FC = () => {
     }, [router, searchParams]);
 
     return <Fragment>
-        <header className="w-full flex justify-between px-4 py-2">
+        <header className="w-full flex justify-between px-2 sm:px-4 py-2">
             <Logo />
             <div className="hidden lg:flex">
                 <HeadNav />

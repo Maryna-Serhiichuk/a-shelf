@@ -13,12 +13,12 @@ export const BargainItem: FC<Bargain> = ({ documentId, products, label, price })
 
     return <div>
         <div className="flex flex-col md:flex-row justify-between items-center py-5 px-5 md:px-7 xl:px-15 bg-stone-100 dark:bg-stone-800">
-            <div className="grid gap-3">
-                <div className="text-2xl font-bold text-center md:text-left dark:text-stone-200">
+            <div className="grid gap-1 sm:gap-3">
+                <div className="text-xl sm:text-2xl font-bold text-center md:text-left dark:text-stone-200">
                     {label}
                 </div>
                 {products?.map(product => (
-                    <div key={product?.documentId} className="text-lg text-center md:text-left dark:text-stone-400">
+                    <div key={product?.documentId} className="text-md sm:text-lg text-center md:text-left dark:text-stone-400">
                         {product?.name}
                     </div>
                 ))}

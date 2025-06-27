@@ -14,7 +14,7 @@ export default async function Products ({ type, search: searchParams }: Products
 
     const data = await fetchFromApi<Array<Product>>(productApi.endpoints.products, { type, search })
 
-    return <div className="grid grid-cols-4 gap-5">
+    return <div className="grid grid-cols-4 gap-2 sm:gap-5">
         <ProductsList items={data?.data} />
     </div>
 }

@@ -2,15 +2,15 @@ import { FC } from "react";
 import { Container } from "@/components/Container";
 import { IconDescriptionComponent } from "@/components/IconDescriptionComponent";
 import bottle from "@/images/toner.png"
-import { IconText } from "@/components/IconText";
 import classNames from "classnames";
+import { IconDescription } from "../IconDescription";
 
 export const OurValues: FC<IconDescriptionComponent> = ({ heading, items }) => {
     const cardWidth = "w-[250px] xl:w-[300px] 2xl:w-[400px]"
-    return <section className="bg-[linear-gradient(transparent,_#AFCBC9)] dark:bg-[linear-gradient(transparent,_rgba(77,103,103,1))] pt-40">
+    return <section className="bg-[linear-gradient(transparent,_#AFCBC9)] dark:bg-[linear-gradient(transparent,_rgba(77,103,103,1))] pt-10 sm:pt-40">
         <Container>
             {heading &&
-                <div className="text-6xl font-semibold flex justify-center dark:text-stone-100">
+                <div className="text-6xl font-semibold flex justify-center dark:text-stone-100 font-heading">
                     {heading}
                 </div>
             }
@@ -21,10 +21,10 @@ export const OurValues: FC<IconDescriptionComponent> = ({ heading, items }) => {
                 <div>
                     <div className="flex justify-between transform-[translateY(100px)]">
                         <div className={cardWidth}>
-                            {items?.[0] && <IconText {...items[0]} />}
+                            {items?.[0] && <IconDescription {...items[0]} withIllustration/>}
                         </div>
                         <div className={classNames("transform-[translateY(50px)]", cardWidth)}>
-                            {items?.[1] && <IconText {...items[1]} />}
+                            {items?.[1] && <IconDescription {...items[1]} withIllustration/>}
                         </div>
                     </div>
                     <div className="relative flex justify-center items-center">
@@ -35,10 +35,10 @@ export const OurValues: FC<IconDescriptionComponent> = ({ heading, items }) => {
                     </div>
                     <div className="flex justify-between transform-[translateY(-100px)]">
                         <div className={classNames("transform-[translateY(-50px)]", cardWidth)}>
-                            {items?.[2] && <IconText {...items[2]} />}
+                            {items?.[2] && <IconDescription {...items[2]} withIllustration/>}
                         </div>
                         <div className={cardWidth}>
-                            {items?.[3] && <IconText {...items[3]} />}
+                            {items?.[3] && <IconDescription {...items[3]} withIllustration/>}
                         </div>
                     </div>
                 </div>

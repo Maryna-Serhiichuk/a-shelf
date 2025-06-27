@@ -8,6 +8,7 @@ import { Markdown } from "@/components/Markdown";
 import { useAddDesire } from "@/hooks/useAddDesire";
 import { ActiveIngredients } from "@/components/ActiveIngredients";
 import classNames from "classnames";
+import { ProductElement } from "./components/ProductElement";
 
 export const ProductView: FC<Product> = ({ documentId, name, subname, description, ingredients, price, type, illustration, discount, volume, isCart, composition, using, purpose, isOutOfStock }) => {
     const { addDesire } = useAddDesire()
@@ -21,12 +22,12 @@ export const ProductView: FC<Product> = ({ documentId, name, subname, descriptio
             <div className="grid grid-cols-6 gap-10 items-center">
                 <div className="hidden lg:flex justify-center col-span-2">
                     <div className="flex flex-col gap-4">
-                        <div className="text-4xl lg:text-5xl font-light dark:text-stone-100">
+                        <ProductElement.Name>
                             {name}
-                        </div>
-                        <div className="text-xl font-extralight dark:text-stone-400">
+                        </ProductElement.Name>
+                        <ProductElement.Volume>
                             {volume}
-                        </div>
+                        </ProductElement.Volume>
                         {!isOutOfStock &&
                             <Fragment>
                                 <div className="text-2xl font-bold">
@@ -53,25 +54,23 @@ export const ProductView: FC<Product> = ({ documentId, name, subname, descriptio
                 <div className={classNames(
                     "flex justify-center col-span-6 md:col-span-3 lg:col-span-2 h-[300px] md:h-[600px]",
                     { "contrast-50": isOutOfStock }
-                    )}>
+                )}>
                     <Img src={illustration?.url} />
                 </div>
                 <div className="hidden md:flex justify-center col-span-3 lg:col-span-2">
                     <div className="flex flex-col gap-4">
-                        <div className="block lg:hidden text-4xl lg:text-5xl font-light dark:text-stone-100">
+                        <ProductElement.Name className="block lg:hidden">
                             {name}
-                        </div>
+                        </ProductElement.Name>
                         {subname &&
-                            <div className="dark:text-stone-100 text-lg lg:text-3xl">
+                            <ProductElement.SubName>
                                 {subname}
-                            </div>
+                            </ProductElement.SubName>
                         }
-                        <div className="block lg:hidden text-xl font-extralight dark:text-stone-400">
+                        <ProductElement.Volume className="block lg:hidden">
                             {volume}
-                        </div>
-                        <div>
-                            <Markdown data={description} />
-                        </div>
+                        </ProductElement.Volume>
+                        <ProductElement.Description data={description} />
                         <div className="block lg:hidden text-2xl font-bold">
                             <Price price={price} discount={discount} />
                         </div>
@@ -87,26 +86,24 @@ export const ProductView: FC<Product> = ({ documentId, name, subname, descriptio
         </Container>
         <Container>
             <div className="flex md:hidden justify-center">
-                <div className="flex flex-col gap-4">
-                    <div className="block lg:hidden text-4xl lg:text-5xl font-light dark:text-stone-100">
+                <div className="flex flex-col gap-2 sm:gap-4">
+                    <ProductElement.Name className="block lg:hidden">
                         {name}
-                    </div>
+                    </ProductElement.Name>
                     {subname &&
-                        <div className="dark:text-stone-100 text-lg lg:text-3xl">
+                        <ProductElement.SubName>
                             {subname}
-                        </div>
+                        </ProductElement.SubName>
                     }
-                    <div className="block lg:hidden text-xl font-extralight dark:text-stone-400">
+                    <ProductElement.Volume className="block lg:hidden">
                         {volume}
-                    </div>
-                    <div>
-                        <Markdown data={description?.slice(0, 350)} />
-                    </div>
+                    </ProductElement.Volume>
+                    <ProductElement.Description data={description} />
                     <div className="block lg:hidden text-2xl font-bold">
                         <Price price={price} discount={discount} />
                     </div>
                     <ActiveIngredients items={ingredients} />
-                    <div className="block lg:hidden w-full">
+                    <div className="block lg:hidden w-full pt-3 sm:pt-0">
                         <Button className="w-full" size="large">
                             Buy Now
                         </Button>

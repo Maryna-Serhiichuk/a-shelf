@@ -13,7 +13,7 @@ export const LastAttendings: FC<LastAttendingsArgs> = ({ id }) => {
 
     return <Container>
         <SectionTitle>Recently Viewed Products</SectionTitle>
-        <div className="grid grid-cols-4 gap-5">
+        <div className="grid grid-cols-4 gap-2 sm:gap-5">
             {data?.map(product => (
                 <ProductPreview key={product?.documentId} {...product} className="col-span-2 lg:col-span-1" />
             ))}

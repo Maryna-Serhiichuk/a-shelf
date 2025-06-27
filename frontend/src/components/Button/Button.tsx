@@ -14,7 +14,7 @@ export interface ButtonArgs extends PropsWithChildren<ButtonHTMLAttributes<HTMLB
 export const Button: FC<ButtonArgs> = ({ children, variant = 'default', size = 'default', Icon, loading, ...props }) => {
 
     const buttonType: {[key in NonNullable<ButtonArgs['variant']>]: string} = {
-        link: 'text-stone-800 hover:text-stone-500 dark:text-stone-400 hover:underline px-3',
+        link: 'text-stone-800 hover:text-stone-500 dark:text-stone-400 hover:underline px-2 sm:px-3',
         text: 'text-stone-800 hover:text-stone-600 dark:text-stone-400 dark:bg-stone-600 dark:text-stone-900 px-3',
         default: 'bg-stone-800 dark:bg-stone-500 hover:bg-stone-700 dark:hover:bg-stone-600 px-7',
         outlined: 'border border-stone-300 text-stone-900 hover:border-stone-500 hover:text-stone-700 px-7'

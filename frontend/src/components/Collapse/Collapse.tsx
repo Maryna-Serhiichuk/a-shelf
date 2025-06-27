@@ -67,12 +67,12 @@ export const Collapse: FC<{ items: Array<{ label: string, description: string }>
         onChange={e => setActiveKey(e)}
         accordion items={items?.map((it, i) => ({ 
             label: <div className="flex w-full justify-between items-center">
-                <div className="font-semibold text-stone-900 dark:text-stone-200 text-3xl">{it?.label}</div>
+                <div className="font-semibold text-stone-900 dark:text-stone-200 text-2xl sm:text-3xl">{it?.label}</div>
                 <div className={classNames({
                     "transform-[rotate(-180deg)] duration-300": activeKey[0] === i.toString()
                 })}><ChevronUpIcon height={40} fontSize={20} className="dark:text-stone-200"/></div>
             </div>,
-            children: <div className="text-2xl dark:text-stone-400">{it?.description}</div>,
+            children: <div className="text-sm sm:text-2xl dark:text-stone-400">{it?.description}</div>,
             headerClass: "w-full",
             showArrow: false,
         }))} 

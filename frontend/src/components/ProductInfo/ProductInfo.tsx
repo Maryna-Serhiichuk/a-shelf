@@ -9,7 +9,7 @@ const info: IconDescriptionComponent['items'] = [
 ]
 
 export const ProductInfo: FC<Product> = ({}) => {
-    return <div>
+    return <div className="py-12 sm:py-0">
         <IconDescriptionComponent items={info} />
     </div>
 }

@@ -7,7 +7,7 @@ export const Formula: FC<ImageShortDescription> = ({ title, description, left, r
         <section className="relative grid grid-cols-8 md:grid-cols-3 md:h-[300px] lg:h-[500px] xl:h-[700px] gap-8 lg:gap-15 items-center my-10 md:my-40">
             {title &&
                 <div className="block md:hidden col-span-8 relative z-3 text-3xl">
-                    <div className="flex justify-center font-semibold text-center">
+                    <div className="flex justify-center font-semibold text-center font-heading">
                         {title}
                     </div>
                 </div>
@@ -20,12 +20,12 @@ export const Formula: FC<ImageShortDescription> = ({ title, description, left, r
             </div>
             <div className="hidden md:block col-span-4 md:col-span-1 text-xl lg:text-2xl">
                 {title &&
-                    <div className="relative z-3 text-3xl lg:text-6xl/18 sm:w-[125%] sm:left-[-25%] top-[-20px] lg:top-[-60px] dark:text-stone-200">
+                    <div className="relative z-3 text-3xl lg:text-6xl/18 sm:w-[125%] sm:left-[-25%] top-[-20px] lg:top-[-60px] dark:text-stone-200 font-heading">
                         {title}
                     </div>
                 }
                 {description &&
-                    <div className="dark:text-stone-400">
+                    <div className="dark:text-stone-400 text-sm">
                         {description}
                     </div>
                 }
