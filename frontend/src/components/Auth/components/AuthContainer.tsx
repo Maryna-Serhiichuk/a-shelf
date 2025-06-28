@@ -2,7 +2,7 @@ import { Button } from "@/components/Button";
 import { FC, PropsWithChildren } from "react";
 
 export const AuthContainer: FC<PropsWithChildren<{ title: string, driverTitle: string }>> = ({ children, title, driverTitle }) => {
-    return <div className="px-10 pt-8">
+    return <div className="px-2 sm:px-10 pt-8">
         <div className="text-4xl font-bold text-center uppercase pb-10">
             {title}
         </div>

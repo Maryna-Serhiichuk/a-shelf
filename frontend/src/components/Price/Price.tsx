@@ -27,7 +27,7 @@ export const Price: FC<{ price?: number, discount?: Discount, mini?: boolean, sh
             }
         </div>
         {!mini &&
-            <div className="flex gap-[inherit] flex-wrap">
+            <div className="flex gap-[inherit] flex-wrap group-[.discount-hidden]:hidden group-[.discount-hidden]:lg:flex">
                 {discount?.interest && !short &&
                     <div className="bg-stone-800 dark:bg-red-800 text-lg text-stone-50 px-3 py-1 whitespace-nowrap">
                         Save {discount?.interest}%
