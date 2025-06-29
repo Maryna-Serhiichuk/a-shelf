@@ -5,13 +5,13 @@ import { Markdown } from "@/components/Markdown";
 type DivProps = PropsWithChildren<{ className?: string }>;
 
 const Name: FC<DivProps> = ({ children, className }) => {
-    return <div className={classNames("text-3xl font-medium sm:text-4xl lg:text-5xl sm:font-light dark:text-stone-100", className)}>
+    return <div className={classNames("text-3xl font-medium sm:text-4xl lg:text-5xl sm:font-light dark:text-stone-100 font-heading", className)}>
         {children}
     </div>
 }
 
 const SubName: FC<DivProps> = ({ children, className }) => {
-    return <div className="dark:text-stone-100 font-medium text-md sm:text-lg lg:text-3xl">
+    return <div className="dark:text-stone-100 font-medium text-md sm:text-lg lg:text-3xl font-heading">
         {children}
     </div>
 }

@@ -22,7 +22,7 @@ export const Footer: FC = () => {
     ]
 
     const pagesStyle = {
-        title: "w-36 xl:w-56 text-2xl",
+        title: "w-36 xl:w-56 text-2xl font-heading",
         wrap: "w-full flex flex-wrap text-stone-300 gap-y-2 md:gap-y-3",
         container: "w-full sm:w-1/2 md:w-full flex flex-col lg:flex-row gap-4 md:gap-6 items-start"
     }
@@ -37,7 +37,7 @@ export const Footer: FC = () => {
                     
                 </div>
                 <div className={classNames("flex flex-col gap-3", cols.left)}>
-                    <div className="text-3xl">
+                    <div className="text-3xl font-heading">
                         Customers support
                     </div>
                     <div className="text-2xl">

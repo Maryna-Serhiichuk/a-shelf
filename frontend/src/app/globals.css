@@ -31,6 +31,11 @@ body {
   font-family: Lora;
 }
 
+.font-poppins {
+  font-family: Poppins;
+}
+
+
 .multiline-ellipsis {
   display: -webkit-box;
   -webkit-line-clamp: 2;

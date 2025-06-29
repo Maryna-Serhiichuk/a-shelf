@@ -42,7 +42,7 @@ export const Auth: FC = () => {
                     {isExist ? 'Not a member?' : 'Have you account?'}
                 </div> 
                 <Button variant="link" className="underline" onClick={() => setExist(!isExist)}>
-                    {isExist ? 'Sign Up now' : 'Log In'}
+                    {isExist ? 'Sign Up' : 'Log In'}
                 </Button>
             </div>
         </Modal>

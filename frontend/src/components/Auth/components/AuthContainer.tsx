@@ -3,7 +3,7 @@ import { FC, PropsWithChildren } from "react";
 
 export const AuthContainer: FC<PropsWithChildren<{ title: string, driverTitle: string }>> = ({ children, title, driverTitle }) => {
     return <div className="px-2 sm:px-10 pt-8">
-        <div className="text-4xl font-bold text-center uppercase pb-10">
+        <div className="text-4xl font-bold text-center uppercase pb-10 font-heading">
             {title}
         </div>
         <div className="flex flex-col gap-10">
