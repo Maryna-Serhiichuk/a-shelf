@@ -24,7 +24,8 @@ export const Footer: FC = () => {
     const pagesStyle = {
         title: "w-36 xl:w-56 text-2xl font-heading",
         wrap: "w-full flex flex-wrap text-stone-300 gap-y-2 md:gap-y-3",
-        container: "w-full sm:w-1/2 md:w-full flex flex-col lg:flex-row gap-4 md:gap-6 items-start"
+        container: "w-full sm:w-1/2 md:w-full flex flex-col lg:flex-row gap-4 md:gap-6 items-start",
+        menuItem: "w-full xs:w-1/2 sm:w-full md:w-1/2 hover:underline"
     }
 
     return <footer className="w-full bg-stone-900 text-stone-50 dark py-8 px-3">
@@ -60,7 +61,7 @@ export const Footer: FC = () => {
                         </div>
                         <nav className={pagesStyle.wrap}>
                             {pages?.map(page => (
-                                <div key={page?.href} className="w-1/2 sm:w-full md:w-1/2 hover:underline">
+                                <div key={page?.href} className={pagesStyle.menuItem}>
                                     <NavLink href={'/' + page?.href}>
                                         {page?.label}
                                     </NavLink>
@@ -74,7 +75,7 @@ export const Footer: FC = () => {
                         </div>
                         <nav className={pagesStyle.wrap}>
                             {data?.data?.map(page => (
-                                <div key={page?.slug} className="w-1/2 sm:w-full md:w-1/2 hover:underline">
+                                <div key={page?.slug} className={pagesStyle.menuItem}>
                                     <NavLink href={`/support/${page.slug}`}>
                                         {page?.label}
                                     </NavLink>
