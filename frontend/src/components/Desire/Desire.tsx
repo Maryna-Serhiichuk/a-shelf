@@ -1,4 +1,4 @@
-import { FC, useCallback, useEffect, useState } from "react";
+import { FC, useCallback, useEffect, useState, memo } from "react";
 import debounce from 'lodash.debounce';
 import { useCartlines } from "@/hooks/useCartlines";
 import { CartProduct } from "@/components/CartProduct";
@@ -6,14 +6,15 @@ import { CartPrice } from "@/components/CartPrice";
 import { CartWrap } from "@/components/CartWrap";
 import { getPriceWithDiscount } from "@/utils/getPriceWithDiscount";
 
-export const Desire: FC<Cartline> = ({ documentId, product, quantity }) => {
+export const Desire: FC<Cartline> = memo(({ documentId, product, quantity }) => {
     const { changeCartline, removeCartline } = useCartlines()
 
     const [productQuantity, setQuantity] = useState(quantity)
     const [price, setPrice] = useState<number>(product?.price * quantity)
 
     const updatePrice = (count: number) => {
-        setPrice(product?.price * count)
+        const withDiscount = getPriceWithDiscount({ price: product?.price, discount: product?.discount })
+        setPrice(withDiscount * count)
     }
 
     const valuesControler = (quant: number) => {
@@ -33,6 +34,7 @@ export const Desire: FC<Cartline> = ({ documentId, product, quantity }) => {
         if (quantity !== value) {
             changeQuantity(value)
         }
+
         valuesControler(value)
     }, [quantity])
 
@@ -63,10 +65,10 @@ export const Desire: FC<Cartline> = ({ documentId, product, quantity }) => {
 
     return <CartWrap onTrash={removeItem}>
         <CartProduct {...product} />
-        <CartPrice 
+        <CartPrice
             value={productQuantity}
             onChange={quantityControler}
-            price={getPriceWithDiscount({ price, discount: product?.discount })}
+            price={price}
         />
     </CartWrap>
-}
+})

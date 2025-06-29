@@ -8,8 +8,6 @@ import { getPriceWithDiscount } from "@/utils/getPriceWithDiscount";
 dayjs.extend(relativeTime);
 
 export const Price: FC<{ price?: number, discount?: Discount, mini?: boolean, short?: boolean }> = ({ price = 0, discount, mini = false, short = false }) => {
-    if (!discount || dayjs().isAfter(dayjs(discount?.endDate, 'YYYY-MM-DD'))) return '$' + price.toFixed(2)
-
     return <div className={classNames("flex items-center dark:text-stone-100", {
         "gap-0": mini,
         "gap-3": !mini,
@@ -20,7 +18,8 @@ export const Price: FC<{ price?: number, discount?: Discount, mini?: boolean, sh
             </div>
             {!short &&
                 <div className={classNames("font-light flex justify-center line-through text-stone-500 dark:text-red-400", {
-                    "text-sm": mini
+                    "text-sm": mini,
+                    "hidden": !discount
                 })}>
                     ${price.toFixed(2)}
                 </div>
