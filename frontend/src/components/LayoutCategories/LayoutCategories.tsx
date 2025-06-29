@@ -14,7 +14,7 @@ export default async function LayoutCategories ({ children, id, type }: LayoutCa
                 <div className="col-1 md:col-[1/2] justify-items-center">
                     <Categories />
                 </div>
-                <div className="col-1 md:col-[2/3]">
+                <div className="col-1 md:col-[2/3] relative z-2">
                     {children}
                 </div>
             </div>
