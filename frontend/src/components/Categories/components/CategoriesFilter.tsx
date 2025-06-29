@@ -17,7 +17,7 @@ export const CategoriesFilter: FC<PropsWithChildren> = ({ children }) => {
                 </span>
             </Button>
         </div>
-        <nav className={classNames("w-full flex flex-col gap-3 max-h-0 duration-300 opacity-0", {
+        <nav className={classNames("w-full flex flex-col gap-3 max-h-0 duration-300 opacity-0 md:opacity-100", {
             "max-h-100 opacity-100": open
         })}>
             {children}
