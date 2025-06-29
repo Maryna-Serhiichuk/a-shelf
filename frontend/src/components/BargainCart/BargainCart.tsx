@@ -21,7 +21,7 @@ export const BargainCart: FC<CartBargain> = ({ documentId, bargain }) => {
         <div className="flex justify-between items-center w-full">
             <div className="">
                 {bargain?.products?.map(product => (
-                    <CartProduct {...product} />
+                    <CartProduct key={product.documentId} {...product} />
                 ))}
             </div>
             <div>
