@@ -13,11 +13,11 @@ export default async function Page({ params }: { params: Promise<{ page: string 
 
     return (
         <Container>
-            <div className="grid grid-cols-4 gap-14">
-                <div className="col-span-1">
+            <div className="grid grid-cols-1 md:grid-cols-[250px_1fr] lg:grid-cols-4 gap-8 md:gap-14">
+                <div className="lg:col-span-1">
                     <SupportMenu/>
                 </div>
-                <div className="col-span-3">
+                <div className="lg:col-span-3">
                     <Support {...data?.data as SupportPage} />
                 </div>
             </div>

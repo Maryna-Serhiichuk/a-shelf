@@ -12,7 +12,7 @@ export const ProductDetails: FC<Product> = ({ composition, using, purpose }) => 
         ...(purpose ? [{ label: 'Purpose', description: purpose }] : []),
     ].filter(Boolean);
 
-    return <div className="relative grid grid-cols-1 md:grid-cols-[300px_1fr] shadow-[inset_0px_0px_20px_rgba(0,0,0,.2))]">
+    return <div className="relative grid grid-cols-1 md:grid-cols-[300px_1fr] shadow-[inset_0px_0px_20px_rgba(0,0,0,.2)]">
         <div className="absolute md:relative h-full w-full">
             <Image src={leaves} alt="" className="w-full h-full object-cover" />
         </div>

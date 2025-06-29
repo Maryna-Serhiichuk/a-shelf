@@ -10,7 +10,7 @@ export const Markdown: FC<{data: string | undefined}> = ({ data }) => {
         a: ({href, children}) => <a href={href} className="text-cyan-700 underline">{children}</a>,
         p: ({children}) => <div className="dark:text-stone-50 pb-5">{children}</div>,
         // h1: ({children}) => children,
-        h2: ({children}) => <div className="text-2xl font-bold dark:text-stone-50 pb-3">{children}</div>,
+        h2: ({children}) => <div className="text-2xl font-bold dark:text-stone-50 pb-3 font-heading">{children}</div>,
         // h3: ({children}) => children,
         h4: ({children}) => <div className="font-semibold dark:text-stone-50">{children}</div>,
         h5: ({children}) => <div className="text-lg dark:text-stone-50">{children}</div>,
