@@ -4,7 +4,7 @@ import { productApi } from "@/api/product"
 import { fetchFromApi } from "@/utils/fetchFromApi"
 import { BargainSlider } from "./components/BargainSlider"
 
-interface BargainArgs {
+export interface BargainArgs {
   id?: string
   type?: string
 }

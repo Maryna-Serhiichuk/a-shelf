@@ -1,4 +1,4 @@
-import { LayoutCategories } from "./LayoutCategories";
+import LayoutCategories from "./LayoutCategories";
 
 export {
     LayoutCategories

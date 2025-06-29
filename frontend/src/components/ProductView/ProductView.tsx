@@ -1,10 +1,8 @@
 import { FC, Fragment } from "react";
-import { HeartIcon } from "@heroicons/react/24/outline";
 import { Container } from "@/components/Container";
 import { Price } from "@/components/Price";
 import { Button } from "@/components/Button";
 import { Img } from "@/components/Img";
-import { Markdown } from "@/components/Markdown";
 import { useAddDesire } from "@/hooks/useAddDesire";
 import { ActiveIngredients } from "@/components/ActiveIngredients";
 import classNames from "classnames";
@@ -33,10 +31,7 @@ export const ProductView: FC<Product> = ({ documentId, name, subname, descriptio
                                 <div className="text-2xl font-bold">
                                     <Price price={price} discount={discount} />
                                 </div>
-                                <div className="flex flex-nowrap flex-col gap-1">
-                                    <Button size="large">
-                                        Buy Now
-                                    </Button>
+                                <ProductElement.Buttons onHeart={addToCart} solidIcon={isCart} className="flex flex-nowrap flex-col gap-1">
                                     {isCart
                                         ? <Button variant="outlined">
                                             Added
@@ -45,8 +40,7 @@ export const ProductView: FC<Product> = ({ documentId, name, subname, descriptio
                                             Add to Cart
                                         </Button>
                                     }
-
-                                </div>
+                                </ProductElement.Buttons>
                             </Fragment>
                         }
                     </div>
@@ -75,11 +69,7 @@ export const ProductView: FC<Product> = ({ documentId, name, subname, descriptio
                             <Price price={price} discount={discount} />
                         </div>
                         <ActiveIngredients items={ingredients} />
-                        <div className="block lg:hidden w-full">
-                            <Button className="w-full" size="large">
-                                Buy Now
-                            </Button>
-                        </div>
+                        <ProductElement.Buttons onHeart={addToCart} solidIcon={isCart} className="block lg:hidden w-full" />
                     </div>
                 </div>
             </div>
@@ -103,11 +93,7 @@ export const ProductView: FC<Product> = ({ documentId, name, subname, descriptio
                         <Price price={price} discount={discount} />
                     </div>
                     <ActiveIngredients items={ingredients} />
-                    <div className="block lg:hidden w-full pt-3 sm:pt-0">
-                        <Button className="w-full" size="large">
-                            Buy Now
-                        </Button>
-                    </div>
+                    <ProductElement.Buttons onHeart={addToCart} solidIcon={isCart} className="block lg:hidden w-full pt-3 sm:pt-0" />
                 </div>
             </div>
         </Container>

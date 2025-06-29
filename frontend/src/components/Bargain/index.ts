@@ -1,5 +1,6 @@
-import Bargain from "./Bargain";
+import Bargain, { type BargainArgs } from "./Bargain";
 
 export {
-    Bargain
+    Bargain,
+    BargainArgs
 }

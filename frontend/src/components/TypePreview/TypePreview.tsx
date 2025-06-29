@@ -4,7 +4,7 @@ import { NavLink } from "@/components/NavLink";
 
 export const TypePreview: FC<Type> = ({ slug, category, preview, label }) => {
     return <NavLink key={slug} href={`/${category?.slug}/${slug}`}>
-        <div className="flex flex-col h-60 bg-stone-100 dark:bg-stone-700">
+        <div className="flex flex-col h-60 bg-stone-100 dark:bg-stone-700 shadow-item">
             <div className="flex items-end justify-center grow h-[70%]">
                 {preview?.url &&
                     <img className="w-100 h-[90%] object-center object-contain" src={`${url.strapi}${preview?.url}`} alt=""/>
