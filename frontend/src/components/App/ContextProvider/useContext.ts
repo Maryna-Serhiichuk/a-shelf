@@ -63,7 +63,10 @@ export const useContext = (): IContext => {
             lines &&
             lines?.products && lines?.products?.length > 0 ||
             lines?.bargains && lines?.bargains?.length > 0
-        )) return []
+        )) {
+            setCart({})
+            return
+        }
 
         const productsResult = await getProductsByIds({ ids: lines?.products?.map(it => it?.id) })
         const products = productsResult?.data?.data
