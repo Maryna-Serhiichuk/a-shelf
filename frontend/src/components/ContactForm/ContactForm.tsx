@@ -9,6 +9,7 @@ import { FormLabel } from "@/components/FormLabel";
 import { pageApi } from "@/api/page";
 import { checkRequireFields } from "@/utils/checkRequireFields";
 import { Result, ResultType } from "@/components/Result";
+import { NavLink } from "@/components/NavLink";
 
 export const ContactForm: FC = () => {
     const [message, setMessage] = useState<Maybe<ResultType>>()
@@ -51,9 +52,11 @@ export const ContactForm: FC = () => {
                     warning: "You are sending messages too frequently. Please wait a moment before trying again.",
                     error: "We're very sorry — something went wrong. Your message is important to us, so please try again later."
                 }} />
-                <Button size="large" variant="link">
-                    Go to Shop
-                </Button>
+                <NavLink href={'/shop'}>
+                    <Button size="large" variant="link">
+                        Go to Shop
+                    </Button>
+                </NavLink>
             </div>
             : <div className="flex flex-col gap-6 sm:gap-10">
                 <div className="font-heading text-3xl sm:text-5xl font-bold dark:text-stone-100">

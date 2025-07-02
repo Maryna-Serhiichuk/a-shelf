@@ -23,7 +23,7 @@ export const Result: FC<ResultArgs> = ({ items, type }) => {
         <div className="size-20">
             <Icon fill={results?.[type]?.color} />
         </div>
-        <div className="text-3xl/10 text-center font-medium tracking-wide">
+        <div className="text-3xl/10 text-center font-medium tracking-wide font-heading">
             {results?.[type]?.message}
         </div>
     </div>
