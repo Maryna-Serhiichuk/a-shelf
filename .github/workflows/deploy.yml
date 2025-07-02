@@ -36,6 +36,9 @@ jobs:
             DATABASE_CLIENT=${{ secrets.DATABASE_CLIENT }}
             DATABASE_FILENAME=${{ secrets.DATABASE_FILENAME }}
             JWT_SECRET=${{ secrets.JWT_SECRET }}
+            EOF
+            echo 'DATABASE_CLIENT on server:' ${{ secrets.DATABASE_CLIENT }}
+            ls -la ${{ secrets.TARGET_DIR }}/backend/.tmp
           "
       - name: Create frontend .env file on server
         run: |

@@ -8,7 +8,7 @@ services:
     ports:
       - "1337:1337"
     volumes:
-      - ./backend:/srv/app/.tmp
+      - ./backend/.tmp:/app/.tmp
       - ./backend/public/uploads:/app/public/uploads
     command: yarn start
 
