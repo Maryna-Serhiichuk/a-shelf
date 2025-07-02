@@ -46,7 +46,7 @@ export const ContactForm: FC = () => {
 
     return <Fragment>
         {!!message
-            ? <div className="flex flex-col gap-10 py-10">
+            ? <div className="flex flex-col gap-10 py-10 justify-center">
                 <Result type={message} items={{
                     success: "Thank you for reaching out! Your message has been successfully sent. We'll get back to you shortly.",
                     warning: "You are sending messages too frequently. Please wait a moment before trying again.",
