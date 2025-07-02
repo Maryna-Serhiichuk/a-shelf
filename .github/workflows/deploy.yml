@@ -41,7 +41,8 @@ jobs:
       - name: Folder .tmp contained
         run: |
           ssh ${{ secrets.USERNAME }}@${{ secrets.HOST }} '
-            ls -la ${{ secrets.TARGET_DIR }}/backend/.tmp
+            cd ${{ secrets.TARGET_DIR }}/backend/.tmp &&
+            ls -la
           '  
       - name: Create frontend .env file on server
         run: |
