@@ -38,12 +38,6 @@ jobs:
             JWT_SECRET=${{ secrets.JWT_SECRET }}
           '
 
-      - name: Folder .tmp contained
-        run: |
-          ssh ${{ secrets.USERNAME }}@${{ secrets.HOST }} '
-            cd ${{ secrets.TARGET_DIR }}/backend/.tmp &&
-            ls -la
-          '  
       - name: Create frontend .env file on server
         run: |
           ssh ${{ secrets.USERNAME }}@${{ secrets.HOST }} '
