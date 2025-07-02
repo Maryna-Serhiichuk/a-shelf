@@ -46,17 +46,19 @@ export const ContactForm: FC = () => {
 
     return <Fragment>
         {!!message
-            ? <div className="flex flex-col gap-10 py-10 justify-center">
+            ? <div className="flex flex-col gap-10 py-10">
                 <Result type={message} items={{
                     success: "Thank you for reaching out! Your message has been successfully sent. We'll get back to you shortly.",
                     warning: "You are sending messages too frequently. Please wait a moment before trying again.",
                     error: "We're very sorry — something went wrong. Your message is important to us, so please try again later."
                 }} />
-                <NavLink href={'/shop'}>
-                    <Button size="large" variant="link">
-                        Go to Shop
-                    </Button>
-                </NavLink>
+                <div className="flex justify-center">
+                    <NavLink href={'/shop'}>
+                        <Button size="large" variant="link">
+                            Go to Shop
+                        </Button>
+                    </NavLink>
+                </div>
             </div>
             : <div className="flex flex-col gap-6 sm:gap-10">
                 <div className="font-heading text-3xl sm:text-5xl font-bold dark:text-stone-100">
