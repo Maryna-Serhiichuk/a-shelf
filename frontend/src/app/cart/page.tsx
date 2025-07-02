@@ -1,12 +1,13 @@
-import { LayoutCategories } from "@/components/LayoutCategories";
 import { CartLayout } from "@/components/CartLayout";
+import { SidebarLayout } from "@/components/SidebarLayout";
+import { ToShopButton } from "@/components/ToShopButton";
 
 export const dynamic = 'force-dynamic';
 
 export default function Page() {
     return (
-        <LayoutCategories>
-            <CartLayout/>
-        </LayoutCategories>
+        <SidebarLayout sidebar={<ToShopButton/>}>
+            <CartLayout />
+        </SidebarLayout>
     );
 }
