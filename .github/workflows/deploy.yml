@@ -27,7 +27,7 @@ jobs:
 
       - name: Create backend .env file on server
         run: |
-          ssh ${{ secrets.USERNAME }}@${{ secrets.HOST }} "
+          ssh ${{ secrets.USERNAME }}@${{ secrets.HOST }} '
             cat <<EOF > ${{ secrets.TARGET_DIR }}/backend/.env
             APP_KEYS=${{ secrets.APP_KEYS }}
             API_TOKEN_SALT=${{ secrets.API_TOKEN_SALT }}
@@ -36,22 +36,26 @@ jobs:
             DATABASE_CLIENT=${{ secrets.DATABASE_CLIENT }}
             DATABASE_FILENAME=${{ secrets.DATABASE_FILENAME }}
             JWT_SECRET=${{ secrets.JWT_SECRET }}
-            EOF
+          '
+
+      - name: Folder .tmp contained
+        run: |
+          ssh ${{ secrets.USERNAME }}@${{ secrets.HOST }} '
             ls -la ${{ secrets.TARGET_DIR }}/backend/.tmp
-          "
+          '  
       - name: Create frontend .env file on server
         run: |
-          ssh ${{ secrets.USERNAME }}@${{ secrets.HOST }} "
+          ssh ${{ secrets.USERNAME }}@${{ secrets.HOST }} '
             cat <<EOF > ${{ secrets.TARGET_DIR }}/frontend/.env
             NEXT_PUBLIC_HOST=${{ secrets.NEXT_PUBLIC_HOST }}
-          "
+          '
 
       - name: Clean up dangling images and restart containers
         run: |
-          ssh ${{ secrets.USERNAME }}@${{ secrets.HOST }} "
+          ssh ${{ secrets.USERNAME }}@${{ secrets.HOST }} '
             cd ${{ secrets.TARGET_DIR }} &&
             docker-compose down --remove-orphans &&
             docker image prune -f &&
             docker container prune -f &&
             docker-compose up -d --build
-          "
+          '
