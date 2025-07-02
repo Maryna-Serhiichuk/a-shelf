@@ -3,7 +3,7 @@ import { Container } from "@/components/Container";
 import { IconDescriptionComponent } from "@/components/IconDescriptionComponent";
 import bottle from "@/images/toner.png"
 import classNames from "classnames";
-import { IconDescription } from "../IconDescription";
+import { IconDescription } from "@/components/IconDescription";
 
 export const OurValues: FC<IconDescriptionComponent> = ({ heading, items }) => {
     const cardWidth = "w-[250px] xl:w-[300px] 2xl:w-[400px]"
