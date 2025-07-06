@@ -6,7 +6,7 @@ import { ArrowPathIcon } from '@heroicons/react/24/outline';
 
 export interface ButtonArgs extends PropsWithChildren<ButtonHTMLAttributes<HTMLButtonElement>> {
     variant?: 'default' | 'text' | 'link' | 'outlined'
-    size?: 'default' | 'large'
+    size?: 'default' | 'large' | 'small'
     Icon?: ComponentType<React.SVGProps<SVGSVGElement>>,
     loading?: boolean
 }
@@ -22,7 +22,8 @@ export const Button: FC<ButtonArgs> = ({ children, variant = 'default', size = '
 
     const buttonSize: {[key in NonNullable<ButtonArgs['size']>]: string} = {
         large: 'px-15 py-3 text-xl',
-        default: 'py-2'
+        default: 'py-2',
+        small: 'px-3 py-1'
     }
 
     return <button {...props} disabled={loading} className={classNames(

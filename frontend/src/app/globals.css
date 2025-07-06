@@ -49,3 +49,12 @@ body {
   text-overflow: ellipsis;
   word-break: break-word;
 }
+
+.multiline-ellipsis-1 {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-word;
+}
