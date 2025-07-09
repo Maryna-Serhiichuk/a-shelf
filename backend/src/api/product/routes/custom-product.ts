@@ -10,6 +10,12 @@ export default {
         handler: "product.productsByIds",
         config: {},
       },
+      {
+        method: "POST",
+        path: "/checkout",
+        handler: "product.checkout",
+        config: {},
+      }
     ],
   }
   

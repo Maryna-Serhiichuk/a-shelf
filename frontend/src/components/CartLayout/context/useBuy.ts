@@ -1,3 +1,4 @@
+import { cartApi } from "@/api/cart"
 import { Dispatch, SetStateAction, useState } from "react"
 
 type BuyItem = { product: Product, quantity: number }
@@ -15,6 +16,9 @@ export type IBuyContext = {
 export const useBuy = (): IBuyContext => {
     const [openDrawer, setOpenDrawer] = useState(false)
     const [products, setProducts] = useState<Array<BuyItem>>([])
+
+    const { useCheckoutMutation } = cartApi
+    const [checkout, { isLoading }] = useCheckoutMutation();
 
     const addToOrder: IBuyContext['addToOrder'] = (value) => {
         console.log(value)
@@ -36,8 +40,16 @@ export const useBuy = (): IBuyContext => {
         setProducts(prev => prev?.map(it => it?.product?.documentId === id ? ({ ...it, quantity }) : it))
     }
 
-    const onCheckout = () => {
-        console.log(products)
+    const onCheckout = async () => {
+        const transformForRequest: CheckoutInput = {
+            items: products?.map(it => ({ 
+                id: it?.product?.documentId, 
+                quantity: it?.quantity ?? 1 
+            }))
+        }
+        console.log(11111111, transformForRequest)
+        const responese = await checkout(transformForRequest)
+        console.log(22222222222, responese)
         // api to paypal
     }
 

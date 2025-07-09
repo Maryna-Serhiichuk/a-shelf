@@ -75,6 +75,27 @@ declare global {
         message: string
         email: string
     }
+
+    interface CheckoutInput {
+        items: Array<{ id: string, quantity: number }>
+    }
+
+    interface Checkout {
+        url: string
+    }
+
+    interface DeliveryInput {
+        firstName: string
+        lastName: string
+        email: string
+        phone: string
+        street: string
+        house: string
+        appartment: string
+        city: string
+        region: string
+        postCode: string
+    }
 }
 
 export {};

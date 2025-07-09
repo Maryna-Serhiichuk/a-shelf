@@ -59,5 +59,13 @@ export const cartApi = enhanceApi.injectEndpoints({
             }),
             invalidatesTags: ['CartBargain'],
         }),
+        checkout: builder.mutation<any, CheckoutInput>({
+          query: (body) => ({
+              url: `checkout`,
+              method: 'POST',
+              body
+          }),
+          // invalidatesTags: ['CartBargain'],
+        })
     })
 })
