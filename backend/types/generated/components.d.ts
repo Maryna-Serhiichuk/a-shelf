@@ -44,6 +44,19 @@ export interface MoleculeItemIcon extends Struct.ComponentSchema {
   };
 }
 
+export interface MoleculeOrderItem extends Struct.ComponentSchema {
+  collectionName: 'components_molecule_order_items';
+  info: {
+    displayName: 'OrderItem';
+    icon: 'oneWay';
+  };
+  attributes: {
+    price: Schema.Attribute.Decimal;
+    product: Schema.Attribute.Relation<'oneToOne', 'api::product.product'>;
+    quantity: Schema.Attribute.Integer;
+  };
+}
+
 export interface SaleDiscount extends Struct.ComponentSchema {
   collectionName: 'components_sale_discounts';
   info: {
@@ -133,6 +146,7 @@ declare module '@strapi/strapi' {
       'molecule.button': MoleculeButton;
       'molecule.icon-description': MoleculeIconDescription;
       'molecule.item-icon': MoleculeItemIcon;
+      'molecule.order-item': MoleculeOrderItem;
       'sale.discount': SaleDiscount;
       'ui.banner': UiBanner;
       'ui.hero': UiHero;

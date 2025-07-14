@@ -1,5 +1,4 @@
 import { FC, useMemo, useState } from "react";
-import { Formik, Form, ErrorMessage, FormikConfig } from 'formik';
 import { TrashIcon } from "@heroicons/react/24/outline";
 import { Button } from "@/components/Button";
 import { Drawer } from "@/components/Drawer";
@@ -31,18 +30,27 @@ export const BuyDrawer: FC = () => {
     }, [orderList]);
 
     const onCheckoutNext = () => {
-        if (addressMode) {
-            onCheckout()
-        } else {
-            setAddressMode(true)
-        }
+        setAddressMode(true)
+    }
+
+    const onCancel = () => {
+        setOpenDrawer(false)
+        setTimeout(() => {
+            setAddressMode(false)
+        }, 1000)
     }
 
     return <Drawer open={openDrawer} onClose={setOpenDrawer} position="right">
         <div className="p-4">
             {addressMode
-                ?  <div>
-                    <Delivery/>
+                ? <div>
+                    <Delivery
+                        cancelButton={<Button variant="outlined" onClick={onCancel}>
+                            Cancel
+                        </Button>}
+                    >
+                        <BuyDrawerFooter totalPrice={totalPrice} />
+                    </Delivery>
                 </div>
                 : <div>
                     {orderList?.map(product => (
@@ -72,21 +80,30 @@ export const BuyDrawer: FC = () => {
                             </div>
                         </div>
                     ))}
+                    <div>
+                        <BuyDrawerFooter totalPrice={totalPrice} />
+                        <div className="grid grid-cols-2 gap-2">
+                            <Button variant="outlined" onClick={onCancel}>
+                                Cancel
+                            </Button>
+                            <Button onClick={onCheckoutNext}>
+                                Checkout Now
+                            </Button>
+                        </div>
+                    </div>
                 </div>
             }
-            <div>
-                <div className="text-2xl border-y border-stone-200 mt-2 mb-6 py-3 flex justify-between">
-                    <div>
-                        Total:
-                    </div>
-                    <div>
-                        <Price price={totalPrice} />
-                    </div>
-                </div>
-                <Button onClick={onCheckoutNext}>
-                    Checkout Now
-                </Button>
-            </div>
         </div>
     </Drawer>
+}
+
+const BuyDrawerFooter: FC<{ totalPrice?: number }> = ({ totalPrice }) => {
+    return <div className="text-2xl border-y border-stone-200 mt-2 mb-6 py-3 flex justify-between">
+        <div>
+            Total:
+        </div>
+        <div>
+            <Price price={totalPrice} />
+        </div>
+    </div>
 }

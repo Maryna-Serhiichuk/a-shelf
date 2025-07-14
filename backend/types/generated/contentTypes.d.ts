@@ -637,6 +637,39 @@ export interface ApiIngredientIngredient extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiOrderOrder extends Struct.CollectionTypeSchema {
+  collectionName: 'orders';
+  info: {
+    description: '';
+    displayName: 'Order';
+    pluralName: 'orders';
+    singularName: 'order';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    delivery_address: Schema.Attribute.Text;
+    delivery_status: Schema.Attribute.Enumeration<
+      ['created', 'processing', 'delivering', 'delivered']
+    > &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'created'>;
+    items: Schema.Attribute.Component<'molecule.order-item', true>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::order.order'> &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    uuid: Schema.Attribute.UID;
+  };
+}
+
 export interface ApiProductProduct extends Struct.CollectionTypeSchema {
   collectionName: 'products';
   info: {
@@ -1266,6 +1299,7 @@ declare module '@strapi/strapi' {
       'api::contact-request.contact-request': ApiContactRequestContactRequest;
       'api::contact.contact': ApiContactContact;
       'api::ingredient.ingredient': ApiIngredientIngredient;
+      'api::order.order': ApiOrderOrder;
       'api::product.product': ApiProductProduct;
       'api::support-page.support-page': ApiSupportPageSupportPage;
       'api::type.type': ApiTypeType;

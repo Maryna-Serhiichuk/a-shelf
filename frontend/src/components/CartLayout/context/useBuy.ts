@@ -1,5 +1,6 @@
 import { cartApi } from "@/api/cart"
 import { Dispatch, SetStateAction, useState } from "react"
+import { useRouter } from 'next/navigation';
 
 type BuyItem = { product: Product, quantity: number }
 
@@ -16,6 +17,7 @@ export type IBuyContext = {
 export const useBuy = (): IBuyContext => {
     const [openDrawer, setOpenDrawer] = useState(false)
     const [products, setProducts] = useState<Array<BuyItem>>([])
+    const router = useRouter();
 
     const { useCheckoutMutation } = cartApi
     const [checkout, { isLoading }] = useCheckoutMutation();
@@ -49,8 +51,9 @@ export const useBuy = (): IBuyContext => {
         }
         console.log(11111111, transformForRequest)
         const responese = await checkout(transformForRequest)
-        console.log(22222222222, responese)
-        // api to paypal
+        if(responese?.data?.url) {
+            router.push(responese?.data?.url);
+        }
     }
 
     return {

@@ -89,9 +89,7 @@ declare global {
         lastName: string
         email: string
         phone: string
-        street: string
-        house: string
-        appartment: string
+        address: string
         city: string
         region: string
         postCode: string
