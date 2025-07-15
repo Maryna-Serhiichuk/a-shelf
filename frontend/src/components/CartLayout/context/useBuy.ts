@@ -49,7 +49,7 @@ export const useBuy = (): IBuyContext => {
                 quantity: it?.quantity ?? 1 
             }))
         }
-        console.log(11111111, transformForRequest)
+
         const responese = await checkout(transformForRequest)
         if(responese?.data?.url) {
             router.push(responese?.data?.url);

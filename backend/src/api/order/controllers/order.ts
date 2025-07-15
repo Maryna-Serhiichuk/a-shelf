@@ -3,136 +3,54 @@
  */
 
 import { factories } from '@strapi/strapi'
-import { ItemCategory } from '@paypal/paypal-server-sdk';
-import { ApiError, CheckoutPaymentIntent, OrdersController } from '@paypal/paypal-server-sdk';
-import { client } from '../../../utils/paypalInstance';
-import { getPriceWithDiscount } from '../../../utils/getPriceWithDiscount';
+import { ApiError } from '@paypal/paypal-server-sdk';
+import { getProductsForCheckout } from '../../../utils/checkout/getProductsForCheckout';
+import { checkoutItemMapper } from '../../../utils/checkout/checkoutItemMapper';
+import { createOrder } from '../../../utils/checkout/createOrder';
+import { createCheckout } from '../../../utils/checkout/createCheckout';
 import { v4 } from 'uuid';
 
 export default factories.createCoreController('api::order.order', ({ strapi }) => ({
     async checkout(ctx) {
-        const { items } = ctx.request.body
+        const { items, deliveryAddress } = ctx.request.body
+
+        const { firstName, lastName, ...chargeFields } = deliveryAddress
+        const address = {
+            fullName: deliveryAddress.firstName + " " + deliveryAddress.lastName,
+            ...chargeFields
+        }
+        const delivery_address = Object.values(address).join('\n')
 
         if (!items || !items?.length) return null
 
-        // якщо нема user, то обов'язково має заповнити адресу відправки
-        // // відправити на пошту посилання і пароль за яким побачити статус відправки
-
-        // якщо є user зберігати в базу
-
         const ids = items?.map(it => it?.id)
 
-        const products = await strapi.documents('api::product.product').findMany({
-            where: {
-                documentId: { $in: ids },
-                // publishedAt: { $notNull: true }
-            },
-            populate: { discount: true },
-            select: ['id', 'name', 'price', 'documentId', 'publishedAt']
-        })
+        try {
+            const products = await getProductsForCheckout(ids)
 
-        const transformedItems = products?.map(prod => {
-            const quantity: number = items?.find(it => it?.id === prod?.documentId)?.quantity ?? 1
-            return {
-                documentId: prod?.documentId,
-                id: prod?.id,
-                name: prod?.name ?? '',
-                quantity: quantity ?? 1,
-                price: getPriceWithDiscount({ price: prod?.price, discount: prod?.discount }),
+            const transformedItems = checkoutItemMapper({ items, products })
+
+            const orderId = v4()
+
+            const result = await createCheckout({ mapData: transformedItems, orderId })
+
+            if (result?.status === 'CREATED') {
+                await createOrder({ mapData: transformedItems, orderId, cheackoutId: result.checkoutId, delivery_address })
             }
-        })
 
-        const orderId = v4()
-
-        try {
-            const createdItems = await Promise.all(
-                transformedItems.map(item =>
-                    strapi.db.query('molecule.order-item').create({
-                        data: {
-                            product: { connect: [{ id: item.id }] },
-                            quantity: item.quantity,
-                            price: item.price,
-                        },
-                        // populate: { product: true },
-                    })
-                )
-            );
-
-            const createdOrder = await strapi.db.query('api::order.order').create({
-                data: {
-                    delivery_status: 'created',
-                    // delivery_address
-                    items: createdItems,
-                    uuid: orderId
-                },
-                populate: { items: { populate: { product: true } } },
-            })
-
-        } catch (e) {
-            console.log(e)
-            return { url: undefined }
-        }
-
-        const productItems = transformedItems?.map(prod => ({
-            name: prod?.name,
-            quantity: prod?.quantity.toString(),
-            unitAmount: {
-                currencyCode: "USD",
-                value: prod?.price.toString()
-            },
-            category: "PHYSICAL_GOODS" as ItemCategory
-        }))
-
-        const totalAnount = productItems?.reduce((accumulator, currentValue) => {
-            const calculateWithQuantity = parseFloat(currentValue?.unitAmount?.value) * parseInt(currentValue?.quantity)
-            return accumulator + calculateWithQuantity
-        }, 0).toFixed(2)
-
-        const publicUrl = process.env.NEXT_PUBLIC_HOST ?? 'http://127.0.0.1:1337'
-
-        const collect = {
-            body: {
-                intent: CheckoutPaymentIntent.Capture,
-                purchaseUnits: [
-                    {
-                        items: productItems,
-                        amount: {
-                            currencyCode: "USD",
-                            value: totalAnount,
-                            breakdown: {
-                                itemTotal: {
-                                    currencyCode: "USD",
-                                    value: totalAnount
-                                }
-                            }
-                        }
-                    }
-                ],
-                application_context: {
-                    return_url: `${publicUrl}/success/${orderId}`,
-                    cancel_url: `${publicUrl}/cancel/${orderId}`,
-                }
-            },
-            prefer: 'return=minimal'
-        }
-
-        try {
-            const ordersController = new OrdersController(client);
-
-            const { result, ...httpResponse } = await ordersController.createOrder(collect)
-            console.log(result)
-            return { url: result?.links?.find(it => it?.rel === 'approve')?.href }
-
-            // відправити на пошту посилання на дані із відправкою
-            // відправляти зміни статусів
-            // відправити посилання на чек
+            return { url: result?.url }
         } catch (error) {
             if (error instanceof ApiError) {
                 const errors = error.result;
+                console.log(errors)
                 // const { statusCode, headers } = error;
             }
         }
 
         return { url: '' }
-    }
+    },
+    async paymentCheck(ctx) {
+        // url = https://www.sandbox.paypal.com/checkoutnow?token=8NY2429013616852G
+
+    },
 }));

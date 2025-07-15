@@ -33,6 +33,9 @@
     },
     "uuid": {
       "type": "uid"
+    },
+    "checkout_id": {
+      "type": "string"
     }
   }
 }

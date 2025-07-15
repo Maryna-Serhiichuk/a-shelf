@@ -68,32 +68,6 @@ declare global {
         link?: string
         icon?: any
     }
-
-    interface ContactRequestInput {
-        name: string
-        subject: string
-        message: string
-        email: string
-    }
-
-    interface CheckoutInput {
-        items: Array<{ id: string, quantity: number }>
-    }
-
-    interface Checkout {
-        url: string
-    }
-
-    interface DeliveryInput {
-        firstName: string
-        lastName: string
-        email: string
-        phone: string
-        address: string
-        city: string
-        region: string
-        postCode: string
-    }
 }
 
 export {};
