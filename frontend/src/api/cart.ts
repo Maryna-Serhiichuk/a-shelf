@@ -74,6 +74,31 @@ export const cartApi = enhanceApi.injectEndpoints({
         }
       },
       // invalidatesTags: ['CartBargain'],
-    })
+    }),
+    paymentCheck: builder.mutation<any, { id: string }>({
+      query: ({ id }) => ({
+        url: `payment-check`,
+        method: 'POST',
+        body: {
+          id
+        }
+      }),
+      // invalidatesTags: ['CartBargain'],
+    }),
+    order: builder.query<Order, { id: string }>({
+      query: ({ id }) => ({
+        url: `orders`,
+        method: 'GET',
+        params: {
+          'filters[uuid]': id,
+          'populate[0]': 'delivery_address',
+          'populate[1]': 'items.product',
+        }
+      }),
+      transformResponse: (response: Response<Array<Order>>, meta, arg) => {
+        return response.data[0]
+      },
+      // invalidatesTags: ['CartBargain'],
+    }),
   })
 })

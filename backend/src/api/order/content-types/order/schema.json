@@ -20,11 +20,9 @@
         "created",
         "processing",
         "delivering",
-        "delivered"
+        "delivered",
+        "void"
       ]
-    },
-    "delivery_address": {
-      "type": "text"
     },
     "items": {
       "type": "component",
@@ -36,6 +34,11 @@
     },
     "checkout_id": {
       "type": "string"
+    },
+    "delivery_address": {
+      "type": "component",
+      "component": "molecule.address",
+      "repeatable": false
     }
   }
 }

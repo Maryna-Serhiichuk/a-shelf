@@ -2,10 +2,19 @@ type FunctionArgs = {
     mapData: Array<CheckoutMapData>
     orderId: string
     cheackoutId: string
-    delivery_address: string
+    deliveryAddress: CheckoutInput['address']
 }
 
-export async function createOrder({ mapData, orderId, cheackoutId, delivery_address }: FunctionArgs): Promise<Order> {
+export async function createOrder({ mapData, orderId, cheackoutId, deliveryAddress }: FunctionArgs): Promise<Order> {
+    const { firstName, lastName, ...address } = deliveryAddress
+    
+    const delivery_address = await strapi.db.query('molecule.address').create({
+        data: {
+            fullName: firstName + ' ' + lastName,
+            ...address
+        },
+    })
+
     const createdItems = await Promise.all(
         mapData.map(item =>
             strapi.db.query('molecule.order-item').create({

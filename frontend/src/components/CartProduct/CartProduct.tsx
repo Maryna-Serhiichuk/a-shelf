@@ -6,7 +6,7 @@ import { Button } from "@/components/Button";
 
 interface CartProductArgs extends Product {
     price: number
-    addItemToOrder: () => void
+    addItemToOrder?: () => void
 }
 
 export const CartProduct: FC<CartProductArgs> = ({ documentId, name, illustration, volume, discount, price, addItemToOrder }) => {
@@ -30,11 +30,13 @@ export const CartProduct: FC<CartProductArgs> = ({ documentId, name, illustratio
                     <Price price={price} discount={discount} />
                 </div>
             </div>
-            <div>
-                <Button size="small" onClick={addItemToOrder}>
-                    Buy
-                </Button>
-            </div>
+            {addItemToOrder &&
+                <div>
+                    <Button size="small" onClick={addItemToOrder}>
+                        Buy
+                    </Button>
+                </div>
+            }
         </div>
     </div>
 }

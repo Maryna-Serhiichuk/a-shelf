@@ -50,8 +50,8 @@ export async function createCheckout({ mapData, orderId }: FunctionArgs): Promis
                 }
             ],
             application_context: {
-                return_url: `${publicUrl}/success/${orderId}`,
-                cancel_url: `${publicUrl}/cancel/${orderId}`,
+                return_url: `${publicUrl}/order/${orderId}`,
+                cancel_url: `${publicUrl}/order/${orderId}`,
             }
         },
         prefer: 'return=minimal'

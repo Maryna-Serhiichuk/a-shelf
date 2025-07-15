@@ -1,5 +1,22 @@
 import type { Schema, Struct } from '@strapi/strapi';
 
+export interface MoleculeAddress extends Struct.ComponentSchema {
+  collectionName: 'components_molecule_addresses';
+  info: {
+    displayName: 'Address';
+    icon: 'check';
+  };
+  attributes: {
+    address: Schema.Attribute.String;
+    city: Schema.Attribute.String;
+    email: Schema.Attribute.Email;
+    fullName: Schema.Attribute.String;
+    phone: Schema.Attribute.String;
+    postCode: Schema.Attribute.String;
+    region: Schema.Attribute.String;
+  };
+}
+
 export interface MoleculeButton extends Struct.ComponentSchema {
   collectionName: 'components_molecule_buttons';
   info: {
@@ -143,6 +160,7 @@ export interface UiImageShortDescription extends Struct.ComponentSchema {
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
+      'molecule.address': MoleculeAddress;
       'molecule.button': MoleculeButton;
       'molecule.icon-description': MoleculeIconDescription;
       'molecule.item-icon': MoleculeItemIcon;

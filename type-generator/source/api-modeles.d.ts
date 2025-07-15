@@ -19,7 +19,7 @@ declare global {
 
     type IconType = 'spakles' | 'star' | 'eye_dropper' | 'beaker' | 'paint_brush' | 'hand_raised';
 
-    type OrderStatus = 'created' | 'processing' | 'delivering' | 'delivered'
+    type OrderStatus = 'created' | 'processing' | 'delivering' | 'delivered' | 'void'
 
     interface Model {
         id: ID
@@ -134,10 +134,20 @@ declare global {
 
     interface Order extends Model {
         delivery_status: OrderStatus
-        delivery_address: string
+        delivery_address: DeliveryInput
         items: Array<OrderItem>
         uuid: string
         checkout_id: string
+    }
+
+    interface DeliveryInput {
+        fullName: string
+        email: string
+        phone: string
+        address: string
+        city: string
+        region: string
+        postCode: string
     }
 
     interface OrderItem { 

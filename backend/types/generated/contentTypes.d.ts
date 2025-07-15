@@ -653,9 +653,9 @@ export interface ApiOrderOrder extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    delivery_address: Schema.Attribute.Text;
+    delivery_address: Schema.Attribute.Component<'molecule.address', false>;
     delivery_status: Schema.Attribute.Enumeration<
-      ['created', 'processing', 'delivering', 'delivered']
+      ['created', 'processing', 'delivering', 'delivered', 'void']
     > &
       Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<'created'>;

@@ -11,18 +11,7 @@ declare global {
 
     interface CheckoutInput {
         items: Array<CheckoutInputItem>
-        address?: DeliveryInput
-    }
-
-    interface DeliveryInput {
-        firstName: string
-        lastName: string
-        email: string
-        phone: string
-        address: string
-        city: string
-        region: string
-        postCode: string
+        address?: Omit<DeliveryInput, 'fullName'> & { firstName: string, lastName: string }
     }
 }
 
