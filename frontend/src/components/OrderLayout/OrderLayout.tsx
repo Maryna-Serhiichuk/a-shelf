@@ -1,6 +1,7 @@
 'use client'
 
 import { cartApi } from "@/api/cart";
+import { useRouter } from 'next/navigation';
 import { CheckBadgeIcon, ExclamationCircleIcon } from "@heroicons/react/24/outline";
 import { FC, PropsWithChildren, useEffect, useMemo } from "react";
 import { CartWrap } from "@/components/CartWrap";
@@ -9,31 +10,30 @@ import { Price } from "@/components/Price";
 import { useSearchParams } from 'next/navigation'
 import Link from "next/link";
 import { Button } from "../Button";
+import { useCartProviderContext } from "../CartLayout/context/CartContextProvider";
 
 interface OrderLayoutArgs {
     id: string
 }
-// url = https://www.sandbox.paypal.com/checkoutnow?token=8NY2429013616852G
+
 export const OrderLayout: FC<OrderLayoutArgs> = ({ id }) => {
+    const router = useRouter();
     const searchParams = useSearchParams()
     const status = searchParams.get('status')
 
-    const { usePaymentCheckMutation, useOrderQuery } = cartApi
+    const { useOrderQuery } = cartApi
     const { data } = useOrderQuery({ id })
-    const [checkPayment] = usePaymentCheckMutation()
 
-    // if(!data) return null // redirect to cart
+    const { repeatOrder } = useCartProviderContext()
 
-    useEffect(() => {
-        getStatus()
-    }, []) // da28e793-0e6d-459d-a12a-55d5e43fecf1
-
-    // console.log(data)
-
-    const getStatus = async () => {
-        const response = await checkPayment({ id })
-        // console.log(response)
+    const onRepeat = () => {
+        const items = data?.items?.map(it => ({ product: it?.product, quantity: it?.quantity ?? 1 })) ?? []
+        repeatOrder(items)
     }
+
+    // http://localhost:3000/order/c38a2e48-7948-4293-b04b-a29007029203?status=cancel
+    console.log(data)
+
 
     const statuses: { [key in OrderStatus]: PropsWithChildren['children'] } = {
         created: data?.checkout_id ? <Link className="text-sky-600 underline" href={`https://www.sandbox.paypal.com/checkoutnow?token=${data?.checkout_id}`}>
@@ -42,10 +42,8 @@ export const OrderLayout: FC<OrderLayoutArgs> = ({ id }) => {
         processing: "Processing",
         delivering: "Delivering",
         delivered: "Delivered",
-        void: "The order is unpaid" // create again
-    }
-
-
+        void: "The order is unpaid"
+    } // https://www.sandbox.paypal.com/checkoutnow?token=61158952SU905753E
 
     const info = data ? [
         { label: 'Status', value: statuses[data.delivery_status] },
@@ -67,6 +65,8 @@ export const OrderLayout: FC<OrderLayoutArgs> = ({ id }) => {
 
     const isSuccess = status === 'success' && data?.delivery_status === 'processing'
     const isCancel = status === 'cancel' && data?.delivery_status === 'created'
+
+    if(!data) return null
 
     return <div className="flex flex-col gap-10 max-w-[700px] pb-30">
         {(isSuccess || isCancel) &&
@@ -111,11 +111,13 @@ export const OrderLayout: FC<OrderLayoutArgs> = ({ id }) => {
             <div className="text-3xl font-mediun border-t border-stone-300 flex justify-end pt-4 mt-8">
                 <Price price={total} />
             </div>
-            <div className="flex justify-end border-t border-stone-300 pt-4 mt-4">
-                <Button size="large">
-                    Checkout Now Again
-                </Button>
-            </div>
+            {data?.delivery_status === 'void' &&
+                <div className="flex justify-end border-t border-stone-300 pt-4 mt-4">
+                    <Button size="large" onClick={onRepeat}>
+                        Checkout Now Again
+                    </Button>
+                </div>
+            }
         </div>
     </div>
 }

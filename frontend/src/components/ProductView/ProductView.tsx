@@ -7,9 +7,16 @@ import { useAddDesire } from "@/hooks/useAddDesire";
 import { ActiveIngredients } from "@/components/ActiveIngredients";
 import classNames from "classnames";
 import { ProductElement } from "./components/ProductElement";
+import { useCartProviderContext } from "@/components/CartLayout/context/CartContextProvider";
 
-export const ProductView: FC<Product> = ({ documentId, name, subname, description, ingredients, price, type, illustration, discount, volume, isCart, composition, using, purpose, isOutOfStock }) => {
+export const ProductView: FC<Product> = (product) => {
+    const { documentId, name, subname, description, ingredients, price, type, illustration, discount, volume, isCart, composition, using, purpose, isOutOfStock } = product
+    const { addToOrder } = useCartProviderContext()
     const { addDesire } = useAddDesire()
+
+    const onBuy = () => {
+        addToOrder({ product, quantity: 1 })
+    }
 
     const addToCart = () => {
         addDesire(documentId)
@@ -31,7 +38,7 @@ export const ProductView: FC<Product> = ({ documentId, name, subname, descriptio
                                 <div className="text-2xl font-bold">
                                     <Price price={price} discount={discount} />
                                 </div>
-                                <ProductElement.Buttons onHeart={addToCart} solidIcon={isCart} className="flex flex-nowrap flex-col gap-1">
+                                <ProductElement.Buttons onBuy={onBuy} onHeart={addToCart} solidIcon={isCart} className="flex flex-nowrap flex-col gap-1">
                                     {isCart
                                         ? <Button variant="outlined">
                                             Added
@@ -69,7 +76,7 @@ export const ProductView: FC<Product> = ({ documentId, name, subname, descriptio
                             <Price price={price} discount={discount} />
                         </div>
                         <ActiveIngredients items={ingredients} />
-                        <ProductElement.Buttons onHeart={addToCart} solidIcon={isCart} className="block lg:hidden w-full" />
+                        <ProductElement.Buttons onBuy={onBuy} onHeart={addToCart} solidIcon={isCart} className="block lg:hidden w-full" />
                     </div>
                 </div>
             </div>
@@ -93,7 +100,7 @@ export const ProductView: FC<Product> = ({ documentId, name, subname, descriptio
                         <Price price={price} discount={discount} />
                     </div>
                     <ActiveIngredients items={ingredients} />
-                    <ProductElement.Buttons onHeart={addToCart} solidIcon={isCart} className="block lg:hidden w-full pt-3 sm:pt-0" />
+                    <ProductElement.Buttons onBuy={onBuy} onHeart={addToCart} solidIcon={isCart} className="block lg:hidden w-full pt-3 sm:pt-0" />
                 </div>
             </div>
         </Container>

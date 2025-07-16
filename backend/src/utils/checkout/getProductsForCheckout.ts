@@ -6,7 +6,7 @@ export async function getProductsForCheckout(ids: string[]): Promise<ProductsTyp
             documentId: { $in: ids },
             // publishedAt: { $notNull: true }
         },
-        populate: { discount: true },
+        populate: { discount: true, illustration: true },
         select: ['id', 'name', 'price', 'documentId', 'publishedAt']
     })
 }

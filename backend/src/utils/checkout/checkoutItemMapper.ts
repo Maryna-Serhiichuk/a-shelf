@@ -16,6 +16,7 @@ export function checkoutItemMapper({ items, products }: FunctionArgs): Array<Fun
             name: prod?.name ?? '',
             quantity: quantity ?? 1,
             price: getPriceWithDiscount({ price: prod?.price, discount: prod?.discount }),
+            
         }
     })
 }

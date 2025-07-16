@@ -5,6 +5,7 @@ import { client } from '../paypalInstance';
 type FunctionArgs = {
     mapData: Array<CheckoutMapData>
     orderId: string
+    deliveryAddress: CheckoutInput['address']
 }
 
 type FunctionResponse = {
@@ -13,7 +14,7 @@ type FunctionResponse = {
     url: string
 }
 
-export async function createCheckout({ mapData, orderId }: FunctionArgs): Promise<FunctionResponse> {
+export async function createCheckout({ mapData, orderId, deliveryAddress }: FunctionArgs): Promise<FunctionResponse> {
     const productItems = mapData?.map(prod => ({
         name: prod?.name,
         quantity: prod?.quantity.toString(),
@@ -21,15 +22,15 @@ export async function createCheckout({ mapData, orderId }: FunctionArgs): Promis
             currencyCode: "USD",
             value: prod?.price.toString()
         },
-        category: "PHYSICAL_GOODS" as ItemCategory
+        category: "PHYSICAL_GOODS" as ItemCategory,
     }))
 
-    const totalAnount = productItems?.reduce((accumulator, currentValue) => {
+    const totalAmount = productItems?.reduce((accumulator, currentValue) => {
         const calculateWithQuantity = parseFloat(currentValue?.unitAmount?.value) * parseInt(currentValue?.quantity)
         return accumulator + calculateWithQuantity
     }, 0).toFixed(2)
 
-    const publicUrl = process.env.NEXT_PUBLIC_HOST ?? 'http://127.0.0.1:1337'
+    const publicUrl = process.env.NEXT_PUBLIC_HOST ?? 'http://127.0.0.1:3000'
 
     const collect = {
         body: {
@@ -39,19 +40,32 @@ export async function createCheckout({ mapData, orderId }: FunctionArgs): Promis
                     items: productItems,
                     amount: {
                         currencyCode: "USD",
-                        value: totalAnount,
+                        value: totalAmount,
                         breakdown: {
                             itemTotal: {
                                 currencyCode: "USD",
-                                value: totalAnount
+                                value: totalAmount
                             }
                         }
                     }
                 }
             ],
-            application_context: {
-                return_url: `${publicUrl}/order/${orderId}`,
-                cancel_url: `${publicUrl}/order/${orderId}`,
+            paymentSource: {
+                paypal: {
+                    experienceContext: {
+                        brandName: "A-Shelf",
+                        returnUrl: `${publicUrl}/order/${orderId}?status=success`,
+                        cancelUrl: `${publicUrl}/order/${orderId}?status=cancel`,
+                        // paymentmethodPreference: PayeePaymentMethodPreference.ImmediatePaymentRequired,
+                    },
+                    address: {
+                        addressLine1: deliveryAddress.address,
+                        adminArea2: deliveryAddress.city,
+                        adminArea1: deliveryAddress.region,
+                        postalCode: deliveryAddress.postCode,
+                        countryCode: "US"
+                    }
+                }
             }
         },
         prefer: 'return=minimal'
@@ -64,6 +78,6 @@ export async function createCheckout({ mapData, orderId }: FunctionArgs): Promis
     return {
         checkoutId: result?.id,
         status: result?.status,
-        url: result?.links?.find(it => it?.rel === 'approve')?.href
+        url: result?.links?.find(it => it?.rel === 'payer-action')?.href
     }
 }

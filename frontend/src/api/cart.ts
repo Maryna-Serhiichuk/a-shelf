@@ -75,16 +75,6 @@ export const cartApi = enhanceApi.injectEndpoints({
       },
       // invalidatesTags: ['CartBargain'],
     }),
-    paymentCheck: builder.mutation<any, { id: string }>({
-      query: ({ id }) => ({
-        url: `payment-check`,
-        method: 'POST',
-        body: {
-          id
-        }
-      }),
-      // invalidatesTags: ['CartBargain'],
-    }),
     order: builder.query<Order, { id: string }>({
       query: ({ id }) => ({
         url: `orders`,

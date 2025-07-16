@@ -1,4 +1,5 @@
 import { FC, useMemo, useState } from "react";
+import { usePathname, useRouter } from 'next/navigation'
 import { TrashIcon } from "@heroicons/react/24/outline";
 import { Button } from "@/components/Button";
 import { Drawer } from "@/components/Drawer";
@@ -11,8 +12,12 @@ import { getPriceWithDiscount } from "@/utils/getPriceWithDiscount";
 import { Delivery } from "@/components/Delivery";
 
 export const BuyDrawer: FC = () => {
+    const router = useRouter()
+    const pathname = usePathname()
+    const isCart = pathname.startsWith('/cart')
+
     const [addressMode, setAddressMode] = useState(false)
-    const { openDrawer, setOpenDrawer, orderList, onDelete, changeQuantity, onCheckout } = useCartProviderContext()
+    const { openDrawer, setOpenDrawer, orderList, onDelete, changeQuantity, clearOrder, loading } = useCartProviderContext()
 
     const totalPrice = useMemo(() => {
         if (!orderList?.length) return 0
@@ -34,10 +39,25 @@ export const BuyDrawer: FC = () => {
     }
 
     const onCancel = () => {
+        if (!isCart) {
+            router.push('/cart')
+            setTimeout(() => {
+                closeDrawer()
+            }, 300)
+            return
+        }
+        closeDrawer()
+    }
+
+    const closeDrawer = () => {
         setOpenDrawer(false)
         setTimeout(() => {
             setAddressMode(false)
         }, 1000)
+    }
+
+    const onClearCart = () => {
+        clearOrder()
     }
 
     return <Drawer open={openDrawer} onClose={setOpenDrawer} position="right">
@@ -53,6 +73,16 @@ export const BuyDrawer: FC = () => {
                     </Delivery>
                 </div>
                 : <div>
+                    <div className="flex justify-between items-center gap-5 mb-5">
+                        <div className="text-2xl font-heading font-semibold text-center">
+                            Order Summary
+                        </div>
+                        <div className="flex justify-end">
+                            <Button variant="outlined" onClick={onClearCart}>
+                                Clear
+                            </Button>
+                        </div>
+                    </div>
                     {orderList?.map(product => (
                         <div key={product?.product?.documentId} className="flex justify-between py-2">
                             <div className="flex gap-x-3">
@@ -86,7 +116,7 @@ export const BuyDrawer: FC = () => {
                             <Button variant="outlined" onClick={onCancel}>
                                 Cancel
                             </Button>
-                            <Button onClick={onCheckoutNext}>
+                            <Button onClick={onCheckoutNext} loading={loading}>
                                 Checkout Now
                             </Button>
                         </div>
