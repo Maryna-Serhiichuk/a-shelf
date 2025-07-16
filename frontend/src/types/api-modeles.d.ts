@@ -81,7 +81,7 @@ declare global {
         price: number
         type: Type
         illustration: Media
-        discount: Discount
+        discount?: Discount
         volume: string
         ingredients: Array<Ingredient>
         isCart?: boolean
