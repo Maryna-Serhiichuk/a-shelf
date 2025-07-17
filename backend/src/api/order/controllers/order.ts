@@ -29,7 +29,7 @@ export default factories.createCoreController('api::order.order', ({ strapi }) =
             const result = await createCheckout({ mapData: transformedItems, orderId, deliveryAddress })
 
             if (result?.checkoutId) {
-                await createOrder({ mapData: transformedItems, orderId, cheackoutId: result.checkoutId, deliveryAddress })
+                await createOrder({ mapData: transformedItems, orderId, cheackoutId: result.checkoutId, deliveryAddress, userId: ctx?.state?.user?.id })
             }
 
             return { url: result?.url }

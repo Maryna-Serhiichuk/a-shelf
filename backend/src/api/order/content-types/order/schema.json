@@ -39,6 +39,12 @@
       "type": "component",
       "component": "molecule.address",
       "repeatable": false
+    },
+    "user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "orders"
     }
   }
 }
