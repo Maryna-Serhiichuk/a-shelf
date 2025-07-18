@@ -24,6 +24,7 @@ declare global {
     interface Model {
         id: ID
         documentId: string
+        createdAt: Data
     }
 
     interface Bargain extends Model {

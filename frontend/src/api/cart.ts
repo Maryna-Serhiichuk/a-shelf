@@ -75,19 +75,21 @@ export const cartApi = enhanceApi.injectEndpoints({
       },
       // invalidatesTags: ['CartBargain'],
     }),
-    order: builder.query<Order, { id: string }>({
+    order: builder.query<Response<Order>, { id: string }>({
       query: ({ id }) => ({
+        url: `orders/${id}`,
+        method: 'GET',
+      }),
+      // invalidatesTags: ['CartBargain'],
+    }),
+    orders: builder.query<Response<Array<Order>>, undefined>({
+      query: () => ({
         url: `orders`,
         method: 'GET',
         params: {
-          'filters[uuid]': id,
-          'populate[0]': 'delivery_address',
-          'populate[1]': 'items.product',
+          'sort[createdAt]': 'desc'
         }
       }),
-      transformResponse: (response: Response<Array<Order>>, meta, arg) => {
-        return response.data[0]
-      },
       // invalidatesTags: ['CartBargain'],
     }),
   })

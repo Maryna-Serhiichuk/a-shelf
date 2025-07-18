@@ -11,6 +11,7 @@ import { useSearchParams } from 'next/navigation'
 import Link from "next/link";
 import { Button } from "../Button";
 import { useCartProviderContext } from "../CartLayout/context/CartContextProvider";
+import { orderStatusMessages, OrderStatusMessagesType } from "@/constants/orderStatusMessages";
 
 interface OrderLayoutArgs {
     id: string
@@ -22,9 +23,20 @@ export const OrderLayout: FC<OrderLayoutArgs> = ({ id }) => {
     const status = searchParams.get('status')
 
     const { useOrderQuery } = cartApi
-    const { data } = useOrderQuery({ id })
+    const { data: response } = useOrderQuery({ id })
+    const data = response?.data
 
-    const { repeatOrder } = useCartProviderContext()
+    const { repeatOrder, clearOrder } = useCartProviderContext()
+
+    const isSuccess = status === 'success' && data?.delivery_status === 'processing'
+    const isCancel = status === 'cancel' && data?.delivery_status === 'created'
+
+    useEffect(() => {
+        if (isSuccess || isCancel) {
+            console.log(1, 'work clear localstorage')
+            clearOrder()
+        }
+    }, [data])
 
     const onRepeat = () => {
         const items = data?.items?.map(it => ({ product: it?.product, quantity: it?.quantity ?? 1 })) ?? []
@@ -32,21 +44,22 @@ export const OrderLayout: FC<OrderLayoutArgs> = ({ id }) => {
     }
 
     // http://localhost:3000/order/c38a2e48-7948-4293-b04b-a29007029203?status=cancel
-    console.log(data)
+    // console.log(data)
 
-
-    const statuses: { [key in OrderStatus]: PropsWithChildren['children'] } = {
-        created: data?.checkout_id ? <Link className="text-sky-600 underline" href={`https://www.sandbox.paypal.com/checkoutnow?token=${data?.checkout_id}`}>
-            Pending Payment
-        </Link> : 'Not Paid',
-        processing: "Processing",
-        delivering: "Delivering",
-        delivered: "Delivered",
-        void: "The order is unpaid"
+    const statuses: OrderStatusMessagesType<PropsWithChildren['children']> = {
+        ...orderStatusMessages,
+        created: {
+            ...orderStatusMessages.created,
+            label: data?.checkout_id
+                ? <Link className="text-sky-600 underline" href={`https://www.sandbox.paypal.com/checkoutnow?token=${data?.checkout_id}`}>
+                    {orderStatusMessages.created.label}
+                </Link>
+                : orderStatusMessages.created.label,
+        }
     } // https://www.sandbox.paypal.com/checkoutnow?token=61158952SU905753E
 
     const info = data ? [
-        { label: 'Status', value: statuses[data.delivery_status] },
+        { label: 'Status', value: statuses[data.delivery_status].label },
         { label: 'Order Number', value: data?.id },
         { label: 'Full Name', value: data?.delivery_address?.fullName },
         { label: 'E-mail', value: data?.delivery_address?.email },
@@ -63,12 +76,9 @@ export const OrderLayout: FC<OrderLayoutArgs> = ({ id }) => {
         }, 0) ?? 0
     }, [data])
 
-    const isSuccess = status === 'success' && data?.delivery_status === 'processing'
-    const isCancel = status === 'cancel' && data?.delivery_status === 'created'
+    if (!data) return null
 
-    if(!data) return null
-
-    return <div className="flex flex-col gap-10 max-w-[700px] pb-30">
+    return <div className="flex flex-col gap-10 max-w-[700px] pb-30 pt-2">
         {(isSuccess || isCancel) &&
             <div>
                 {isSuccess &&
@@ -86,6 +96,9 @@ export const OrderLayout: FC<OrderLayoutArgs> = ({ id }) => {
             </div>
         }
         <div className="flex flex-col gap-3">
+            <div className="text-center text-2xl sm:text-3xl font-heading font-bold border border-stone-300">
+                Order Details
+            </div>
             {info?.map(it => (
                 <div key={it?.label} className="grid grid-cols-5">
                     <div className="col-span-2 text-lg text-stone-400">

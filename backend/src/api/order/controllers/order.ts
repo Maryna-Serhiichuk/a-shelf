@@ -43,12 +43,21 @@ export default factories.createCoreController('api::order.order', ({ strapi }) =
 
         return { url: '' }
     },
-    async find(args) {
-        const { data, meta } = await super.find(args);
+    async findOne(ctx) {
+        const { id } = ctx.params
 
-        let order = data[0]
-        if (!order) return null
+        let order = await strapi.documents('api::order.order').findFirst({
+            filters: {
+                uuid: id
+            },
+            populate: { user: true }
+        })
 
+        if (!order) return ctx.notFound('Order not found')
+
+        if (ctx?.state?.user?.id && order?.user?.id) {
+            if (order?.user?.id !== ctx?.state?.user?.id) return ctx.notFound('Order not found')
+        }
 
         if (order.checkout_id && order.delivery_status === 'created') {
             await paymentCheck(order.documentId, order.checkout_id)
@@ -71,6 +80,29 @@ export default factories.createCoreController('api::order.order', ({ strapi }) =
             },
         })
 
-        return { data: [order] }
+        return { data: order }
+    },
+    async find(ctx) {
+
+        const userId = ctx?.state?.user?.id
+
+        if (!userId) {
+            return ctx.unauthorized('You must be logged in.');
+        }
+
+        ctx.query = {
+            ...ctx.query,
+            filters: {
+                ...(typeof ctx.query.filters === 'object' && ctx.query.filters !== null ? ctx.query.filters : {}),
+                user: { id: userId },
+            },
+            populate: { 
+                items: { populate: { product: true } },
+            }
+        };
+
+        const orders = await strapi.documents('api::order.order').findMany(ctx.query)
+
+        return { data: orders, meta: {} }
     },
 }));

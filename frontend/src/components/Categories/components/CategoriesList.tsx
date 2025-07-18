@@ -1,10 +1,14 @@
 'use client'
 
 import { FC } from "react";
-import { Category } from "./Category";
+import { NavigationIconItemsBar, NavigationIconItemsBarArgs } from "@/components/NavigationIconItemsBar";
 
 export const CategoriesList: FC<{ items: Maybe<Array<Category>> }> = ({ items }) => {
-    return items?.map(category => (
-        <Category key={category?.slug} {...category} />
-    ))
+    const caregoriesNavigation: NavigationIconItemsBarArgs['items'] = items?.map(category => ({
+        label: category?.label ?? '',
+        slug: category?.slug ?? '',
+        icon: category?.icon ?? 'map_pin'
+    })) ?? []
+
+    return <NavigationIconItemsBar items={caregoriesNavigation}/>
 }
