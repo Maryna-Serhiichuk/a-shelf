@@ -16,6 +16,11 @@
     },
     "quantity": {
       "type": "integer"
+    },
+    "bargain": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::bargain.bargain"
     }
   }
 }

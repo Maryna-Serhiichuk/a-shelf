@@ -68,6 +68,7 @@ export interface MoleculeOrderItem extends Struct.ComponentSchema {
     icon: 'oneWay';
   };
   attributes: {
+    bargain: Schema.Attribute.Relation<'oneToOne', 'api::bargain.bargain'>;
     price: Schema.Attribute.Decimal;
     product: Schema.Attribute.Relation<'oneToOne', 'api::product.product'>;
     quantity: Schema.Attribute.Integer;

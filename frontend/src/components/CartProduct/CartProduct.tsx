@@ -4,8 +4,8 @@ import { Img } from "@/components/Img";
 import { Price } from "@/components/Price";
 import { Button } from "@/components/Button";
 
-interface CartProductArgs extends Product {
-    price: number
+interface CartProductArgs extends Omit<Product, 'price'> {
+    price?: number
     addItemToOrder?: () => void
     quantity?: number
     size?: number
@@ -31,7 +31,7 @@ export const CartProduct: FC<CartProductArgs> = ({ documentId, name, illustratio
                     {volume}
                 </div>
                 <div className="flex text-sm/4.5 sm:text-lg font-medium text-stone-700 dark:text-stone-200 group discount-hidden">
-                    <Price price={price} discount={discount} />
+                    {price && <Price price={price} discount={discount} /> }
                     {quantity &&
                         <div className="text-stone-400 ml-1.5">
                             x {quantity}

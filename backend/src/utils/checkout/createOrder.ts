@@ -2,7 +2,7 @@ type FunctionArgs = {
     mapData: Array<CheckoutMapData>
     orderId: string
     cheackoutId: string
-    deliveryAddress: CheckoutInput['address']
+    deliveryAddress: CheckoutInput['deliveryAddress']
     userId?: boolean
 }
 
@@ -20,7 +20,8 @@ export async function createOrder({ mapData, orderId, cheackoutId, deliveryAddre
         mapData.map(item =>
             strapi.db.query('molecule.order-item').create({
                 data: {
-                    product: { connect: [{ id: item.id }] },
+                    ...( item?.type === 'product' ? { product: { connect: [{ id: item.id }] } } : {} ),
+                    ...( item?.type === 'bargain' ? { bargain: { connect: [{ id: item.id }] } } : {} ),
                     quantity: item.quantity,
                     price: item.price
                 },

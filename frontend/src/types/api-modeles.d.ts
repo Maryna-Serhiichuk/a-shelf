@@ -24,7 +24,6 @@ declare global {
     interface Model {
         id: ID
         documentId: string
-        createdAt: Data
     }
 
     interface Bargain extends Model {
@@ -139,6 +138,7 @@ declare global {
         items: Array<OrderItem>
         uuid: string
         checkout_id: string
+        createdAt: Date
     }
 
     interface DeliveryInput {
@@ -153,9 +153,10 @@ declare global {
 
     interface OrderItem { 
         id: ID
-        price: number, 
-        product: Product, 
-        quantity: number 
+        price: number
+        product?: Product
+        quantity: number
+        bargain?: Bargain
     }
 }
 

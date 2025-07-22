@@ -1,8 +1,11 @@
 declare global {
 
+    type OrderItemType = 'product' | 'bargain'
+
     interface CheckoutInputItem {
         id: string,
         quantity: number
+        type: OrderItemType
     }
 
     interface CheckoutResponse {
@@ -11,7 +14,7 @@ declare global {
 
     interface CheckoutInput {
         items: Array<CheckoutInputItem>
-        address?: Omit<DeliveryInput, 'fullName'> & { firstName: string, lastName: string }
+        deliveryAddress?: Omit<DeliveryInput, 'fullName'> & { firstName: string, lastName: string }
     }
 }
 

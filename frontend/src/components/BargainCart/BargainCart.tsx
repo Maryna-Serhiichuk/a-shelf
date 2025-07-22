@@ -3,10 +3,12 @@ import { CartProduct } from "@/components/CartProduct";
 import { CartWrap } from "@/components/CartWrap";
 import { CartPrice } from "@/components/CartPrice";
 import { useCartlines } from "@/hooks/useCartlines";
+import { useCartProviderContext } from "../CartLayout/context/CartContextProvider";
 
 export const BargainCart: FC<CartBargain> = ({ documentId, bargain }) => {
-     const { removeCartBargain } = useCartlines()
-    
+    const { removeCartBargain } = useCartlines()
+    const { addToOrder } = useCartProviderContext()
+
     const removeItem = () => {
         try {
             removeCartBargain(documentId)
@@ -17,11 +19,15 @@ export const BargainCart: FC<CartBargain> = ({ documentId, bargain }) => {
         // TODO: then().error()
     }
 
+    const addBargainToOrder = () => {
+        addToOrder({ bargain, quantity: 1 })
+    }
+
     return <CartWrap onTrash={removeItem}>
         <div className="flex justify-between items-center w-full">
-            <div className="">
-                {bargain?.products?.map(product => (
-                    <CartProduct key={product.documentId} {...product} />
+            <div>
+                {bargain?.products?.map((product, index) => (
+                    <CartProduct addItemToOrder={(bargain?.products?.length - 1) === index ? addBargainToOrder : undefined} key={product.documentId} {...product} />
                 ))}
             </div>
             <div>

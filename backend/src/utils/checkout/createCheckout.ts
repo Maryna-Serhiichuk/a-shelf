@@ -5,7 +5,7 @@ import { client } from '../paypalInstance';
 type FunctionArgs = {
     mapData: Array<CheckoutMapData>
     orderId: string
-    deliveryAddress: CheckoutInput['address']
+    deliveryAddress: CheckoutInput['deliveryAddress']
 }
 
 type FunctionResponse = {

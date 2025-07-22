@@ -10,19 +10,23 @@ import { createOrder } from '../../../utils/checkout/createOrder';
 import { createCheckout } from '../../../utils/checkout/createCheckout';
 import { v4 } from 'uuid';
 import { paymentCheck } from '../../../utils/checkout/paymentCheck';
+import { getBargainsForCheckout } from '../../../utils/checkout/getBargainsForCheckout';
 
 export default factories.createCoreController('api::order.order', ({ strapi }) => ({
     async checkout(ctx) {
-        const { items, deliveryAddress } = ctx.request.body
+        const { items, deliveryAddress }: CheckoutInput = ctx.request.body
 
         if (!items || !items?.length) return null
 
-        const ids = items?.map(it => it?.id)
-
         try {
-            const products = await getProductsForCheckout(ids)
 
-            const transformedItems = checkoutItemMapper({ items, products })
+            const onlyProducts = items?.filter(it => it?.type === 'product')?.map(it => it?.id)
+            const products = await getProductsForCheckout(onlyProducts)
+
+            const onlyBargaint = items?.filter(it => it?.type === 'bargain')?.map(it => it?.id)
+            const bargains = await getBargainsForCheckout(onlyBargaint)
+
+            const transformedItems = checkoutItemMapper({ items, products, bargains })
 
             const orderId = v4()
 
@@ -73,6 +77,15 @@ export default factories.createCoreController('api::order.order', ({ strapi }) =
                                 illustration: true,
                                 discount: true
                             }
+                        },
+                        bargain: {
+                            populate: {
+                                products: {
+                                    populate: {
+                                        illustration: true
+                                    }
+                                }
+                            }
                         }
                     }
                 },
@@ -96,8 +109,18 @@ export default factories.createCoreController('api::order.order', ({ strapi }) =
                 ...(typeof ctx.query.filters === 'object' && ctx.query.filters !== null ? ctx.query.filters : {}),
                 user: { id: userId },
             },
-            populate: { 
-                items: { populate: { product: true } },
+            populate: {
+                items: {
+                    populate: {
+                        product: true,
+
+                        bargain: {
+                            populate: {
+                                products: true
+                            }
+                        }
+                    }
+                },
             }
         };
 

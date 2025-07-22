@@ -81,7 +81,7 @@ declare global {
         price: number
         type: Type
         illustration: Media
-        discount: Discount
+        discount?: Discount
         volume: string
         ingredients: Array<Ingredient>
         isCart?: boolean
@@ -138,6 +138,7 @@ declare global {
         items: Array<OrderItem>
         uuid: string
         checkout_id: string
+        createdAt: Date
     }
 
     interface DeliveryInput {
@@ -152,9 +153,10 @@ declare global {
 
     interface OrderItem { 
         id: ID
-        price: number, 
-        product: Product, 
-        quantity: number 
+        price: number
+        product?: Product
+        quantity: number
+        bargain?: Bargain
     }
 }
 

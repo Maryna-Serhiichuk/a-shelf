@@ -33,15 +33,36 @@ export const OrderPreview: FC<Order> = ({ id, delivery_address, delivery_status,
         <div className="col-span-3 flex flex-col gap-2">
             <div className="font-semibold text-sm">List of Products</div>
             <div className="flex flex-col gap-1">
-                {items?.map(it => (
-                    <div key={it?.id} className="text-xs items-center">
-                        <span>{it?.product?.name}</span>
-                        <span className="opacity-40 text-xs">
-                            <span className="ml-1">x</span>
-                            <span className="ml-1">{it?.quantity}</span>
-                        </span>
-                    </div>
-                ))}
+                {items?.map(it => {
+                    if ('product' in it && it?.product) {
+                        return <div key={it?.id} className="text-xs items-center">
+                            <span>{it?.product?.name}</span>
+                            <span className="opacity-40 text-xs">
+                                <span className="ml-1">x</span>
+                                <span className="ml-1">{it?.quantity}</span>
+                            </span>
+                        </div>
+                    }
+                    if ('bargain' in it && it?.bargain) {
+                        return <div key={it?.id} className="text-xs items-center">
+                            <span>
+                                <span className="underline">{it?.bargain?.label}</span>
+                            </span>
+                            <span className="opacity-40 text-xs">
+                                <span className="ml-1">x</span>
+                                <span className="ml-1">{it?.quantity}</span>
+                            </span>
+                            <span>
+                                {it?.bargain?.products?.map(it => (
+                                    <span key={it?.id}>
+                                        <br />
+                                        <span>{'· '}{it?.name}</span>
+                                    </span>
+                                ))}
+                            </span>
+                        </div>
+                    }
+                })}
             </div>
         </div>
         <div className="col-span-1 flex justify-end items-start text-sm font-semibold">

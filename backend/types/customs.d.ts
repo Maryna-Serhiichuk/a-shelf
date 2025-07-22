@@ -6,6 +6,7 @@ declare global {
         name: string
         quantity: number
         price: number
+        type: OrderItemType
     }
 
 }

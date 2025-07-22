@@ -12,6 +12,7 @@ import Link from "next/link";
 import { Button } from "../Button";
 import { useCartProviderContext } from "../CartLayout/context/CartContextProvider";
 import { orderStatusMessages, OrderStatusMessagesType } from "@/constants/orderStatusMessages";
+import { BuyItem } from "../CartLayout";
 
 interface OrderLayoutArgs {
     id: string
@@ -25,7 +26,7 @@ export const OrderLayout: FC<OrderLayoutArgs> = ({ id }) => {
     const { useOrderQuery } = cartApi
     const { data: response } = useOrderQuery({ id })
     const data = response?.data
-
+    
     const { repeatOrder, clearOrder } = useCartProviderContext()
 
     const isSuccess = status === 'success' && data?.delivery_status === 'processing'
@@ -33,18 +34,28 @@ export const OrderLayout: FC<OrderLayoutArgs> = ({ id }) => {
 
     useEffect(() => {
         if (isSuccess || isCancel) {
-            console.log(1, 'work clear localstorage')
             clearOrder()
         }
     }, [data])
 
     const onRepeat = () => {
-        const items = data?.items?.map(it => ({ product: it?.product, quantity: it?.quantity ?? 1 })) ?? []
+        const items = data?.items?.flatMap(it => {
+            if ('product' in it && it?.product) {
+                return [{
+                    product: it.product,
+                    quantity: it.quantity ?? 1
+                }] as BuyItem[]
+            }
+            if ('bargain' in it && it?.bargain) {
+                return [{
+                    bargain: it.bargain,
+                    quantity: it.quantity ?? 1
+                }] as BuyItem[]
+            }
+            return []
+        }) ?? []
         repeatOrder(items)
     }
-
-    // http://localhost:3000/order/c38a2e48-7948-4293-b04b-a29007029203?status=cancel
-    // console.log(data)
 
     const statuses: OrderStatusMessagesType<PropsWithChildren['children']> = {
         ...orderStatusMessages,
@@ -52,11 +63,11 @@ export const OrderLayout: FC<OrderLayoutArgs> = ({ id }) => {
             ...orderStatusMessages.created,
             label: data?.checkout_id
                 ? <Link className="text-sky-600 underline" href={`https://www.sandbox.paypal.com/checkoutnow?token=${data?.checkout_id}`}>
-                    {orderStatusMessages.created.label}
+                    Payment Checkout
                 </Link>
                 : orderStatusMessages.created.label,
         }
-    } // https://www.sandbox.paypal.com/checkoutnow?token=61158952SU905753E
+    }
 
     const info = data ? [
         { label: 'Status', value: statuses[data.delivery_status].label },
@@ -114,7 +125,14 @@ export const OrderLayout: FC<OrderLayoutArgs> = ({ id }) => {
             <div className="flex flex-col gap-4">
                 {data?.items?.map(it => (
                     <CartWrap key={it?.id}>
-                        <CartProduct size={120} {...it?.product} price={it?.price} discount={undefined} quantity={it.quantity} />
+                        {it.product && <CartProduct size={120} {...it.product} price={it?.price} discount={undefined} quantity={it.quantity} />}
+                        {it.bargain &&
+                            <div>
+                                {it?.bargain?.products?.map(prod => (
+                                    <CartProduct key={prod?.id} size={120} {...prod} price={undefined} discount={undefined} />
+                                ))}
+                            </div>
+                        }
                         <div className="flex align-middle text-2xl font-medium">
                             <Price price={it.price * it.quantity} />
                         </div>
