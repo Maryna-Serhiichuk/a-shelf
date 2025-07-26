@@ -21,20 +21,13 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H ${{ secrets.HOST }} >> ~/.ssh/known_hosts || true
 
-      # - name: Save data files
-      #   run: |
-      #     cp -r /projects/a-shelf_db/.tmp /projects/a-shelf/backend/
-      #     cp -r /projects/a-shelf_db/public/uploads /projects/a-shelf/backend/public/
-
       - name: Copy project files to server
         run: |
-          rsync -avz --exclude '.git' ./ ${{ secrets.USERNAME }}@${{ secrets.HOST }}:${{ secrets.TARGET_DIR }}
-
-      - name: Copy data files
-        run: |
-          ls ../ -al
-          cp -r "/../a-shelf_db/.tmp" "/backend/"
-          cp -r "/../a-shelf_db/public/uploads" "/backend/public/"
+          rsync -avz --delete \
+            --filter='protect backend/.tmp/' \
+            --filter='protect backend/public/uploads/' \
+            --filter='exclude .git/' \
+            ./ ${{ secrets.USERNAME }}@${{ secrets.HOST }}:${{ secrets.TARGET_DIR }}
 
       - name: Create backend .env file on server
         run: |
