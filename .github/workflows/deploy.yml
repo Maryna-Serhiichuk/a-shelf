@@ -23,10 +23,7 @@ jobs:
 
       - name: Copy project files to server
         run: |
-          rsync -avz --delete \
-            --filter='protect backend/.tmp/' \
-            --filter='protect backend/public/uploads/' \
-            ./ ${{ secrets.USERNAME }}@${{ secrets.HOST }}:${{ secrets.TARGET_DIR }}
+          rsync -avz --delete --exclude '.git' ./ ${{ secrets.USERNAME }}@${{ secrets.HOST }}:${{ secrets.TARGET_DIR }}
 
       - name: Create backend .env file on server
         run: |
