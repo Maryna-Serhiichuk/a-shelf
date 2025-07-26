@@ -32,8 +32,9 @@ jobs:
 
       - name: Copy data files
         run: |
-          cp -r /projects/a-shelf_db/.tmp /projects/a-shelf/backend/
-          cp -r /projects/a-shelf_db/public/uploads /projects/a-shelf/backend/public/
+          ls -al
+          cp -r "$GITHUB_WORKSPACE/projects/a-shelf_db/.tmp" "$GITHUB_WORKSPACE/projects/a-shelf/backend/"
+          cp -r "$GITHUB_WORKSPACE/projects/a-shelf_db/public/uploads" "$GITHUB_WORKSPACE/projects/a-shelf/backend/public/"
 
       - name: Create backend .env file on server
         run: |
