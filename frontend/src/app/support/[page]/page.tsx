@@ -18,7 +18,7 @@ export default async function Page({ params }: { params: Promise<{ page: string 
                     <SupportMenu/>
                 </div>
                 <div className="lg:col-span-3">
-                    <Support {...data?.data as SupportPage} />
+                    {data?.data && <Support {...data?.data as SupportPage} />}
                 </div>
             </div>
         </Container>
