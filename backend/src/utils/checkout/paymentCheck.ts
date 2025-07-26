@@ -13,4 +13,6 @@ export async function paymentCheck(id: string, checkoutId: string) {
     if (result.status === 'VOID') {
         return changeStatus('void')
     }
+
+    return changeStatus('void')
 }

@@ -16,9 +16,13 @@ export async function checkCheckout({ checkoutId }: FunctionArgs): Promise<Funct
 
     const ordersController = new OrdersController(client);
 
-    const { result, ...httpResponse } = await ordersController.getOrder(collect)
+    try {
+        const result = await ordersController.getOrder(collect)
+        return {
+            status: result.result.status
+        }
 
-    return {
-        status: result.status
+    } catch (e) {
+        return { status: 'VOID' }
     }
 }
