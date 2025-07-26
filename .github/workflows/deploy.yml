@@ -19,14 +19,7 @@ jobs:
           mkdir -p ~/.ssh
           echo "${{ secrets.SSH_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
-          eval "$(ssh-agent -s)"
-          sudo apt-get update && sudo apt-get install -y expect
-          expect -c "
-            spawn ssh-add ~/.ssh/id_rsa
-            expect \"Enter passphrase for ~/.ssh/id_rsa:\"
-            send \"${{ secrets.SSH_KEY_PASSPHRASE }}\r\"
-            expect eof
-          "
+          ssh-add ~/.ssh/id_rsa <<< "${{ secrets.SSH_KEY_PASSPHRASE }}"
           ssh-keyscan -H ${{ secrets.HOST }} >> ~/.ssh/known_hosts || true
 
       - name: Copy project files to server
