@@ -32,9 +32,9 @@ jobs:
 
       - name: Copy data files
         run: |
-          ls -al
-          cp -r "../a-shelf_db/.tmp" "backend/"
-          cp -r "../a-shelf_db/public/uploads" "backend/public/"
+          ls ../ -al
+          cp -r "/../a-shelf_db/.tmp" "/backend/"
+          cp -r "/../a-shelf_db/public/uploads" "/backend/public/"
 
       - name: Create backend .env file on server
         run: |
