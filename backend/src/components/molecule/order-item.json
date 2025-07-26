@@ -1,0 +1,26 @@
+{
+  "collectionName": "components_molecule_order_items",
+  "info": {
+    "displayName": "OrderItem",
+    "icon": "oneWay"
+  },
+  "options": {},
+  "attributes": {
+    "price": {
+      "type": "decimal"
+    },
+    "product": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::product.product"
+    },
+    "quantity": {
+      "type": "integer"
+    },
+    "bargain": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::bargain.bargain"
+    }
+  }
+}

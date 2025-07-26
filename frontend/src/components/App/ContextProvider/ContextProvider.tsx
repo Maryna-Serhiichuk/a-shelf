@@ -5,7 +5,7 @@ import { IContext } from './useContext'
 
 export const Context = createContext<IContext>({} as IContext)
 
-export interface WordProviderProps extends IContext {
+export interface ProviderProps extends IContext {
     children: ReactElement | ReactElement[]
 }
 

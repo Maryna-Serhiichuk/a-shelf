@@ -1,5 +1,22 @@
 import type { Schema, Struct } from '@strapi/strapi';
 
+export interface MoleculeAddress extends Struct.ComponentSchema {
+  collectionName: 'components_molecule_addresses';
+  info: {
+    displayName: 'Address';
+    icon: 'check';
+  };
+  attributes: {
+    address: Schema.Attribute.String;
+    city: Schema.Attribute.String;
+    email: Schema.Attribute.Email;
+    fullName: Schema.Attribute.String;
+    phone: Schema.Attribute.String;
+    postCode: Schema.Attribute.String;
+    region: Schema.Attribute.String;
+  };
+}
+
 export interface MoleculeButton extends Struct.ComponentSchema {
   collectionName: 'components_molecule_buttons';
   info: {
@@ -41,6 +58,20 @@ export interface MoleculeItemIcon extends Struct.ComponentSchema {
     link: Schema.Attribute.String;
     title: Schema.Attribute.String;
     value: Schema.Attribute.Text;
+  };
+}
+
+export interface MoleculeOrderItem extends Struct.ComponentSchema {
+  collectionName: 'components_molecule_order_items';
+  info: {
+    displayName: 'OrderItem';
+    icon: 'oneWay';
+  };
+  attributes: {
+    bargain: Schema.Attribute.Relation<'oneToOne', 'api::bargain.bargain'>;
+    price: Schema.Attribute.Decimal;
+    product: Schema.Attribute.Relation<'oneToOne', 'api::product.product'>;
+    quantity: Schema.Attribute.Integer;
   };
 }
 
@@ -130,9 +161,11 @@ export interface UiImageShortDescription extends Struct.ComponentSchema {
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
+      'molecule.address': MoleculeAddress;
       'molecule.button': MoleculeButton;
       'molecule.icon-description': MoleculeIconDescription;
       'molecule.item-icon': MoleculeItemIcon;
+      'molecule.order-item': MoleculeOrderItem;
       'sale.discount': SaleDiscount;
       'ui.banner': UiBanner;
       'ui.hero': UiHero;

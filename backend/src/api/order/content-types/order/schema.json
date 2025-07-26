@@ -1,0 +1,50 @@
+{
+  "kind": "collectionType",
+  "collectionName": "orders",
+  "info": {
+    "singularName": "order",
+    "pluralName": "orders",
+    "displayName": "Order",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "delivery_status": {
+      "type": "enumeration",
+      "required": true,
+      "default": "created",
+      "enum": [
+        "created",
+        "processing",
+        "delivering",
+        "delivered",
+        "void"
+      ]
+    },
+    "items": {
+      "type": "component",
+      "component": "molecule.order-item",
+      "repeatable": true
+    },
+    "uuid": {
+      "type": "uid"
+    },
+    "checkout_id": {
+      "type": "string"
+    },
+    "delivery_address": {
+      "type": "component",
+      "component": "molecule.address",
+      "repeatable": false
+    },
+    "user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "orders"
+    }
+  }
+}

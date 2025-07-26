@@ -5,8 +5,11 @@ import { CartProduct } from "@/components/CartProduct";
 import { CartPrice } from "@/components/CartPrice";
 import { CartWrap } from "@/components/CartWrap";
 import { getPriceWithDiscount } from "@/utils/getPriceWithDiscount";
+import { useCartProviderContext } from "../CartLayout/context/CartContextProvider";
 
 export const Desire: FC<Cartline> = memo(({ documentId, product, quantity }) => {
+    const { addToOrder } = useCartProviderContext()
+
     const { changeCartline, removeCartline } = useCartlines()
 
     const [productQuantity, setQuantity] = useState(quantity)
@@ -63,8 +66,12 @@ export const Desire: FC<Cartline> = memo(({ documentId, product, quantity }) => 
         // TODO: then().error()
     }
 
+    const addItemToOrder = () => {
+        addToOrder({ product, quantity })
+    }
+
     return <CartWrap onTrash={removeItem}>
-        <CartProduct {...product} />
+        <CartProduct {...product} addItemToOrder={addItemToOrder} />
         <CartPrice
             value={productQuantity}
             onChange={quantityControler}

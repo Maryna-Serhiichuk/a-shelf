@@ -1,9 +1,9 @@
 'use client'
 
 import { ComponentType, FC, SVGProps } from "react";
-import { PhoneIcon, EnvelopeIcon, MapPinIcon, ClockIcon, SparklesIcon, StarIcon, EyeDropperIcon, BeakerIcon, PaintBrushIcon, HandRaisedIcon } from '@heroicons/react/24/outline'
+import { PhoneIcon, EnvelopeIcon, MapPinIcon, ClockIcon, SparklesIcon, StarIcon, EyeDropperIcon, BeakerIcon, PaintBrushIcon, HandRaisedIcon, HeartIcon, ShoppingBagIcon, BuildingStorefrontIcon } from '@heroicons/react/24/outline'
 
-export type IconTypeProp = IconType | 'clock' | 'map_pin' | 'envelope' | 'phone'
+export type IconTypeProp = IconType | 'clock' | 'map_pin' | 'envelope' | 'phone' | 'heart' | 'shopping_bag' | 'building_storefront'
 
 const icons: { [key in IconTypeProp]: ComponentType<SVGProps<SVGSVGElement>> } = {
     spakles: SparklesIcon,
@@ -16,7 +16,11 @@ const icons: { [key in IconTypeProp]: ComponentType<SVGProps<SVGSVGElement>> } =
     clock: ClockIcon,
     map_pin: MapPinIcon,
     envelope: EnvelopeIcon,
-    phone: PhoneIcon
+    phone: PhoneIcon,
+
+    heart: HeartIcon,
+    shopping_bag: ShoppingBagIcon,
+    building_storefront: BuildingStorefrontIcon
 }
 
 interface IconArgs extends SVGProps<SVGSVGElement> {

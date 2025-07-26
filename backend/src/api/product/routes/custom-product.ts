@@ -9,7 +9,7 @@ export default {
         path: "/products-by-ids",
         handler: "product.productsByIds",
         config: {},
-      },
+      }
     ],
   }
   

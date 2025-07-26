@@ -15,7 +15,7 @@ const Name: FC<DivProps> = ({ children, className }) => {
 }
 
 const SubName: FC<DivProps> = ({ children, className }) => {
-    return <div className="dark:text-stone-100 font-medium text-md sm:text-lg lg:text-3xl font-heading">
+    return <div className={classNames("dark:text-stone-100 font-medium text-md sm:text-lg lg:text-3xl font-heading", className)}>
         {children}
     </div>
 }
@@ -32,9 +32,9 @@ const Description: FC<{ className?: string, data?: string }> = ({ data, classNam
     </div>
 }
 
-const Buttons: FC<PropsWithChildren<{ className?: string, solidIcon?: boolean, onHeart?: () => void }>> = ({ children, className, solidIcon = FaceSmileIcon, onHeart }) => {
+const Buttons: FC<PropsWithChildren<{ className?: string, solidIcon?: boolean, onHeart?: () => void, onBuy?: () => void }>> = ({ children, className, solidIcon = FaceSmileIcon, onHeart, onBuy }) => {
     return <div className={classNames(className, "flex")}>
-        <Button size="large" className="w-full">
+        <Button size="large" className="w-full" onClick={onBuy}>
             Buy Now
         </Button>
         {children ??
