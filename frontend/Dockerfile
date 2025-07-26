@@ -11,6 +11,6 @@ COPY . .
 
 # RUN yarn build --no-lint
 
-EXPOSE 3000
+EXPOSE 3030
 
 CMD ["yarn", "dev"]

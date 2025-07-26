@@ -17,7 +17,7 @@ services:
       context: ./frontend
     container_name: frontend
     ports:
-      - "3000:3000"
+      - "3030:3030"
     command: yarn dev
 
 volumes:
