@@ -23,8 +23,8 @@ jobs:
 
       # - name: Save data files
       #   run: |
-      #     cp -r ~/projects/a-shelp/backend/.tmp ~/projects/a-shelf_db/.tmp
-      #     cp -r ~/projects/a-shelp/backend/public/uploads ~/projects/a-shelf_db/public/uploads
+      #     cp -r ~/projects/a-shelf_db/.tmp ~/projects/a-shelf/backend/
+      #     cp -r ~/projects/a-shelf_db/public/uploads ~/projects/a-shelf/backend/public/
 
       - name: Copy project files to server
         run: |
@@ -32,10 +32,8 @@ jobs:
 
       - name: Copy data files
         run: |
-          mkdit ~/projects/a-shelf/backend/.tmp
-          cp -r ~/projects/a-shelf_db/.tmp ~/projects/a-shelp/backend/.tmp
-          mkdit ~/projects/a-shelf/backend/public/uploads
-          cp -r ~/projects/a-shelf_db/public/uploads ~/projects/a-shelp/backend/public/uploads
+          cp -r ~/projects/a-shelf_db/.tmp ~/projects/a-shelf/backend/
+          cp -r ~/projects/a-shelf_db/public/uploads ~/projects/a-shelf/backend/public/
 
       - name: Create backend .env file on server
         run: |
