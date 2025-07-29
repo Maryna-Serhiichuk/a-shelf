@@ -23,7 +23,11 @@ jobs:
 
       - name: Copy project files to server
         run: |
-          rsync -avz --exclude '.git' ./ ${{ secrets.USERNAME }}@${{ secrets.HOST }}:${{ secrets.TARGET_DIR }}
+          rsync -avz --delete \
+              --filter='protect backend/.tmp/' \
+              --filter='protect backend/public/uploads/' \
+              --exclude '.git' \
+              ./ ${{ secrets.USERNAME }}@${{ secrets.HOST }}:${{ secrets.TARGET_DIR }}
 
       - name: Create backend .env file on server
         run: |
@@ -39,14 +43,14 @@ jobs:
             PAYPAL_SECRET=${{ secrets.PAYPAL_SECRET }}
             PAYPAL_CLIENT_ID=${{ secrets.PAYPAL_CLIENT_ID }}
             NEXT_PUBLIC_HOST=${{ secrets.NEXT_PUBLIC_HOST }}
-            NEXT_SERVER_HOST=${{ secrets.NEXT_SERVER_HOST }}
+            NEXT_PUBLIC_SERVER_HOST=${{ secrets.NEXT_PUBLIC_SERVER_HOST }}
           '
 
       - name: Create frontend .env file on server
         run: |
           ssh ${{ secrets.USERNAME }}@${{ secrets.HOST }} '
             cat <<EOF > ${{ secrets.TARGET_DIR }}/frontend/.env
-            NEXT_SERVER_HOST=${{ secrets.NEXT_SERVER_HOST }}
+            NEXT_PUBLIC_SERVER_HOST=${{ secrets.NEXT_PUBLIC_SERVER_HOST }}
           '
 
       - name: Clean up dangling images and restart containers
