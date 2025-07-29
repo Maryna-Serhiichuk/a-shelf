@@ -28,6 +28,10 @@ This project is a fully functional e-commerce web application that allows users 
             <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg" alt="Tailwind" width="80" height="80"/>
         <br>Tailwind CSS
         </td>
+        <td align="center" width="150" height="130">
+            <img src="https://www.paypalobjects.com/paypal-ui/logos/svg/paypal-mark-color.svg" alt="PayPal" width="80" height="80"/>
+        <br>PayPal
+        </td>
     </tr>
 </table>
 
