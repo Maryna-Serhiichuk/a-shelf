@@ -5,8 +5,6 @@ import styled from 'styled-components';
 import "rc-collapse/assets/index.css"
 import classNames from "classnames";
 
-// arrow-down-left
-
 const CollapseContainer = styled(CollapseRC)`
   border: none;
   background: transparent;
@@ -56,7 +54,14 @@ const openMotion = {
     }),
 };
 
-export const Collapse: FC<{ items: Array<{ label: string, description: string }> }> = ({ items }) => {
+export type CollapseProps = { 
+  items: Array<{ 
+    label: string, 
+    description: string 
+  }> 
+}
+
+export const Collapse: FC<CollapseProps> = ({ items }) => {
     const [activeKey, setActiveKey] = useState<Array<Key>>(['0'])
 
     return <CollapseContainer

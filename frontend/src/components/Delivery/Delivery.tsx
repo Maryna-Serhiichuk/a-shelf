@@ -3,12 +3,17 @@ import { Formik, Form, ErrorMessage } from 'formik';
 import { Entry } from "@/components/Entry";
 import { checkRequireFields } from "@/utils/checkRequireFields";
 import { deliveryLS } from "@/utils/delivery";
-import { Button } from "../Button";
-import { useCartProviderContext } from "../CartLayout/context/CartContextProvider";
+import { Button } from "@/components/Button";
+import { useCartProviderContext } from "@/components/CartLayout/context/CartContextProvider";
+
+export interface FormType extends Omit<DeliveryInput, 'fullName'> {
+    firstName: string
+    lastName: string
+}
 
 export const Delivery: FC<PropsWithChildren<{ cancelButton: PropsWithChildren['children'] }>> = ({ children, cancelButton }) => {
-    const [deliveryAddress, setDeliveryAddress] = useState<Maybe<DeliveryInput>>()
-    const allFields: (keyof DeliveryInput)[] = ['firstName', 'lastName', 'email', 'phone', 'address', 'city', 'region', 'postCode']
+    const [deliveryAddress, setDeliveryAddress] = useState<Maybe<FormType>>()
+    const allFields: (keyof FormType)[] = ['firstName', 'lastName', 'email', 'phone', 'address', 'city', 'region', 'postCode']
     const { onCheckout } = useCartProviderContext()
 
     useEffect(() => {
@@ -20,20 +25,20 @@ export const Delivery: FC<PropsWithChildren<{ cancelButton: PropsWithChildren['c
         if (deliveryAddressFromLS) {
             setDeliveryAddress(deliveryAddressFromLS)
         } else {
-            const initialValues = allFields.reduce<DeliveryInput>((obj, key) => {
+            const initialValues = allFields.reduce<FormType>((obj, key) => {
                 obj[key] = '';
                 return obj;
-            }, {} as DeliveryInput)
+            }, {} as FormType)
             setDeliveryAddress(initialValues)
         }
     }
 
-    const validateForm = (values: DeliveryInput) => {
-        const requireChecked = checkRequireFields<DeliveryInput>(values, allFields)
+    const validateForm = (values: FormType) => {
+        const requireChecked = checkRequireFields<FormType>(values, allFields)
         return requireChecked
     }
 
-    const setToLocalStorage = (values: DeliveryInput) => {
+    const setToLocalStorage = (values: FormType) => {
         deliveryLS.set(values)
     }
 

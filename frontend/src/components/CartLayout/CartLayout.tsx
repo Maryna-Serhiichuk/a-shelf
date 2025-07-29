@@ -6,8 +6,8 @@ import { Desire } from '@/components/Desire';
 import { useEffect, useState } from "react";
 import { useProviderContext } from "@/components/App/ContextProvider/ContextProvider";
 import { BargainCart } from "@/components/BargainCart";
-import { Button } from "../Button";
-import { NavLink } from "../NavLink";
+import { Button } from "@/components/Button";
+import { NavLink } from "@/components/NavLink";
 
 export const CartLayout: FC = () => {
     const { cart } = useProviderContext()

@@ -9,10 +9,10 @@ import { CartProduct } from "@/components/CartProduct";
 import { Price } from "@/components/Price";
 import { useSearchParams } from 'next/navigation'
 import Link from "next/link";
-import { Button } from "../Button";
-import { useCartProviderContext } from "../CartLayout/context/CartContextProvider";
+import { Button } from "@/components/Button";
+import { useCartProviderContext } from "@/components/CartLayout/context/CartContextProvider";
 import { orderStatusMessages, OrderStatusMessagesType } from "@/constants/orderStatusMessages";
-import { BuyItem } from "../CartLayout";
+import { BuyItem } from "@/components/CartLayout";
 
 interface OrderLayoutArgs {
     id: string

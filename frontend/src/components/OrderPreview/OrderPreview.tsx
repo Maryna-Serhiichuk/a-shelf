@@ -4,7 +4,7 @@ import relativeTime from 'dayjs/plugin/relativeTime';
 import { NavLink } from "@/components/NavLink";
 import { orderStatusMessages } from "@/constants/orderStatusMessages";
 import classNames from "classnames";
-import { Price } from "../Price";
+import { Price } from "@/components/Price";
 dayjs.extend(relativeTime);
 
 export const OrderPreview: FC<Order> = ({ id, delivery_address, delivery_status, items, checkout_id, createdAt, uuid }) => {

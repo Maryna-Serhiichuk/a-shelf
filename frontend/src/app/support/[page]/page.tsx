@@ -3,6 +3,7 @@ import { pageApi } from "@/api/page";
 import { Support } from "@/components/Support";
 import { SupportMenu } from "@/components/SupportMenu";
 import { fetchFromApi } from "@/utils/fetchFromApi"
+import { ContactForm } from "@/components/ContactForm";
 
 export const dynamic = 'force-dynamic';
 

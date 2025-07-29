@@ -2,7 +2,7 @@
 
 import { cartApi } from "@/api/cart";
 import { FC } from "react";
-import { OrderPreview } from "../OrderPreview";
+import { OrderPreview } from "@/components/OrderPreview";
 
 export const Orders: FC = () => {
     const { useOrdersQuery } = cartApi

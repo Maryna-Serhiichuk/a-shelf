@@ -75,6 +75,18 @@ export interface MoleculeOrderItem extends Struct.ComponentSchema {
   };
 }
 
+export interface MoleculeRecord extends Struct.ComponentSchema {
+  collectionName: 'components_molecule_records';
+  info: {
+    displayName: 'Record';
+    icon: 'bulletList';
+  };
+  attributes: {
+    key: Schema.Attribute.String;
+    value: Schema.Attribute.Text;
+  };
+}
+
 export interface SaleDiscount extends Struct.ComponentSchema {
   collectionName: 'components_sale_discounts';
   info: {
@@ -166,6 +178,7 @@ declare module '@strapi/strapi' {
       'molecule.icon-description': MoleculeIconDescription;
       'molecule.item-icon': MoleculeItemIcon;
       'molecule.order-item': MoleculeOrderItem;
+      'molecule.record': MoleculeRecord;
       'sale.discount': SaleDiscount;
       'ui.banner': UiBanner;
       'ui.hero': UiHero;
