@@ -3,7 +3,7 @@ import { CartProduct } from "@/components/CartProduct";
 import { CartWrap } from "@/components/CartWrap";
 import { CartPrice } from "@/components/CartPrice";
 import { useCartlines } from "@/hooks/useCartlines";
-import { useCartProviderContext } from "../CartLayout/context/CartContextProvider";
+import { useCartProviderContext } from "@/components/CartLayout/context/CartContextProvider";
 
 export const BargainCart: FC<CartBargain> = ({ documentId, bargain }) => {
     const { removeCartBargain } = useCartlines()

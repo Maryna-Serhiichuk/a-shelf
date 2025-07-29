@@ -1,8 +1,8 @@
 import { FC } from "react";
 import leaves from "@/images/leaves.jpg"
 import Image from "next/image";
-import { Collapse } from "@/components/Collapse";
 import { Container } from "@/components/Container";
+import { CollapseWrap } from "@/components/CollapseWrap";
 
 export const ProductDetails: FC<Product> = ({ composition, using, purpose }) => {
 
@@ -17,11 +17,7 @@ export const ProductDetails: FC<Product> = ({ composition, using, purpose }) => 
             <Image src={leaves} alt="" className="w-full h-full object-cover" />
         </div>
         <Container>
-            <div className="flex justify-center py-10 sm:py-20">
-                <div className="max-w-[800px] w-full py-4 px-8 border-3 border-stone-900 dark:border-stone-700 shadow-lg bg-[rgba(255,255,255,.9)] md:bg-stone-50 dark:bg-stone-800">
-                    <Collapse items={collapse} />
-                </div>
-            </div>
+            <CollapseWrap items={collapse} className="max-w-[800px] py-10 sm:py-20" />
         </Container>
     </div>
 }

@@ -1,0 +1,17 @@
+{
+  "collectionName": "components_molecule_records",
+  "info": {
+    "displayName": "Record",
+    "icon": "bulletList"
+  },
+  "options": {},
+  "attributes": {
+    "key": {
+      "type": "string"
+    },
+    "value": {
+      "type": "text"
+    }
+  },
+  "config": {}
+}

@@ -158,6 +158,16 @@ declare global {
         quantity: number
         bargain?: Bargain
     }
+
+    interface Record {
+        key: string
+        value: string
+    }
+
+    interface Faq {
+        title: string
+        items: Array<Record>
+    }
 }
 
 export { };

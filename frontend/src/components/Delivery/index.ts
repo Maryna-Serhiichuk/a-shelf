@@ -1,5 +1,6 @@
-import { Delivery } from "./Delivery";
+import { Delivery, type FormType } from "./Delivery";
 
 export {
-    Delivery
+    Delivery,
+    FormType
 }

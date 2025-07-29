@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { NavIconItem, NavIconItemArgs } from "../NavIconItem";
+import { NavIconItem, NavIconItemArgs } from "@/components/NavIconItem";
 
 export interface NavigationIconItemsBarArgs {
     items: Array<NavIconItemArgs>

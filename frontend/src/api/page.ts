@@ -53,6 +53,15 @@ export const pageApi = enhanceApi.injectEndpoints({
                 },
             }),
         }),
+        faq: builder.query<Response<Faq>, undefined>({
+            query: () => ({
+                url: `faq`,
+                method: 'GET',
+                params: {
+                    'populate[0]': 'items',
+                },
+            }),
+        }),
         createContactRequest: builder.mutation<{ ok?: boolean }, ContactRequestInput>({
             query: (body) => ({
                 url: 'contact-requests',

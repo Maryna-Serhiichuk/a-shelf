@@ -1,5 +1,6 @@
-import { Collapse } from "./Collapse";
+import { Collapse, type CollapseProps } from "./Collapse";
 
 export {
-    Collapse
+    Collapse,
+    CollapseProps
 }
